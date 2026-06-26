@@ -1,0 +1,25 @@
+# Dependencies
+**/node_modules/
+
+# Next.js build output
+**/.next/
+**/out/
+**/build/
+**/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env / secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# OS
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Sanity
+**/.sanity/

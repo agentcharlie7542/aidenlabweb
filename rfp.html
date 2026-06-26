@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>aidenlab 홈페이지 리뉴얼 — 기획·디자인 요구정의서 v1.0</title>
+<style>
+:root{
+  --bg-0:#05060d;--bg-1:#0a0c18;--line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.18);
+  --ink-0:#fff;--ink-1:rgba(255,255,255,.86);--ink-2:rgba(255,255,255,.6);--ink-3:rgba(255,255,255,.42);
+  --violet:#7C5CFF;--magenta:#FF4FB7;--cyan:#3DE3FF;--lime:#C8FF52;--amber:#FFC857;
+  --grad-hero:linear-gradient(120deg,#7C5CFF,#FF4FB7 45%,#FFC857);
+  --grad-cool:linear-gradient(120deg,#3DE3FF,#7C5CFF 60%,#FF4FB7);
+  --font:"Pretendard","Inter","SF Pro Text",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg-0);color:var(--ink-1);font-family:var(--font);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+body::before,body::after{content:"";position:fixed;width:50vw;height:50vw;border-radius:50%;filter:blur(140px);opacity:.25;pointer-events:none;z-index:-1}
+body::before{top:-15vw;left:-12vw;background:radial-gradient(circle,#7C5CFF,transparent 60%)}
+body::after{bottom:-20vw;right:-15vw;background:radial-gradient(circle,#FF4FB7,transparent 60%)}
+.wrap{max-width:920px;margin:0 auto;padding:0 32px}
+.cover{padding:120px 0 80px;text-align:center}
+.cover .badge{display:inline-block;padding:8px 18px;border:1px solid var(--line-2);border-radius:999px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);background:rgba(61,227,255,.08)}
+.cover h1{font-size:clamp(36px,5vw,64px);line-height:1.1;letter-spacing:-.03em;font-weight:800;color:#fff;margin:30px 0 14px}
+.cover h1 span{background:var(--grad-hero);-webkit-background-clip:text;color:transparent}
+.cover .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0;text-align:left}
+.cover .meta div small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.cover .meta div strong{display:block;color:#fff;font-size:16px;margin-top:6px;font-weight:600}
+
+nav.toc{position:fixed;top:24px;right:24px;width:240px;max-height:80vh;overflow-y:auto;background:rgba(10,12,24,.92);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:18px;padding:20px;z-index:50;font-size:12px}
+nav.toc h4{margin:0 0 10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+nav.toc a{display:block;padding:5px 8px;color:var(--ink-2);border-radius:6px;text-decoration:none;line-height:1.5}
+nav.toc a:hover{color:#fff;background:rgba(255,255,255,.06)}
+nav.toc a.lv2{padding-left:18px;font-size:11px;color:var(--ink-3)}
+
+main{padding-bottom:120px}
+section.chap{padding:80px 0 30px;border-top:1px solid var(--line);scroll-margin-top:20px}
+.chap-num{font-family:var(--font);font-size:13px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;font-weight:600}
+.chap h2{font-size:36px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.15;margin:14px 0 8px}
+.chap .lead{font-size:17px;color:var(--ink-2);max-width:700px;line-height:1.7;margin:14px 0 30px}
+.chap h3{font-size:22px;font-weight:700;color:#fff;margin:50px 0 14px;letter-spacing:-.01em;scroll-margin-top:20px}
+.chap h3 .pill{display:inline-block;font-size:11px;letter-spacing:.16em;padding:3px 10px;border-radius:6px;background:rgba(124,92,255,.16);color:var(--violet);margin-left:10px;vertical-align:middle;text-transform:uppercase}
+.chap h4{font-size:16px;font-weight:700;color:#fff;margin:30px 0 8px}
+.chap p{margin:0 0 14px}
+.chap ul,.chap ol{margin:8px 0 18px;padding-left:22px}
+.chap li{margin:6px 0;color:var(--ink-1)}
+.chap li b,.chap li strong{color:#fff;font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:13px;margin:20px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:rgba(255,255,255,.04);color:var(--ink-2);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+td{color:var(--ink-1)}
+td.h{color:#fff;font-weight:600}
+tr:last-child td{border-bottom:0}
+
+.callout{padding:24px 28px;border-radius:18px;border:1px solid var(--line-2);background:linear-gradient(135deg,rgba(124,92,255,.12),rgba(61,227,255,.05));margin:24px 0}
+.callout.warn{background:linear-gradient(135deg,rgba(255,200,87,.12),rgba(255,79,183,.05));border-color:rgba(255,200,87,.25)}
+.callout h4{margin-top:0;font-size:14px;letter-spacing:.08em;color:var(--cyan);text-transform:uppercase}
+.callout.warn h4{color:var(--amber)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.box{padding:24px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.box h4{margin-top:0}
+.box .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+.swatch{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0 20px}
+.swatch div{flex:1;min-width:130px;padding:18px;border-radius:14px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em;border:1px solid rgba(255,255,255,.1)}
+.swatch div small{display:block;opacity:.7;font-weight:400;font-size:10px;margin-top:6px;letter-spacing:.1em}
+
+.palette-grad{display:flex;gap:10px;margin:14px 0 20px}
+.palette-grad div{flex:1;height:60px;border-radius:14px;display:flex;align-items:flex-end;padding:10px 14px;font-size:11px;letter-spacing:.06em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+
+.type-sample{padding:18px 22px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);margin:8px 0}
+.type-sample .lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+
+.persona{padding:24px;border-radius:18px;border:1px solid var(--line-2);background:linear-gradient(135deg,rgba(124,92,255,.1),rgba(255,79,183,.03));margin:14px 0}
+.persona .name{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.persona .ava{width:48px;height:48px;border-radius:50%;background:var(--grad-hero);flex-shrink:0}
+.persona .nm{font-weight:700;color:#fff;font-size:18px}
+.persona .role{color:var(--ink-3);font-size:13px}
+.persona dl{display:grid;grid-template-columns:130px 1fr;gap:10px 18px;margin:0;font-size:13px}
+.persona dt{color:var(--ink-3);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.persona dd{margin:0;color:var(--ink-1)}
+
+.sitemap-tree{font-family:"SF Mono","JetBrains Mono","Consolas",monospace;font-size:12px;line-height:1.85;padding:24px;background:rgba(0,0,0,.4);border:1px solid var(--line);border-radius:16px;color:var(--ink-1);white-space:pre;overflow-x:auto}
+.sitemap-tree span{color:var(--cyan)}
+.sitemap-tree em{color:var(--amber);font-style:normal}
+.sitemap-tree b{color:var(--magenta);font-weight:400}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.kpi-box{padding:18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line-2);text-align:center}
+.kpi-box .v{font-size:28px;font-weight:800;background:var(--grad-cool);-webkit-background-clip:text;color:transparent;line-height:1}
+.kpi-box .l{font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em}
+
+.gantt{display:grid;grid-template-columns:200px repeat(12,1fr);gap:2px;margin:18px 0;font-size:11px}
+.gantt > div{padding:8px 6px;background:rgba(255,255,255,.02);border-radius:4px;color:var(--ink-2)}
+.gantt .hd{background:rgba(255,255,255,.06);color:var(--ink-3);text-align:center;font-weight:600;letter-spacing:.06em}
+.gantt .task{color:#fff;font-weight:600;background:rgba(255,255,255,.04);text-align:left}
+.gantt .bar{background:var(--grad-hero);height:24px;border-radius:4px}
+.gantt .bar-cool{background:var(--grad-cool);height:24px;border-radius:4px}
+.gantt .bar-soft{background:linear-gradient(120deg,#FFC857,#FF4FB7);height:24px;border-radius:4px}
+
+.cta-block{margin:60px 0 0;padding:36px;border-radius:24px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(255,79,183,.08));border:1px solid var(--line-2);text-align:center}
+.cta-block h3{margin:0 0 10px;font-size:24px;color:#fff}
+.btn-link{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:999px;background:var(--grad-hero);color:#0a0a14;font-weight:700;font-size:14px;text-decoration:none}
+
+footer.doc-foot{text-align:center;padding:60px 0 30px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12px}
+footer.doc-foot strong{display:block;color:var(--ink-1);font-size:14px;margin-bottom:8px}
+
+@media (max-width:1100px){nav.toc{display:none}}
+@media (max-width:760px){
+  .grid-2,.grid-3,.kpi-row,.cover .meta{grid-template-columns:1fr}
+  .gantt{grid-template-columns:120px repeat(12,1fr);font-size:9px}
+  .chap h2{font-size:28px}
+  .persona dl{grid-template-columns:90px 1fr}
+}
+@media print{
+  body::before,body::after,nav.toc{display:none!important}
+  body{background:#fff!important;color:#000!important}
+  .chap,.cover,.box,.callout,.persona,table,.kpi-box,.gantt > div{background:#fff!important;color:#000!important;border-color:#ddd!important}
+  .chap h2,.chap h3,.chap h4,.cover h1,strong,b,td.h{color:#000!important}
+  .grad-text,.cover h1 span,.kpi-box .v{background:none!important;-webkit-text-fill-color:#000!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="toc">
+  <h4>목차</h4>
+  <a href="#cover">표지</a>
+  <a href="#ch1">1. 프로젝트 개요</a>
+  <a href="#ch2">2. 사용자·페르소나</a>
+  <a href="#ch3">3. 정보구조 (IA)</a>
+  <a href="#ch4">4. 페이지 사양</a>
+  <a href="#ch5">5. 이미지·비주얼 컨셉</a>
+  <a href="#ch6">6. 디자인 시스템</a>
+  <a href="#ch7">7. UX·인터랙션</a>
+  <a href="#ch8">8. 콘텐츠·톤보이스</a>
+  <a href="#ch9">9. 기술 요구사항</a>
+  <a href="#ch10">10. SEO·계측</a>
+  <a href="#ch11">11. 일정·역할</a>
+  <a href="#ch12">12. 검수·이관</a>
+</nav>
+
+<header id="cover" class="cover">
+  <div class="wrap">
+    <span class="badge">RFP · DESIGN BRIEF · v1.0</span>
+    <h1>aidenlab 홈페이지<br/><span>리뉴얼 기획·디자인 요구정의서</span></h1>
+    <p style="color:var(--ink-2);max-width:580px;margin:18px auto 0;font-size:16px">현재 imweb 기반 사이트를 자체 호스팅 / 헤드리스 CMS 기반의 프리미엄 글로벌 브랜드 사이트로 전환하기 위한 통합 기획·디자인·콘텐츠 요구사항.</p>
+    <div class="meta">
+      <div><small>Client</small><strong>(주)에이든랩</strong></div>
+      <div><small>Author</small><strong>Senior Web Planner</strong></div>
+      <div><small>Version</small><strong>v1.0 (2026.05.17)</strong></div>
+      <div><small>Status</small><strong>Draft for Review</strong></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<!-- =========================================
+     CH 1
+========================================= -->
+<section id="ch1" class="chap">
+  <div class="chap-num">CHAPTER 01</div>
+  <h2>프로젝트 개요</h2>
+  <p class="lead">현행 사이트는 imweb 기반의 브랜드 카탈로그 형태로, 회사의 핵심 경쟁력인 "글로벌 마케팅·커머스 운영 실력"과 "わさび10이라는 자체 플랫폼"을 충분히 표현하지 못하고 있다. 이번 리뉴얼은 신뢰감 있는 기업 사이트 + 리드 전환 머신 + wasabi10 게이트웨이라는 세 가지 역할을 동시에 수행하도록 설계한다.</p>
+
+  <h3 id="ch1-1">1.1 비즈니스 목표 (Why)</h3>
+  <div class="grid-3">
+    <div class="box">
+      <span class="lbl">PRIMARY GOAL</span>
+      <h4 style="margin:8px 0 6px">신규 B2B 리드 증대</h4>
+      <p style="font-size:13px;color:var(--ink-2);margin:0">월 30건 → 월 150건의 무료 진단 신청. 폼 작성률 12% 이상, 1영업일 내 응답 100%.</p>
+    </div>
+    <div class="box">
+      <span class="lbl">SECONDARY</span>
+      <h4 style="margin:8px 0 6px">wasabi10 자사몰 유입</h4>
+      <p style="font-size:13px;color:var(--ink-2);margin:0">전체 세션의 18% 이상을 wasabi10 신규 회원가입까지 전환. UTM·이벤트로 추적.</p>
+    </div>
+    <div class="box">
+      <span class="lbl">SECONDARY</span>
+      <h4 style="margin:8px 0 6px">채용·팀빌딩 강화</h4>
+      <p style="font-size:13px;color:var(--ink-2);margin:0">사이트를 통한 자발적 지원 월 20건 → 월 60건. 임직원 평균 추천 점수 4.3 이상.</p>
+    </div>
+  </div>
+
+  <h3 id="ch1-2">1.2 현황 진단 (As-Is)</h3>
+  <table>
+    <tr><th style="width:160px">항목</th><th>현재 상태</th><th>문제점 / 개선 방향</th></tr>
+    <tr><td class="h">플랫폼</td><td>imweb (코드 노출 한계, SEO·속도 제약)</td><td>Next.js + Headless CMS(Sanity/Strapi) 전환, Vercel 호스팅</td></tr>
+    <tr><td class="h">정보 구조</td><td>ABOUT / BRANDS / DISTRIBUTION / GLOBAL MARKETING / Wasabi10 / NEWS / CONTACT (7개)</td><td>서비스/실적/브랜드/채용 분리 9개 카테고리로 재편</td></tr>
+    <tr><td class="h">메인 메시지</td><td>"K-Brand, Breaking Borders" 추상적 슬로건</td><td>실적 숫자 기반 (Qoo10 1위·월 1억) 후킹 카피</td></tr>
+    <tr><td class="h">실적/케이스</td><td>이미지·텍스트 혼재, 정량 데이터 부재</td><td>케이스별 KPI 카드(매출·랭킹·ROAS) + 인터뷰 영상</td></tr>
+    <tr><td class="h">wasabi10 연결</td><td>탑메뉴 외부 링크 1개</td><td>독립된 게이트웨이 페이지 + 메인 CTA + 풋터 띠배너</td></tr>
+    <tr><td class="h">디자인 톤</td><td>화이트 베이스, 부드러운 그라데이션</td><td>premium dark + 그라데이션 (wiredy/spray 톤)</td></tr>
+    <tr><td class="h">다국어</td><td>한/영/일 서브도메인 분리, 콘텐츠 비대칭</td><td>i18n 단일 베이스로 통합, 자동 라우팅 + 자동 hreflang</td></tr>
+    <tr><td class="h">계측</td><td>GA 미세팅, 폼 추적 없음</td><td>GA4 + GTM + Hotjar + Mixpanel 통합</td></tr>
+  </table>
+
+  <h3 id="ch1-3">1.3 To-Be 컨셉 한 줄</h3>
+  <div class="callout">
+    <h4>One-liner</h4>
+    <p style="margin:0;font-size:18px;color:#fff;line-height:1.5"><b>"숫자로 증명하는 K-브랜드 글로벌 파트너,"</b> <br/>심플하지만 압도적인 신뢰감 — Premium Dark Aesthetic.</p>
+  </div>
+
+  <h3 id="ch1-4">1.4 핵심 KPI</h3>
+  <div class="kpi-row">
+    <div class="kpi-box"><div class="v">×5</div><div class="l">월 리드 (30→150)</div></div>
+    <div class="kpi-box"><div class="v">12%+</div><div class="l">CTA 클릭률</div></div>
+    <div class="kpi-box"><div class="v">18%</div><div class="l">wasabi10 전환</div></div>
+    <div class="kpi-box"><div class="v">&lt;2.5s</div><div class="l">LCP (모바일)</div></div>
+  </div>
+</section>
+
+<!-- =========================================
+     CH 2 — PERSONAS
+========================================= -->
+<section id="ch2" class="chap">
+  <div class="chap-num">CHAPTER 02</div>
+  <h2>타겟 사용자 · 페르소나</h2>
+  <p class="lead">에이든랩 홈페이지는 단일 타겟이 아닌, B2B(브랜드 의사결정자)와 B2C(wasabi10 잠재 회원), 그리고 잠재 채용 후보자가 함께 방문하는 다층 사이트다. 페이지 IA와 라우팅은 각 페르소나의 진입 의도를 빠르게 분기시키도록 설계한다.</p>
+
+  <div class="persona">
+    <div class="name"><div class="ava"></div><div><div class="nm">P1 · 김지수, 35</div><div class="role">K-뷰티 브랜드 마케팅 디렉터 · 1차 의사결정자</div></div></div>
+    <dl>
+      <dt>맥락</dt><dd>국내 매출 안정화 후 일본 진출 검토. 큐텐·라쿠텐 입점 직접 해봤지만 매출 정체. 외부 파트너 비교 중.</dd>
+      <dt>JOB-TO-BE-DONE</dt><dd>실제로 일본에서 매출을 만들어 본 에이전시인지, 우리 카테고리 사례가 있는지 확인하고 빠르게 견적·미팅 요청.</dd>
+      <dt>핵심 페이지</dt><dd>홈 → Cases → Services(시그니처) → Contact</dd>
+      <dt>핵심 메시지</dt><dd>"우리는 평균이 아니라 1위를 만든다. 환급 보장."</dd>
+    </dl>
+  </div>
+
+  <div class="persona">
+    <div class="name"><div class="ava" style="background:var(--grad-cool)"></div><div><div class="nm">P2 · 박정훈, 42</div><div class="role">중소 K-뷰티 브랜드 CEO · 최종 의사결정자</div></div></div>
+    <dl>
+      <dt>맥락</dt><dd>월매출 5~10억 규모. 일본 시장은 처음. 파트너 신뢰도와 일본 법인 보유 여부가 가장 중요.</dd>
+      <dt>JOB-TO-BE-DONE</dt><dd>회사 안정성, 한일 양국 조직, 투자 유치 여부, 대표/팀 백그라운드 확인.</dd>
+      <dt>핵심 페이지</dt><dd>홈 → About(연혁/팀/오피스) → Cases → 프레스</dd>
+      <dt>핵심 메시지</dt><dd>"서울 본사 + 도쿄 지사, 시리즈 B 50억 투자, 60명 한일 팀."</dd>
+    </dl>
+  </div>
+
+  <div class="persona">
+    <div class="name"><div class="ava" style="background:linear-gradient(135deg,#FFC857,#FF4FB7)"></div><div><div class="nm">P3 · さとう みか, 26</div><div class="role">わさび10 잠재 회원 (일본 인플루언서) · B2C</div></div></div>
+    <dl>
+      <dt>맥락</dt><dd>일본인 마이크로 인플루언서(IG 8천 팔로워). 다른 体験団 플랫폼 이용 중. 더 좋은 제품과 보수를 찾는 중.</dd>
+      <dt>JOB-TO-BE-DONE</dt><dd>aidenlab.io 메인에서 わさび10 페이지로 빠르게 이동, JP 사이트로 자동 라우팅, 가입 1분 내 완료.</dd>
+      <dt>핵심 페이지</dt><dd>(JP 자동) 홈 → わさび10 → wasabi10.com 가입</dd>
+      <dt>핵심 메시지</dt><dd>"4,000人の仲間。今登録で1,000円。"</dd>
+    </dl>
+  </div>
+
+  <div class="persona">
+    <div class="name"><div class="ava" style="background:linear-gradient(135deg,#C8FF52,#3DE3FF)"></div><div><div class="nm">P4 · 이준호, 29</div><div class="role">시니어 퍼포먼스 마케터 (잠재 후보)</div></div></div>
+    <dl>
+      <dt>맥락</dt><dd>경력 5년차 마케터. 한일 듀얼 마켓 경험 가능한 환경 선호. 회사의 성장세·문화·복지 동시 검토.</dd>
+      <dt>JOB-TO-BE-DONE</dt><dd>채용 페이지에서 직무·복지·문화·실제 일하는 모습을 확인하고 지원 결정.</dd>
+      <dt>핵심 페이지</dt><dd>채용 → About(팀) → Insights(실제 일하는 방식) → 지원</dd>
+      <dt>핵심 메시지</dt><dd>"빠른 의사결정, 도쿄 출장 기회, AI 동료."</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- =========================================
+     CH 3 — IA
+========================================= -->
+<section id="ch3" class="chap">
+  <div class="chap-num">CHAPTER 03</div>
+  <h2>정보 구조 (Information Architecture)</h2>
+  <p class="lead">9개 1차 카테고리로 재편한다. 헤더 글로벌 네비게이션은 7개로 노출(메인 + 6개), 채용은 우상단 텍스트 링크로 보조 노출. 모든 페이지는 한·영·일 i18n 지원, JP 사용자는 첫 진입 시 OS 언어 감지로 자동 라우팅.</p>
+
+  <h3 id="ch3-1">3.1 사이트맵</h3>
+  <div class="sitemap-tree">
+aidenlab.io
+├── /  <span>Home</span> ······································ <em>P1</em>
+├── /about  <span>About</span> ······························· <em>P2</em>
+│   ├── 회사 소개 / 미션 · 비전
+│   ├── 연혁 (Timeline)
+│   ├── 팀 (Leadership)
+│   └── 오피스 (Seoul · Tokyo)
+├── /services  <span>Services</span> ······················· <em>P3</em>
+│   ├── /services/influencer  글로벌 인플루언서 마케팅
+│   ├── /services/performance 글로벌 퍼포먼스 마케팅
+│   ├── /services/ecommerce   글로벌 이커머스 운영대행
+│   ├── /services/distribution 사입 &amp; 유통
+│   └── /services/signature   <b>SIGNATURE</b> (간판 프로그램)
+│       ├── /signature/japan-growth-plan  일본 Qoo10 1위 만들기
+│       └── /signature/launch-booster      런칭 6개월 1억 만들기
+├── /cases  <span>Case studies</span> ······················· <em>P4</em>
+│   ├── /cases (목록 · 필터: 플랫폼/카테고리/기간)
+│   └── /cases/[slug] (상세 — KPI · 인터뷰 · 비포애프터)
+├── /brands  <span>Brands</span> ···························· <em>P5</em>
+│   ├── PB Brands (Meal it · Glow u · Pimple Lab · Maldda)
+│   └── Partner / Distribution Brands
+├── /wasabi10  <span>わさび10 Bridge</span> ················· <em>P6</em>
+│   └── → wasabi10.com (외부 자사몰)
+├── /insights  <span>Insights / News</span> ················· <em>P8</em>
+│   ├── /insights (필터: 리포트/케이스/트렌드/프레스/소식)
+│   ├── /insights/[slug]
+│   └── /insights/reports (백서 PDF 게이트)
+├── /careers  <span>Careers</span> ··························· <em>P7</em>
+│   ├── 컬처 · 복지
+│   ├── 채용 중인 포지션 (그리팅/노션 임베드)
+│   └── /careers/[slug] (직무 상세)
+├── /contact  <span>Contact</span> ··························· <em>P9</em>
+│   └── 무료 진단 신청 폼 (Tally/HubSpot 임베드)
+└── 보조 페이지
+    ├── /privacy · /terms · /partners · /press · /sitemap.xml
+    └── 404 / 500 (브랜드 톤 유지)
+  </div>
+
+  <h3 id="ch3-2">3.2 글로벌 내비게이션</h3>
+  <table>
+    <tr><th>영역</th><th>구성</th></tr>
+    <tr><td class="h">Top Bar (좌)</td><td>로고 + 슬로건 "K-BRAND × GLOBAL"</td></tr>
+    <tr><td class="h">Top Bar (중)</td><td>Home · About · Services · Cases · Brands · Wasabi10 · Insights</td></tr>
+    <tr><td class="h">Top Bar (우)</td><td>언어 토글(KR/EN/JP) · "상담 신청" CTA (Primary)</td></tr>
+    <tr><td class="h">Mega Menu</td><td>Services hover 시 5개 서브(인플루언서·퍼포먼스·이커머스·유통·시그니처) 4열 그리드 + 시그니처 카드 강조</td></tr>
+    <tr><td class="h">Mobile</td><td>햄버거 → 전체 화면 오버레이. 검색 + 언어 + CTA를 풋터 영역에 sticky</td></tr>
+    <tr><td class="h">Footer</td><td>4컬럼(Services · Company · Platforms · Contact) + 회사 정보 + SNS + 한일 양국 주소</td></tr>
+  </table>
+
+  <h3 id="ch3-3">3.3 URL 규칙</h3>
+  <ul>
+    <li><b>언어 prefix:</b> 기본 한국어는 prefix 없음. 영어 <code>/en/...</code>, 일본어 <code>/ja/...</code></li>
+    <li><b>슬러그:</b> 영문 케밥 케이스 (예: <code>/cases/glow-u-qoo10-no1</code>)</li>
+    <li><b>UTM:</b> 메인 CTA → <code>utm_source=aidenlab&amp;utm_medium=site&amp;utm_campaign=lead</code> 자동 추가</li>
+    <li><b>wasabi10 외부 링크:</b> <code>rel="noopener"</code> + 별도 이벤트 트래킹</li>
+  </ul>
+</section>
+
+<!-- =========================================
+     CH 4 — Page Specs
+========================================= -->
+<section id="ch4" class="chap">
+  <div class="chap-num">CHAPTER 04</div>
+  <h2>페이지별 사양 (Page Specs)</h2>
+  <p class="lead">각 페이지는 ① 목적, ② 주 타겟, ③ 섹션 구성, ④ 핵심 카피, ⑤ 필요한 이미지/소재, ⑥ CTA, ⑦ 추가 노트 순서로 정의한다. <b>모든 페이지의 상단·하단에 동일한 Primary CTA "무료 진단 신청"이 위치</b>한다.</p>
+
+  <!-- ============= P1 Home ============= -->
+  <h3 id="p1">P1 · 홈 (Home)<span class="pill">PRIMARY</span></h3>
+  <p><b>목적:</b> 30초 안에 '이 회사가 어떤 결과를 만들 수 있는지'를 보여주고 진단 신청까지 유도. <b>타겟:</b> P1(마케팅 디렉터) 우선, P2 보조.</p>
+  <table>
+    <tr><th style="width:90px">섹션</th><th>구성 / 핵심 카피</th><th>이미지·소재</th></tr>
+    <tr><td class="h">S01<br/>HERO</td><td><b>"K-브랜드의 글로벌 매출을 설계합니다."</b><br/>서브: 일본 Qoo10 카테고리 1위 17건, 런칭 6개월 만에 월매출 1억 돌파.<br/>CTA: 무료 진단 받기 · 실적 보기 · わさび10 자세히<br/>KPI 3카드: #1 / ¥1억+ / 20,000+</td><td>오른쪽 60% 비주얼: 회전하는 다중 원형 궤도 + 코어 광구. SEOUL·TOKYO·PERFORMANCE·INFLUENCER 4방향 레이블. CSS 애니메이션으로 가벼움.</td></tr>
+    <tr><td class="h">S02<br/>TRUSTED</td><td>로고 마퀴: SERUMKIND · SUREBASE · @TRENDSEOUL · MEAL IT · GLOW U · OLIVE YOUNG 1,300+ · Qoo10 · RAKUTEN · @COSME …</td><td>실제 클라이언트/플랫폼 로고 SVG 24개 (모노톤 화이트 +30% opacity)</td></tr>
+    <tr><td class="h">S03<br/>SIGNATURE</td><td>2장 빅카드 — ① "일본 Qoo10 카테고리 1위 만들기 #1" ② "런칭 6개월 월매출 1억 만들기 ¥1억"</td><td>그라데이션 카드 배경. 우측 하단 일러스트(랭킹 차트/매출 그래프).</td></tr>
+    <tr><td class="h">S04<br/>SERVICES</td><td>4 카드 그리드 — 인플루언서/퍼포먼스/이커머스/유통</td><td>각 카드 좌상단 48px 그라데이션 아이콘. hover 시 보더 발광.</td></tr>
+    <tr><td class="h">S05<br/>WASABI10</td><td>좌 1.4 / 우 1 비율 — 좌: 카피 + 4,000+ / 10M+ / 3개월 무료. 우: 모바일 mock-up.</td><td>わさび10 앱 mock-up(피그마로 정밀 제작). 핑크-옐로우 그라데이션 폰 베젤.</td></tr>
+    <tr><td class="h">S06<br/>CASES</td><td>3장 카드 (Qoo10 헤어 1위 · Rakuten 다이어트 1.2억엔 · 올리브영 1,300매장)</td><td>각 카드 좌상단 platform 칩. 우측 큰 KPI 숫자(그라데이션 텍스트).</td></tr>
+    <tr><td class="h">S07<br/>PROCESS</td><td>4단계 — Diagnose · Localize · Launch · Scale</td><td>각 카드 상단 01~04 대형 숫자(그라데이션 텍스트). 일러스트는 옵션.</td></tr>
+    <tr><td class="h">S08<br/>INSIGHTS</td><td>좌측 피처 1 + 우측 작은 카드 2 — 백서 다운로드 강조</td><td>피처 카드 배경 그라데이션 + 다운로드 시 게이트 폼.</td></tr>
+    <tr><td class="h">S09<br/>CTA</td><td>풀폭 그라데이션 박스 — "한국에서 검증된 브랜드, 일본에서 한 번 더 폭발시킵니다."</td><td>그라데이션 박스 + 별도 비주얼 없음 (텍스트 중심).</td></tr>
+  </table>
+  <div class="callout"><h4>인터랙션 노트</h4><p style="margin:0">S01 KPI 3카드는 스크롤 진입 시 0→실제 숫자로 카운트업 애니메이션. S05 모바일 mock-up은 살짝 떠 있는 듯한 levitation 애니메이션(translateY ±6px, 4초).</p></div>
+
+  <!-- ============= P2 About ============= -->
+  <h3 id="p2">P2 · About</h3>
+  <p><b>목적:</b> 회사의 신뢰성 증명 (한일 듀얼 조직, 투자 유치, 팀 규모). <b>타겟:</b> P2(CEO 의사결정자), 미디어, 채용 후보자.</p>
+  <table>
+    <tr><th style="width:90px">섹션</th><th>구성</th><th>비고</th></tr>
+    <tr><td class="h">S01</td><td>About Hero — "한국의 좋은 브랜드가 세계의 좋은 브랜드가 되도록." (센터 정렬, 풀폭)</td><td>배경: 그라데이션 오브 2개 + 그리드 노이즈</td></tr>
+    <tr><td class="h">S02</td><td>Values 3카드 — 숫자로 증명한다 / 현지에서 만든다 / AI로 가속한다</td><td>각 카드 상단 "01 / VALUE" 라벨</td></tr>
+    <tr><td class="h">S03</td><td>Timeline 2023-2026 — 4개 마일스톤</td><td>왼쪽 세로선 + 그라데이션 도트, 마우스 오버 시 도트 확대</td></tr>
+    <tr><td class="h">S04</td><td>Leadership 팀 4-8명</td><td>실제 사진 교체 전까지 그라데이션 아바타. 한국·일본 양국 인력 비율 노출</td></tr>
+    <tr><td class="h">S05</td><td>Seoul × Tokyo 오피스 2장</td><td>지도 임베드는 옵션 (성능 영향). 실제 오피스 사진 권장.</td></tr>
+    <tr><td class="h">S06</td><td>Press · Investors 로고 그리드 + 보도자료 리스트</td><td>시리즈B 투자사 로고 8-12개</td></tr>
+  </table>
+
+  <!-- ============= P3 Services ============= -->
+  <h3 id="p3">P3 · Services</h3>
+  <p><b>목적:</b> 4개 핵심 서비스 + 2개 시그니처 프로그램의 깊이감을 전달. <b>타겟:</b> P1.</p>
+  <table>
+    <tr><th>구성</th><th>설명</th></tr>
+    <tr><td class="h">상단 탭 5개</td><td>인플루언서 / 퍼포먼스 / 이커머스 / 유통 / 시그니처 — 클릭 시 탭 콘텐츠만 교체 (페이지 이동 없이)</td></tr>
+    <tr><td class="h">각 서비스 패널</td><td>좌측 카피 + 4개 feature 박스 + 상담 CTA / 우측 비주얼 패널 (그라데이션 아이콘 또는 mock-up)</td></tr>
+    <tr><td class="h">시그니처 패널</td><td>JAPAN GROWTH PLAN · LAUNCH BOOSTER 두 카드. 4단계 프로세스와 환급 보장 조건 노출</td></tr>
+    <tr><td class="h">하단 CTA</td><td>"가격은 매출에 맞춰서" 강조 박스 — 무료 진단 신청</td></tr>
+  </table>
+  <div class="callout warn"><h4>법무 검토 필요</h4><p style="margin:0">"환급 보장" 카피는 약관 페이지(/services/refund-policy)로 링크하고, 환급 조건/제외 사항을 명시할 것. 광고법 위반 리스크 사전 검토.</p></div>
+
+  <!-- ============= P4 Cases ============= -->
+  <h3 id="p4">P4 · Cases</h3>
+  <p><b>목적:</b> "정말 매출을 만들었는가?"에 대한 압도적 답변. <b>타겟:</b> P1, P2.</p>
+  <table>
+    <tr><th>구성</th><th>설명</th></tr>
+    <tr><td class="h">필터 칩</td><td>전체 / Qoo10 1위 / Rakuten / Amazon JP / 올리브영 / Beauty / F&amp;B / Lifestyle (다중 선택)</td></tr>
+    <tr><td class="h">케이스 카드(목록)</td><td>플랫폼 칩 + 헤드라인 + 인용 + 3-KPI(매출/랭킹/ROAS). 클릭 시 상세로 이동.</td></tr>
+    <tr><td class="h">상세 페이지 /cases/[slug]</td><td>① Hero (브랜드 로고, 한줄 결과) ② 도전 과제 ③ 전략 ④ 실행 ⑤ 결과(차트) ⑥ 클라이언트 인터뷰 영상(또는 인용) ⑦ 다른 케이스 추천</td></tr>
+    <tr><td class="h">Impact Numbers</td><td>4 수치 카드 — 100+ 브랜드 · 17 Qoo10 1위 · ¥30B+ 누적매출 · 4,000+ 인플루언서</td></tr>
+  </table>
+
+  <!-- ============= P5 Brands ============= -->
+  <h3 id="p5">P5 · Brands</h3>
+  <p>PB 4개(Meal it · Glow u · Pimple Lab · Maldda) + 유통 파트너 브랜드 4-8개를 두 그룹으로 분리. 각 카드 클릭 시 해당 브랜드 사이트 외부 이동.</p>
+
+  <!-- ============= P6 Wasabi10 ============= -->
+  <h3 id="p6">P6 · わさび10 Bridge</h3>
+  <p><b>목적:</b> wasabi10.com 자사몰로의 자연스러운 게이트웨이. JP 방문자는 자동 라우팅. 일반(브랜드) 방문자는 "わさび10 = 에이든랩이 운영하는 자체 플랫폼"이라는 사실을 명확히 인지.</p>
+  <table>
+    <tr><th>구성</th><th>설명</th></tr>
+    <tr><td class="h">S01 Hero</td><td>わさび10 로고 + "Owned Platform · Operated by aidenlab" 라벨. 핫핑크-옐로우 그라데이션 강조</td></tr>
+    <tr><td class="h">S02 How it works</td><td>4단계 (브랜드 등록 → 매칭 → 발송 → 리포트)</td></tr>
+    <tr><td class="h">S03 Channels</td><td>Instagram · X · Qoo10 · Rakuten 4채널 카드</td></tr>
+    <tr><td class="h">S04 CTA</td><td>"지금 등록하면 3개월 무료" — wasabi10.com 외부 링크</td></tr>
+  </table>
+
+  <!-- ============= P7 Careers ============= -->
+  <h3 id="p7">P7 · Careers</h3>
+  <p>채용 페이지는 "왜 여기서 일해야 하는가"를 1차로, "어떤 자리가 비었는가"를 2차로 전달. 그리팅/노션 임베드를 통해 운영 부담 최소화.</p>
+  <table>
+    <tr><th>구성</th><th>설명</th></tr>
+    <tr><td class="h">S01 Hero</td><td>"경계를 허무는 사람들과 함께 합니다."</td></tr>
+    <tr><td class="h">S02 Culture</td><td>4컬쳐 카드 — 속도 · 데이터 · 한일 듀얼 · AI</td></tr>
+    <tr><td class="h">S03 Openings</td><td>테이블 형태 (포지션 · 팀 · 고용형태 · 지역). 행 클릭 → 상세</td></tr>
+    <tr><td class="h">S04 Benefits</td><td>6개 복지 카드</td></tr>
+    <tr><td class="h">S05 Life at Aidenlab</td><td>옵션: 사진 마퀴 (오피스/팀데이/도쿄 워케이션)</td></tr>
+  </table>
+
+  <!-- ============= P8 Insights ============= -->
+  <h3 id="p8">P8 · Insights / News</h3>
+  <p>리포트(백서) · 케이스 인사이트 · 트렌드 · 프레스 · 회사 소식 5개 카테고리. 백서는 이메일 게이트로 받아 리드 풀로 활용.</p>
+
+  <!-- ============= P9 Contact ============= -->
+  <h3 id="p9">P9 · Contact</h3>
+  <p><b>목적:</b> 진단 신청 폼 완료. 폼 항목은 회사명/담당자/직책/이메일/전화/월매출/관심서비스/문의내용 8필드.</p>
+  <table>
+    <tr><th>구성</th><th>설명</th></tr>
+    <tr><td class="h">S01 Hero</td><td>"시작은 30분 무료 진단부터." — 1영업일 내 응답 약속 명시</td></tr>
+    <tr><td class="h">S02 Form</td><td>좌측 폼 + 우측 이메일/전화/주소/지도 — 폼은 HubSpot/Tally 임베드 권장</td></tr>
+    <tr><td class="h">자동화</td><td>제출 시 Slack #leads 알림 + 노션 CRM 자동 등록 + 자동 응답 메일 발송</td></tr>
+  </table>
+</section>
+
+<!-- =========================================
+     CH 5 — IMAGES / VISUAL CONCEPT
+========================================= -->
+<section id="ch5" class="chap">
+  <div class="chap-num">CHAPTER 05</div>
+  <h2>이미지·비주얼 컨셉</h2>
+  <p class="lead">"심플하지만 압도적인 신뢰감 + Premium Dark"를 위해 비주얼은 ① 추상 그래픽(자체 제작) ② 정제된 다큐멘터리 사진 ③ 인포그래픽 3가지 톤으로 통일한다. 스톡 사진은 지양, 모든 비주얼은 일관된 다크 컬러팔레트 안에서 제작.</p>
+
+  <h3 id="ch5-1">5.1 비주얼 컨셉 키워드</h3>
+  <div class="grid-3">
+    <div class="box"><span class="lbl">CONCEPT 01</span><h4>Orbit &amp; Core</h4><p style="font-size:13px;margin:0;color:var(--ink-2)">회전하는 원형 궤도와 발광하는 코어. 글로벌 마켓의 중심에 K-브랜드를 두는 메타포. 메인 히어로, AI/인플루언서 매칭 페이지에 사용.</p></div>
+    <div class="box"><span class="lbl">CONCEPT 02</span><h4>Gradient Field</h4><p style="font-size:13px;margin:0;color:var(--ink-2)">바이올렛-마젠타-앰버의 거대한 그라데이션 필드. CTA 블록, 시그니처 카드, 게이트웨이 페이지의 분위기 톤.</p></div>
+    <div class="box"><span class="lbl">CONCEPT 03</span><h4>Number First</h4><p style="font-size:13px;margin:0;color:var(--ink-2)">#1, ¥1억, 1,300+ 같은 숫자를 거대한 디스플레이 폰트(그라데이션 텍스트)로 시각화. 페이지의 시각적 앵커.</p></div>
+    <div class="box"><span class="lbl">CONCEPT 04</span><h4>Documentary Photo</h4><p style="font-size:13px;margin:0;color:var(--ink-2)">팀·오피스·일본 출장·인플루언서 미팅의 다큐멘터리 사진. 컬러는 다크 톤으로 그레이딩(시네마틱).</p></div>
+    <div class="box"><span class="lbl">CONCEPT 05</span><h4>Mobile Mock-up</h4><p style="font-size:13px;margin:0;color:var(--ink-2)">わさび10 앱·캠페인 화면 mock-up. 핑크-옐로우 베젤로 살짝 levitation 애니메이션.</p></div>
+    <div class="box"><span class="lbl">CONCEPT 06</span><h4>Data Viz</h4><p style="font-size:13px;margin:0;color:var(--ink-2)">매출 그래프, 랭킹 차트, ROAS 워터폴. Recharts 또는 D3로 인터랙티브 구현. 톤: 다크 + 그라데이션 라인.</p></div>
+  </div>
+
+  <h3 id="ch5-2">5.2 신규 이미지 페이지 제안 (현재 사이트 미존재)</h3>
+  <p>현재 사이트에 부재한, 리뉴얼에서 새로 추가/촬영/제작이 필요한 비주얼 자산.</p>
+  <table>
+    <tr><th>이미지 자산</th><th>용도</th><th>제작 방식</th></tr>
+    <tr><td class="h">Hero Orbit Animation</td><td>홈 메인 히어로 우측 비주얼</td><td>CSS/SVG 자체 제작 (외주 시 모션 디자이너 1주)</td></tr>
+    <tr><td class="h">わさび10 App Mock-up Set</td><td>홈 S05, わさび10 페이지 전체</td><td>피그마 정밀 mock-up 8장 (앱 캠페인 화면 시리즈)</td></tr>
+    <tr><td class="h">서울 오피스 다큐멘터리 사진 12장</td><td>About 오피스, Careers 라이프</td><td>사진 작가 1일 촬영 + 시네마틱 컬러그레이딩</td></tr>
+    <tr><td class="h">도쿄 시부야 오피스 사진 12장</td><td>About 오피스, Careers 라이프, 일본어 페이지</td><td>일본 현지 포토그래퍼 1일 촬영</td></tr>
+    <tr><td class="h">한·일 팀 단체 사진 + 개별 프로필 60장</td><td>About Leadership, Careers Life</td><td>스튜디오 촬영 1일 (한국 본사) + 도쿄 별도</td></tr>
+    <tr><td class="h">PB 브랜드 제품 누끼 컷</td><td>Brands 페이지 4 브랜드 카드</td><td>스튜디오 제품 촬영. 다크 배경에 그라데이션 림라이트.</td></tr>
+    <tr><td class="h">케이스 스터디 비포·애프터 그래프 (4-8 케이스)</td><td>Cases 상세 페이지</td><td>실제 매출 데이터 기반 차트 (NDA 익명화 옵션)</td></tr>
+    <tr><td class="h">클라이언트 인터뷰 영상 (3-5건)</td><td>홈 케이스 카드, Cases 상세</td><td>1분 숏폼 + 풀버전 5분. 외주 영상 제작팀.</td></tr>
+    <tr><td class="h">Process Animation (4단계 Lottie)</td><td>홈 S07, Services 페이지</td><td>Lottie 4컷 마이크로 인터랙션</td></tr>
+    <tr><td class="h">2026 일본 뷰티 백서 표지 (PDF)</td><td>Insights 페이지 게이트</td><td>표지 디자인 + 50p 내지 디자인 (별도 외주)</td></tr>
+    <tr><td class="h">시그니처 프로그램 일러스트 2장</td><td>홈 S03, Services 시그니처</td><td>벡터 일러스트 — 랭킹 차트(JGP), 매출 그래프(LB)</td></tr>
+    <tr><td class="h">한·일 지도 인터랙티브</td><td>About 오피스, Insights 인사이트</td><td>SVG 지도 + 호버 시 오피스 정보 팝오버</td></tr>
+  </table>
+
+  <h3 id="ch5-3">5.3 톤·매너 가이드 (Do / Don't)</h3>
+  <div class="grid-2">
+    <div class="box"><h4 style="color:var(--lime)">✓ DO</h4>
+      <ul style="margin:8px 0 0">
+        <li>다크 베이스 위 그라데이션 / 발광 효과</li>
+        <li>숫자·KPI를 비주얼의 주인공으로</li>
+        <li>여백을 충분히 (특히 모바일)</li>
+        <li>실제 데이터/스크린샷/제품을 활용</li>
+        <li>한·일 양국 콘텐츠 동시 노출</li>
+      </ul>
+    </div>
+    <div class="box"><h4 style="color:var(--magenta)">✗ DON'T</h4>
+      <ul style="margin:8px 0 0">
+        <li>스톡 비즈니스 사진(악수, 회의실)</li>
+        <li>화이트 베이스 + 파스텔 (현재 사이트 톤)</li>
+        <li>의미 없는 장식 그라데이션</li>
+        <li>외부 브랜드 로고를 컬러풀하게 노출</li>
+        <li>한국어 일변도 — 일본어 콘텐츠 결락</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+     CH 6 — DESIGN SYSTEM
+========================================= -->
+<section id="ch6" class="chap">
+  <div class="chap-num">CHAPTER 06</div>
+  <h2>디자인 시스템</h2>
+  <p class="lead">단일 디자인 토큰으로 운영. Figma Library + Tailwind 토큰(또는 CSS 변수)으로 동기화. 모든 컴포넌트는 다크/그라데이션 베이스에서 시작하고, 라이트 모드는 v1 범위 외(필요 시 v2).</p>
+
+  <h3 id="ch6-1">6.1 컬러</h3>
+  <p><b>Base</b></p>
+  <div class="swatch">
+    <div style="background:#05060d">--bg-0 / #05060D<small>Canvas</small></div>
+    <div style="background:#0a0c18">--bg-1 / #0A0C18<small>Surface</small></div>
+    <div style="background:#11142a">--bg-2 / #11142A<small>Elevated</small></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)!important">--line / 6-16%<small>Borders</small></div>
+  </div>
+  <p><b>Accent</b></p>
+  <div class="swatch">
+    <div style="background:#7C5CFF">Violet / #7C5CFF<small>Primary</small></div>
+    <div style="background:#FF4FB7">Magenta / #FF4FB7<small>Secondary</small></div>
+    <div style="background:#3DE3FF;color:#0a0a14">Cyan / #3DE3FF<small>Tertiary</small></div>
+    <div style="background:#FFC857;color:#0a0a14">Amber / #FFC857<small>Highlight</small></div>
+    <div style="background:#C8FF52;color:#0a0a14">Lime / #C8FF52<small>Success</small></div>
+  </div>
+  <p><b>Signature Gradients</b></p>
+  <div class="palette-grad">
+    <div style="background:linear-gradient(120deg,#7C5CFF,#FF4FB7 45%,#FFC857)">grad-hero · 120° Violet→Magenta→Amber</div>
+    <div style="background:linear-gradient(120deg,#3DE3FF,#7C5CFF 60%,#FF4FB7)">grad-cool · 120° Cyan→Violet→Magenta</div>
+  </div>
+
+  <h3 id="ch6-2">6.2 타이포그래피</h3>
+  <p>한글 우선 폰트는 <b>Pretendard Variable</b> (오픈소스), 영문 호환 시 동일 폰트가 라틴까지 커버. 일본어는 <b>Noto Sans JP</b> fallback.</p>
+  <div class="type-sample" style="font-size:64px;font-weight:800;color:#fff;line-height:1.05;letter-spacing:-.03em">Display / 64–84px<div class="lbl">Hero h1 — Pretendard 800</div></div>
+  <div class="type-sample" style="font-size:40px;font-weight:700;color:#fff;letter-spacing:-.02em">Headline / 40–56px<div class="lbl">Section h2 — Pretendard 700</div></div>
+  <div class="type-sample" style="font-size:22px;font-weight:700;color:#fff">Subhead / 20–24px<div class="lbl">Card h3 — Pretendard 700</div></div>
+  <div class="type-sample" style="font-size:17px;color:var(--ink-1)">Body L · 17px / 1.7<div class="lbl">Long-form lead text — Pretendard 400</div></div>
+  <div class="type-sample" style="font-size:15px;color:var(--ink-1)">Body M · 15px / 1.7<div class="lbl">Default body — Pretendard 400</div></div>
+  <div class="type-sample" style="font-size:13px;color:var(--ink-2)">Body S · 13px / 1.6<div class="lbl">Captions, meta — Pretendard 400</div></div>
+  <div class="type-sample" style="font-size:11px;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase">EYEBROW / 11PX · 0.18EM<div class="lbl">Section eyebrow — Pretendard 600</div></div>
+
+  <h3 id="ch6-3">6.3 간격 · 코너 · 그림자</h3>
+  <table>
+    <tr><th>토큰</th><th>값</th><th>용도</th></tr>
+    <tr><td class="h">space-1 ~ 12</td><td>4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 60 · 80 · 120 px</td><td>8px 스케일 + 큰 섹션 패딩</td></tr>
+    <tr><td class="h">radius-sm</td><td>10px</td><td>버튼, 칩, 작은 카드</td></tr>
+    <tr><td class="h">radius</td><td>18px</td><td>표준 카드</td></tr>
+    <tr><td class="h">radius-lg</td><td>28px</td><td>섹션 컨테이너, 히어로 비주얼</td></tr>
+    <tr><td class="h">shadow-1</td><td>0 8px 30px rgba(0,0,0,.35)</td><td>floating elements</td></tr>
+    <tr><td class="h">shadow-glow</td><td>0 0 60px rgba(124,92,255,.25)</td><td>Primary CTA, brand mark</td></tr>
+  </table>
+
+  <h3 id="ch6-4">6.4 컴포넌트 라이브러리 (Figma)</h3>
+  <ul>
+    <li><b>Buttons</b>: Primary (그라데이션) / Ghost (보더만) / Tertiary (텍스트). 3 size (sm/md/lg)</li>
+    <li><b>Eyebrow Tag</b>: dot + uppercase. 글로벌 컬러는 cyan 베이스, 강조 시 magenta</li>
+    <li><b>Card</b>: 기본 / Glow border (그라데이션 1px 보더) / Glass (blur 16px)</li>
+    <li><b>Stat Card</b>: 숫자(그라데이션 텍스트) + 라벨</li>
+    <li><b>KPI Card (Big)</b>: 거대 숫자 + 캡션 (히어로용)</li>
+    <li><b>Process Step</b>: 카운터 reset CSS 활용 — 01/02/03/04 자동 번호</li>
+    <li><b>Marquee</b>: keyframes scroll. 로고/텍스트 공용</li>
+    <li><b>Form Field</b>: dark input + violet focus border + 12px label uppercase</li>
+    <li><b>Footer columns</b>: 4컬럼 + 좌측 브랜드 정보</li>
+  </ul>
+
+  <h3 id="ch6-5">6.5 아이콘</h3>
+  <p>1차 아이콘 셋: <b>Lucide</b> (오픈소스, 1.5px stroke). 한국어/일본어 텍스트와의 매칭을 위해 모두 outlined. 컬러는 ink-1, hover 시 violet. PB 브랜드/플랫폼 로고는 SVG 마스터 파일로 관리.</p>
+
+  <h3 id="ch6-6">6.6 그리드</h3>
+  <table>
+    <tr><th>Breakpoint</th><th>Container</th><th>Columns / Gutter</th></tr>
+    <tr><td class="h">XL / ≥1280</td><td>1240px 고정</td><td>12 col · 24px</td></tr>
+    <tr><td class="h">L / 1024-1279</td><td>fluid · padding 28</td><td>12 col · 20px</td></tr>
+    <tr><td class="h">M / 768-1023</td><td>fluid · padding 28</td><td>8 col · 16px</td></tr>
+    <tr><td class="h">S / 480-767</td><td>fluid · padding 20</td><td>6 col · 14px</td></tr>
+    <tr><td class="h">XS / &lt;480</td><td>fluid · padding 16</td><td>4 col · 12px</td></tr>
+  </table>
+</section>
+
+<!-- =========================================
+     CH 7 — UX / INTERACTION
+========================================= -->
+<section id="ch7" class="chap">
+  <div class="chap-num">CHAPTER 07</div>
+  <h2>UX · 인터랙션 사양</h2>
+  <p class="lead">"심플하지만 살아 있는" 사이트. 과한 패럴랙스/스크롤 잭킹은 지양하고, 마이크로 인터랙션과 진입 애니메이션으로 프리미엄감을 표현.</p>
+
+  <h3 id="ch7-1">7.1 전역 인터랙션</h3>
+  <ul>
+    <li><b>스크롤 진입 페이드 업</b>: 모든 섹션은 viewport 진입 시 12px 아래에서 0.4초 페이드. Intersection Observer 1회 트리거.</li>
+    <li><b>커서 인터랙션</b>: 데스크탑에서 Primary CTA hover 시 그라데이션 후광 확대 + arrow 4px translateX.</li>
+    <li><b>이미지 lazy</b>: 모든 이미지 next/image, blur placeholder. 첫 화면 이미지만 priority.</li>
+    <li><b>접근성</b>: prefers-reduced-motion 사용자에게 모든 애니메이션 비활성화.</li>
+  </ul>
+
+  <h3 id="ch7-2">7.2 마이크로 인터랙션</h3>
+  <table>
+    <tr><th>요소</th><th>인터랙션</th></tr>
+    <tr><td class="h">메인 히어로 KPI 카드</td><td>진입 시 0 → 실제 숫자 카운트업 (0.8s, easeOutCubic)</td></tr>
+    <tr><td class="h">히어로 Orbit 비주얼</td><td>3중 원형 궤도 무한 회전 (28s/42s reverse/60s)</td></tr>
+    <tr><td class="h">로고 마퀴</td><td>좌측으로 28초 무한 스크롤 (양 끝 mask gradient)</td></tr>
+    <tr><td class="h">わさび10 모바일 mock-up</td><td>4초 사이클 ±6px translateY levitation</td></tr>
+    <tr><td class="h">서비스 카드 호버</td><td>4px 위로 + 보더 그라데이션 발광</td></tr>
+    <tr><td class="h">시그니처 큰 숫자</td><td>진입 시 grad-hero 스케일 0.96 → 1, 0.5s</td></tr>
+    <tr><td class="h">CTA 버튼</td><td>hover 시 -2px translateY + shadow-glow 강화</td></tr>
+    <tr><td class="h">언어 토글</td><td>드롭다운 fade-down 0.2s</td></tr>
+  </table>
+
+  <h3 id="ch7-3">7.3 모바일·반응형</h3>
+  <ul>
+    <li>모바일 최우선 설계 (320px부터 보장). 폼·CTA는 sticky bottom bar로 항상 노출.</li>
+    <li>탑바: 모바일은 햄버거 + 우측 작은 CTA. 햄버거 → 풀스크린 오버레이.</li>
+    <li>그리드 깨짐 방지: 4 col 그리드 → 2 col (≤900) → 1 col (≤480). Cases 카드는 ≤480에서도 2 col 유지.</li>
+    <li>모바일 hover 대체: 카드 long-press 시 동일 디테일 표시.</li>
+  </ul>
+
+  <h3 id="ch7-4">7.4 접근성 (WCAG 2.1 AA)</h3>
+  <ul>
+    <li>다크 배경 위 텍스트 대비 4.5:1 이상 (ink-2 = #FFF 62% = 통과)</li>
+    <li>그라데이션 텍스트는 일반 텍스트로 fallback 가능하도록 마크업 유지</li>
+    <li>모든 인터랙티브 요소 키보드 접근 + visible focus ring (cyan 2px outline)</li>
+    <li>이미지 alt, 영상 자막(한·영·일), 폼 라벨 명시</li>
+    <li>색맹 시 정보 손실 없도록 — 그라데이션 외에 텍스트/아이콘으로도 의미 전달</li>
+  </ul>
+</section>
+
+<!-- =========================================
+     CH 8 — CONTENT / TOV
+========================================= -->
+<section id="ch8" class="chap">
+  <div class="chap-num">CHAPTER 08</div>
+  <h2>콘텐츠 · 톤보이스</h2>
+  <p class="lead">"전문가가 옆자리에서 말하는 듯한" 신뢰감 — 자만하지 않으면서도 명확하게 결과를 약속하는 톤. 모호한 형용사보다 숫자와 사례를 앞세운다.</p>
+
+  <h3 id="ch8-1">8.1 보이스 가이드</h3>
+  <table>
+    <tr><th>축</th><th>왼쪽</th><th style="text-align:center">우리는 여기</th><th>오른쪽</th></tr>
+    <tr><td class="h">친근함</td><td>과한 격식 (감사드립니다…)</td><td style="text-align:center;color:var(--cyan)">●</td><td>과한 캐주얼 (헤헷, 어머)</td></tr>
+    <tr><td class="h">자신감</td><td>겸손 일변도</td><td style="text-align:center;color:var(--cyan)" colspan="2">     ●</td></tr>
+    <tr><td class="h">정량성</td><td>형용사 (혁신적, 차별화)</td><td style="text-align:center;color:var(--cyan)" colspan="2">       ●</td></tr>
+    <tr><td class="h">감성</td><td>드라이한 데이터</td><td style="text-align:center;color:var(--cyan)">●</td><td>감성 카피</td></tr>
+  </table>
+
+  <h3 id="ch8-2">8.2 카피 원칙</h3>
+  <ol>
+    <li><b>숫자 먼저</b> — "ROAS가 좋습니다" 대신 "ROAS ×4.8, 5개월 만에 ¥1.2억"</li>
+    <li><b>약속 그리고 조건</b> — "1위 보장. 미달성시 환급" (조건은 작은 글씨 링크)</li>
+    <li><b>1문장 1메시지</b> — 광고 카피는 한 화면에 한 가지 행동만 유도</li>
+    <li><b>한·일 양국 톤 통일</b> — 한국어 톤을 일본어로 직역하지 않고, 일본 시장 톤에 맞춰 재라이팅 (정중체 です/ます 우선)</li>
+    <li><b>NDA 시 익명화</b> — "글로벌 헤어 브랜드 A사" 패턴 사용</li>
+  </ol>
+
+  <h3 id="ch8-3">8.3 핵심 카피 시안</h3>
+  <table>
+    <tr><th>위치</th><th>한국어</th><th>일본어</th></tr>
+    <tr><td class="h">홈 Hero</td><td>K-브랜드의 글로벌 매출을 설계합니다.</td><td>Kブランドのグローバル売上を、設計します。</td></tr>
+    <tr><td class="h">홈 Hero Sub</td><td>일본 큐텐 카테고리 1위 17건, 런칭 6개월 만에 월매출 1억 돌파.</td><td>日本Qoo10カテゴリ1位17件、ローンチ6ヶ月で月商1億突破。</td></tr>
+    <tr><td class="h">시그니처 #1</td><td>일본 Qoo10 카테고리 1위 만들기</td><td>日本Qoo10カテゴリ1位を、つくる。</td></tr>
+    <tr><td class="h">시그니처 #2</td><td>런칭 6개월 월매출 1억 만들기</td><td>ローンチ6ヶ月で月商1億を、つくる。</td></tr>
+    <tr><td class="h">메인 CTA</td><td>무료 진단 받기</td><td>無料診断を申し込む</td></tr>
+    <tr><td class="h">わさび10</td><td>일본 체험단 마케팅의 표준</td><td>日本体験団マーケティングの新基準</td></tr>
+  </table>
+
+  <h3 id="ch8-4">8.4 콘텐츠 제작 책임</h3>
+  <table>
+    <tr><th>콘텐츠</th><th>1차 작성</th><th>검수</th><th>분량/주기</th></tr>
+    <tr><td class="h">홈 / About / Services 카피</td><td>마케팅팀 + 외부 카피라이터</td><td>대표 / 법무</td><td>1회성, 30P</td></tr>
+    <tr><td class="h">Cases 케이스 스터디</td><td>운영팀 + 클라이언트 인터뷰</td><td>마케팅팀</td><td>월 1편 (=년 12편)</td></tr>
+    <tr><td class="h">Insights 트렌드</td><td>마케팅팀 / 일본 PM</td><td>편집장 (마케팅 헤드)</td><td>월 2-4편</td></tr>
+    <tr><td class="h">Press / 회사 소식</td><td>대표 / PR 담당</td><td>대표</td><td>이벤트 단위</td></tr>
+    <tr><td class="h">백서 (Annual Report)</td><td>전사 협업</td><td>대표</td><td>연 1회 50p PDF</td></tr>
+    <tr><td class="h">채용 공고</td><td>인사팀 / 직무 매니저</td><td>대표</td><td>상시</td></tr>
+  </table>
+</section>
+
+<!-- =========================================
+     CH 9 — TECH
+========================================= -->
+<section id="ch9" class="chap">
+  <div class="chap-num">CHAPTER 09</div>
+  <h2>기술 요구사항</h2>
+  <p class="lead">imweb 의존도를 0으로 만들고, 자체 호스팅 헤드리스 아키텍처로 전환. 콘텐츠 운영은 비개발자도 가능한 CMS, 코드는 GitHub로 관리.</p>
+
+  <h3 id="ch9-1">9.1 권장 스택</h3>
+  <table>
+    <tr><th>영역</th><th>1순위 권장</th><th>대안</th></tr>
+    <tr><td class="h">Frontend</td><td>Next.js 15 (App Router) + TypeScript</td><td>Astro / Nuxt</td></tr>
+    <tr><td class="h">Styling</td><td>Tailwind CSS + CSS Variables (디자인 토큰)</td><td>CSS Modules</td></tr>
+    <tr><td class="h">CMS</td><td>Sanity v3 (한·영·일 i18n 강력)</td><td>Strapi / Contentful</td></tr>
+    <tr><td class="h">Hosting</td><td>Vercel (Edge 캐시 + ISR)</td><td>Cloudflare Pages</td></tr>
+    <tr><td class="h">Form</td><td>Tally / HubSpot 임베드 → 서버 액션 ingest</td><td>자체 폼 + Resend</td></tr>
+    <tr><td class="h">검색</td><td>Algolia (Insights 페이지)</td><td>Pagefind (정적)</td></tr>
+    <tr><td class="h">미디어</td><td>Vercel Blob + Cloudinary 트랜스폼</td><td>Imgix</td></tr>
+    <tr><td class="h">DNS</td><td>Cloudflare (보안·캐시 통합)</td><td>Route 53</td></tr>
+  </table>
+
+  <h3 id="ch9-2">9.2 i18n 라우팅</h3>
+  <ul>
+    <li>기본 한국어 — prefix 없음 (<code>/about</code>)</li>
+    <li>영어 — <code>/en/about</code>, 일본어 — <code>/ja/about</code></li>
+    <li>최초 접속 시 <code>Accept-Language</code> + IP 기반 자동 라우팅, 사용자 선택 시 쿠키 저장</li>
+    <li>HTML <code>lang</code> + <code>hreflang</code> 자동 삽입 (Sanity 다국어 문서 매핑)</li>
+    <li>현재 분리된 <code>aidenlab-us.com</code> / <code>aidenlab-jp.com</code> 도메인은 301 리다이렉트로 통합</li>
+  </ul>
+
+  <h3 id="ch9-3">9.3 wasabi10 연동</h3>
+  <ul>
+    <li><b>외부 링크</b>: 모든 wasabi10 링크는 <code>rel="noopener noreferrer"</code> + UTM 자동 부여</li>
+    <li><b>이벤트 트래킹</b>: GA4 <code>click_wasabi10_outbound</code> 커스텀 이벤트, GTM 트리거</li>
+    <li><b>단일 SSO (옵션)</b>: 향후 aidenlab.io 로그인 = wasabi10 계정 통합 가능성을 두고 NextAuth + 공유 세션 설계 검토</li>
+    <li><b>크로스 도메인 분석</b>: GA4 cross-domain measurement 활성화로 동일 사용자 추적</li>
+  </ul>
+
+  <h3 id="ch9-4">9.4 인프라·보안</h3>
+  <ul>
+    <li>HTTPS 강제, HSTS preload</li>
+    <li>Sanity Studio 접근은 SSO + IP 화이트리스트</li>
+    <li>폼 제출 시 reCAPTCHA v3 + 허니팟 필드</li>
+    <li>월 1회 의존성 패치, Lighthouse CI를 GitHub Actions로 자동화</li>
+  </ul>
+
+  <h3 id="ch9-5">9.5 성능 목표 (모바일 / 4G)</h3>
+  <div class="kpi-row">
+    <div class="kpi-box"><div class="v">&lt;1.5s</div><div class="l">FCP</div></div>
+    <div class="kpi-box"><div class="v">&lt;2.5s</div><div class="l">LCP</div></div>
+    <div class="kpi-box"><div class="v">&lt;0.1</div><div class="l">CLS</div></div>
+    <div class="kpi-box"><div class="v">&lt;200ms</div><div class="l">INP</div></div>
+  </div>
+  <p>달성 수단: WebP/AVIF 자동, 폰트 subset(한글 2350자 + 한자 1000자), 그라데이션은 CSS only (이미지 X), Edge ISR 60s.</p>
+</section>
+
+<!-- =========================================
+     CH 10 — SEO / ANALYTICS
+========================================= -->
+<section id="ch10" class="chap">
+  <div class="chap-num">CHAPTER 10</div>
+  <h2>SEO · 계측</h2>
+
+  <h3 id="ch10-1">10.1 SEO 핵심 키워드</h3>
+  <table>
+    <tr><th>그룹</th><th>키워드</th><th>대응 페이지</th></tr>
+    <tr><td class="h">메인</td><td>일본 큐텐 마케팅 / 일본 라쿠텐 입점 / 일본 인플루언서 마케팅</td><td>홈 / Services / Cases</td></tr>
+    <tr><td class="h">시그니처</td><td>일본 큐텐 1위 / 일본 매출 1억 만들기 / 일본 진출 컨설팅</td><td>Services 시그니처 페이지</td></tr>
+    <tr><td class="h">플랫폼</td><td>わさび10 / wasabi10 / 일본 체험단 플랫폼 / 日本モニターマーケティング</td><td>わさび10 페이지</td></tr>
+    <tr><td class="h">브랜드</td><td>Meal it · Glow u · Pimple Lab · Maldda</td><td>Brands 페이지 + 외부 브랜드 사이트</td></tr>
+    <tr><td class="h">롱테일</td><td>K-뷰티 일본 진출 / 큐텐 메가포트 광고 / 라쿠텐 랭킹 마케팅</td><td>Insights 콘텐츠</td></tr>
+  </table>
+
+  <h3 id="ch10-2">10.2 메타·구조화</h3>
+  <ul>
+    <li>모든 페이지 OG / Twitter Card / hreflang 자동 생성</li>
+    <li>Cases / Insights 상세 페이지에 <code>Article</code>, <code>Organization</code>, <code>FAQPage</code> 스키마</li>
+    <li>사이트맵 자동 생성, Google/Naver/Bing 서치콘솔 등록, 일본은 추가로 Yahoo Japan</li>
+  </ul>
+
+  <h3 id="ch10-3">10.3 계측 설계</h3>
+  <table>
+    <tr><th>도구</th><th>역할</th></tr>
+    <tr><td class="h">GA4</td><td>세션·페이지뷰·이벤트 기본 측정. 한·영·일 view 별 분리</td></tr>
+    <tr><td class="h">GTM</td><td>모든 이벤트의 단일 진입점. 폼 제출/CTA 클릭/외부 링크 클릭 트리거</td></tr>
+    <tr><td class="h">Hotjar</td><td>히트맵 · 세션 리플레이. 신규 페이지 출시 후 2주 집중 분석</td></tr>
+    <tr><td class="h">Mixpanel (옵션)</td><td>퍼널 분석 (홈 → Services → Contact → Submit)</td></tr>
+    <tr><td class="h">Slack 알림</td><td>폼 제출 시 #leads 채널 실시간 알림</td></tr>
+    <tr><td class="h">노션 CRM</td><td>제출된 리드 자동 row 생성 + 상태 칸반</td></tr>
+  </table>
+
+  <h3 id="ch10-4">10.4 추적 이벤트 (Naming)</h3>
+  <table>
+    <tr><th>이벤트명</th><th>발생 조건</th></tr>
+    <tr><td class="h">view_hero</td><td>홈 히어로 50% 노출</td></tr>
+    <tr><td class="h">click_cta_primary</td><td>모든 Primary CTA 클릭 (label 포함)</td></tr>
+    <tr><td class="h">click_signature</td><td>시그니처 카드 클릭</td></tr>
+    <tr><td class="h">view_case</td><td>케이스 상세 50% 스크롤</td></tr>
+    <tr><td class="h">click_wasabi10_outbound</td><td>wasabi10.com 외부 링크 클릭</td></tr>
+    <tr><td class="h">form_submit</td><td>Contact 폼 제출 성공</td></tr>
+    <tr><td class="h">download_whitepaper</td><td>백서 다운로드 게이트 완료</td></tr>
+    <tr><td class="h">apply_career</td><td>채용 지원 버튼 클릭</td></tr>
+  </table>
+</section>
+
+<!-- =========================================
+     CH 11 — SCHEDULE
+========================================= -->
+<section id="ch11" class="chap">
+  <div class="chap-num">CHAPTER 11</div>
+  <h2>일정 · 역할 분담</h2>
+  <p class="lead">총 12주 (3개월) 일정. Phase별로 산출물 게이트를 두고, 각 단계 종료 시 클라이언트 사인오프 후 다음 단계 진입.</p>
+
+  <h3 id="ch11-1">11.1 마일스톤 (12주)</h3>
+  <div class="gantt">
+    <div class="hd">단계</div>
+    <div class="hd">W1</div><div class="hd">W2</div><div class="hd">W3</div><div class="hd">W4</div>
+    <div class="hd">W5</div><div class="hd">W6</div><div class="hd">W7</div><div class="hd">W8</div>
+    <div class="hd">W9</div><div class="hd">W10</div><div class="hd">W11</div><div class="hd">W12</div>
+
+    <div class="task">Phase 1 · Discovery</div>
+    <div class="bar"></div><div class="bar"></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 2 · IA &amp; Wireframe</div>
+    <div></div><div class="bar-cool"></div><div class="bar-cool"></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 3 · Design System</div>
+    <div></div><div></div><div class="bar-soft"></div><div class="bar-soft"></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 4 · Visual Design</div>
+    <div></div><div></div><div></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 5 · Content / Copy</div>
+    <div></div><div></div><div></div><div></div>
+    <div class="bar-cool"></div><div class="bar-cool"></div><div class="bar-cool"></div><div></div><div></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 6 · Frontend Dev</div>
+    <div></div><div></div><div></div><div></div>
+    <div></div><div class="bar-soft"></div><div class="bar-soft"></div><div class="bar-soft"></div><div class="bar-soft"></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 7 · CMS / 통합</div>
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div class="bar"></div><div class="bar"></div><div></div><div></div><div></div>
+
+    <div class="task">Phase 8 · QA &amp; UAT</div>
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div class="bar-cool"></div><div class="bar-cool"></div><div></div>
+
+    <div class="task">Phase 9 · 런칭 &amp; 리다이렉트</div>
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bar"></div>
+  </div>
+
+  <h3 id="ch11-2">11.2 역할 분담 (RACI)</h3>
+  <table>
+    <tr><th>업무</th><th>R 실행</th><th>A 책임</th><th>C 협의</th><th>I 공유</th></tr>
+    <tr><td class="h">IA · 사이트맵</td><td>웹기획자</td><td>마케팅 헤드</td><td>대표 / 디자이너</td><td>전사</td></tr>
+    <tr><td class="h">디자인 시안</td><td>웹디자이너</td><td>웹기획자</td><td>마케팅 / 대표</td><td>전사</td></tr>
+    <tr><td class="h">카피라이팅</td><td>마케팅팀 + 외부 카피라이터</td><td>마케팅 헤드</td><td>대표</td><td>전사</td></tr>
+    <tr><td class="h">개발</td><td>외주 개발사 또는 사내 엔지니어</td><td>CTO</td><td>웹기획자</td><td>마케팅</td></tr>
+    <tr><td class="h">CMS 구축</td><td>개발</td><td>CTO</td><td>마케팅 (운영자)</td><td>전사</td></tr>
+    <tr><td class="h">콘텐츠 등록</td><td>마케팅 운영자</td><td>마케팅 헤드</td><td>각 사업부</td><td>대표</td></tr>
+    <tr><td class="h">법무 검토</td><td>외부 법무</td><td>대표</td><td>마케팅</td><td>전사</td></tr>
+    <tr><td class="h">QA</td><td>QA 담당 / 마케팅 운영자</td><td>웹기획자</td><td>개발</td><td>대표</td></tr>
+  </table>
+
+  <h3 id="ch11-3">11.3 예상 인력 (외주 가정)</h3>
+  <table>
+    <tr><th>역할</th><th>M/M</th><th>비고</th></tr>
+    <tr><td class="h">웹기획자 (PM 겸)</td><td>3.0</td><td>전체 일정 책임</td></tr>
+    <tr><td class="h">UX/UI 디자이너</td><td>2.5</td><td>디자인 시스템 + 9페이지</td></tr>
+    <tr><td class="h">프론트엔드 개발자</td><td>3.0</td><td>Next.js + Tailwind</td></tr>
+    <tr><td class="h">백엔드/CMS 엔지니어</td><td>1.5</td><td>Sanity 셋업 + i18n</td></tr>
+    <tr><td class="h">카피라이터 (한/일)</td><td>1.0</td><td>외부 프리랜서</td></tr>
+    <tr><td class="h">사진/영상 외주</td><td>0.5</td><td>이벤트성</td></tr>
+    <tr><td class="h">QA</td><td>0.5</td><td>UAT 단계</td></tr>
+  </table>
+</section>
+
+<!-- =========================================
+     CH 12 — ACCEPTANCE
+========================================= -->
+<section id="ch12" class="chap">
+  <div class="chap-num">CHAPTER 12</div>
+  <h2>검수 · 이관 기준</h2>
+
+  <h3 id="ch12-1">12.1 검수 체크리스트</h3>
+  <table>
+    <tr><th>영역</th><th>합격 기준</th></tr>
+    <tr><td class="h">디자인</td><td>Figma 시안 픽셀 일치도 95% 이상 (xl 기준), 다크 컬러 contrast 4.5:1 통과</td></tr>
+    <tr><td class="h">반응형</td><td>320 / 375 / 768 / 1024 / 1280 / 1440 / 1920 모든 폭에서 정상 표시</td></tr>
+    <tr><td class="h">브라우저</td><td>Chrome / Safari / Edge / Firefox 최신 2개 버전, iOS 16+/Android 10+</td></tr>
+    <tr><td class="h">성능</td><td>Lighthouse 모바일 Performance ≥ 85, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95</td></tr>
+    <tr><td class="h">i18n</td><td>한/영/일 3개 언어 100% 번역, hreflang 정합, 일본어 폰트 fallback 정상</td></tr>
+    <tr><td class="h">계측</td><td>GA4 실시간 이벤트 수신, 폼 제출 → Slack 알림 → 노션 row 생성 end-to-end 검증</td></tr>
+    <tr><td class="h">SEO</td><td>주요 키워드 메타 작성, 사이트맵 제출, 구조화 데이터 Rich Result Test 통과</td></tr>
+    <tr><td class="h">접근성</td><td>WAVE 0 error, 키보드만으로 모든 기능 사용 가능</td></tr>
+    <tr><td class="h">CMS 운영성</td><td>마케팅팀 직원이 신규 인사이트 1편을 30분 내 등록·발행 가능 (트레이닝 영상 포함)</td></tr>
+    <tr><td class="h">법무</td><td>이용약관·개인정보처리방침 최신화, "환급 보장" 카피 약관 정합 확인</td></tr>
+  </table>
+
+  <h3 id="ch12-2">12.2 이관·운영 가이드</h3>
+  <ul>
+    <li>코드 저장소(GitHub) 권한 이관, Vercel 프로젝트 이관, 도메인 DNS 이관</li>
+    <li>CMS 운영자 매뉴얼 (한·일) PDF 제공 + 30분 트레이닝 영상 2편</li>
+    <li>3개월 하자 보수: 버그 무상 수정. 신규 기능은 별도 견적</li>
+    <li>분기 1회 성능·SEO 리뷰 미팅 (옵션 계약)</li>
+  </ul>
+
+  <h3 id="ch12-3">12.3 산출물 목록</h3>
+  <ul>
+    <li>Figma 디자인 파일 (디자인 시스템 + 9 페이지 + 컴포넌트 라이브러리)</li>
+    <li>GitHub 저장소 (코드 + README + 환경변수 가이드)</li>
+    <li>Sanity Studio 스키마 + 운영자 가이드</li>
+    <li>본 문서(요구정의서) 최종본 + 페이지 와이어프레임 HTML</li>
+    <li>이미지 라이브러리 (Cloudinary 폴더) + 영상 마스터 파일</li>
+    <li>SEO 키워드 매핑표, 메타 데이터 시트</li>
+    <li>GA4 / GTM 이벤트 매트릭스</li>
+    <li>법무 체크 결과 (환급 보장, 광고법, 개인정보)</li>
+  </ul>
+</section>
+
+<div class="cta-block">
+  <h3>이 문서를 함께 검토할 준비가 됐다면</h3>
+  <p style="color:var(--ink-2);margin:6px 0 0">아래 와이어프레임 프로토타입과 함께 검토 미팅을 잡아주세요. 페이지별 시안과 카피를 화면 위에서 직접 수정·검수합니다.</p>
+  <a class="btn-link" href="./prototype.html">📐 와이어프레임 프로토타입 열기 →</a>
+</div>
+
+</div><!-- /.wrap -->
+</main>
+
+<footer class="doc-foot">
+  <div class="wrap">
+    <strong>aidenlab Renewal RFP v1.0</strong>
+    작성: Senior Web Planner · 2026-05-17 · 본 문서는 (주)에이든랩 내부 검토용입니다.
+  </div>
+</footer>
+
+<script>
+// TOC active highlight
+const links=document.querySelectorAll('nav.toc a');
+const sections=[...links].map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      links.forEach(l=>l.style.color = l.getAttribute('href')==='#'+id ? '#fff' : '');
+      links.forEach(l=>l.style.background = l.getAttribute('href')==='#'+id ? 'rgba(124,92,255,.16)' : '');
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

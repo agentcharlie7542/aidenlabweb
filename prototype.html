@@ -1,0 +1,1493 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>aidenlab — Renewal Prototype v2.0 (with real assets)</title>
+<meta name="description" content="aidenlab 리뉴얼 홈페이지 인터랙티브 와이어프레임. 실사 이미지 적용 버전." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg-0:#05060d;--bg-1:#0a0c18;--bg-2:#11142a;
+  --line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.16);
+  --ink-0:#fff;--ink-1:rgba(255,255,255,.86);--ink-2:rgba(255,255,255,.62);--ink-3:rgba(255,255,255,.42);
+  --accent-violet:#7C5CFF;--accent-magenta:#FF4FB7;--accent-cyan:#3DE3FF;--accent-lime:#C8FF52;--accent-amber:#FFC857;
+  --grad-hero:linear-gradient(120deg,#7C5CFF 0%,#FF4FB7 45%,#FFC857 100%);
+  --grad-cool:linear-gradient(120deg,#3DE3FF 0%,#7C5CFF 60%,#FF4FB7 100%);
+  --radius-sm:10px;--radius:18px;--radius-lg:28px;
+  --shadow-1:0 8px 30px rgba(0,0,0,.35);
+  --shadow-glow:0 0 60px rgba(124,92,255,.25);
+  --max:1240px;
+  --font-sans:"Pretendard","Inter","SF Pro Text","Segoe UI",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  --font-display:"Pretendard","Inter Display","Inter","SF Pro Display",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg-0);color:var(--ink-1);font-family:var(--font-sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+body::before,body::after{content:"";position:fixed;inset:auto;width:60vw;height:60vw;border-radius:50%;filter:blur(120px);opacity:.32;pointer-events:none;z-index:-1}
+body::before{top:-20vw;left:-15vw;background:radial-gradient(circle,#7C5CFF 0%,transparent 60%)}
+body::after{bottom:-25vw;right:-20vw;background:radial-gradient(circle,#FF4FB7 0%,transparent 60%)}
+.bg-grid{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 70%);pointer-events:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+section{padding:120px 0;position:relative}
+
+/* Common */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(255,255,255,.02);backdrop-filter:blur(8px)}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-cyan);box-shadow:0 0 12px var(--accent-cyan)}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--ink-0);font-weight:700;letter-spacing:-.02em;margin:0}
+h1{font-size:clamp(40px,6vw,84px);line-height:1.05}
+h2{font-size:clamp(30px,4vw,56px);line-height:1.1;margin-bottom:18px}
+h3{font-size:22px;margin-bottom:10px}
+p{margin:0 0 14px}
+.muted{color:var(--ink-2)}
+.dim{color:var(--ink-3)}
+.grad-text{background:var(--grad-hero);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cool-text{background:var(--grad-cool);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:14px;transition:transform .2s,box-shadow .2s,background .2s;white-space:nowrap}
+.btn .arr{display:inline-block;transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-primary{background:var(--grad-hero);color:#0a0a14;box-shadow:var(--shadow-glow)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line-2);color:var(--ink-0)}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+
+/* Topbar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(16px);background:rgba(5,6,13,.6);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em;font-size:18px}
+.brand-mark{width:28px;height:28px;border-radius:8px;background:var(--grad-hero);box-shadow:0 0 18px rgba(124,92,255,.55)}
+.brand small{font-size:11px;color:var(--ink-3);letter-spacing:.16em;text-transform:uppercase;margin-left:6px}
+.nav{display:flex;gap:6px;align-items:center}
+.nav a{padding:9px 14px;border-radius:999px;font-size:14px;color:var(--ink-2);transition:color .2s,background .2s}
+.nav a:hover,.nav a.active{color:var(--ink-0);background:rgba(255,255,255,.06)}
+.nav-cta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.brand{flex-shrink:0}
+.nav{min-width:0}
+/* 상단 상담 CTA — 박스 폭 고정 + 언어별 폰트 축소로 Careers/언어 스위처와 겹침 방지(텍스트를 박스 안에 맞춤) */
+.topbar .btn-primary{width:132px;justify-content:center;text-align:center;white-space:nowrap;overflow:hidden;padding-left:10px;padding-right:10px}
+html[lang="zh"] .topbar .btn-primary{font-size:13px}
+html[lang="ja"] .topbar .btn-primary{font-size:11.5px;letter-spacing:-.02em}
+html[lang="en"] .topbar .btn-primary{white-space:normal;line-height:1.12;font-size:11.5px;padding-top:8px;padding-bottom:8px;letter-spacing:-.01em}
+.lang{font-size:12px;color:var(--ink-3);padding:6px 10px;border:1px solid var(--line);border-radius:999px}
+
+.page{display:none}
+.page.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tag{position:absolute;top:18px;left:18px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-cyan);background:rgba(61,227,255,.08);border:1px solid rgba(61,227,255,.4);padding:4px 8px;border-radius:6px;z-index:2}
+.note{margin-top:14px;font-size:12px;color:var(--ink-3);border-left:2px solid var(--accent-violet);padding-left:10px}
+.card{position:relative;border:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));padding:32px;overflow:hidden}
+
+/* ===== HERO with real image ===== */
+.hero{padding:140px 0 60px;position:relative;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}
+.hero h1 .l1{display:block}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.02)}
+.stat .num{font-family:var(--font-display);font-size:32px;font-weight:700;letter-spacing:-.03em;background:var(--grad-hero);-webkit-background-clip:text;color:transparent}
+.stat .lbl{font-size:12px;color:var(--ink-3);margin-top:4px;letter-spacing:.04em}
+.hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+
+/* Hero composite image — real assets in a layered collage */
+.hero-art{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(circle at 30% 20%,rgba(124,92,255,.35),transparent 55%),radial-gradient(circle at 80% 80%,rgba(255,79,183,.3),transparent 55%),linear-gradient(180deg,#11142a,#05060d);border:1px solid var(--line-2);display:grid;place-items:center}
+.hero-art .photo-wrap{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:14px}
+.hero-art .photo-wrap .img{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0a0c18}
+.hero-art .photo-wrap img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.05) brightness(.85)}
+.hero-art .photo-wrap .img::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,92,255,.18),transparent 50%,rgba(255,79,183,.16));mix-blend-mode:overlay;pointer-events:none}
+.hero-art .photo-wrap .img.featured{animation:lev 6s ease-in-out infinite}
+.hero-art .photo-wrap .img.wide{grid-column:1 / span 2}
+.hero-art .photo-wrap .img.wide img{object-position:center}
+.hero-art .badge-float{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:14px 22px;border-radius:999px;background:rgba(5,6,13,.78);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;color:#fff;z-index:3;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+.hero-art .badge-float em{font-style:normal;background:var(--grad-hero);-webkit-background-clip:text;color:transparent;font-weight:800}
+@keyframes lev{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Logo marquee with images */
+.marquee-wrap{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee{display:flex;gap:48px;animation:scroll 36s linear infinite;align-items:center}
+.marquee .ml{font-family:var(--font-display);font-size:22px;color:var(--ink-3);white-space:nowrap;letter-spacing:-.02em;opacity:.7;transition:opacity .2s}
+.marquee .ml:hover{opacity:1;color:var(--ink-0)}
+.marquee .sep{color:var(--line-2);font-size:14px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Signature offers — with real image background */
+.signature{padding:80px 0;background:linear-gradient(180deg,transparent,rgba(124,92,255,.05),transparent)}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:36px}
+.sig-card{position:relative;padding:42px 36px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(124,92,255,.16),rgba(255,79,183,.08));border:1px solid rgba(255,255,255,.12);overflow:hidden;min-height:auto;height:100%;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box}
+.sig-card.cool{background:linear-gradient(135deg,rgba(61,227,255,.16),rgba(124,92,255,.08))}
+.sig-card .sig-bgimg{position:absolute;right:-40px;bottom:-30px;width:280px;height:280px;border-radius:50%;overflow:hidden;opacity:.5;mix-blend-mode:luminosity;pointer-events:none}
+.sig-card .sig-bgimg img{width:100%;height:100%;object-fit:cover;filter:saturate(.6) contrast(1.1)}
+.sig-card.cool .sig-bgimg{opacity:.4}
+.sig-card .num{font-family:var(--font-display);font-size:68px;font-weight:800;letter-spacing:-.04em;line-height:1;background:var(--grad-hero);-webkit-background-clip:text;color:transparent;margin-bottom:8px;position:relative}
+.sig-card.cool .num{background:var(--grad-cool);-webkit-background-clip:text;color:transparent}
+.sig-card h3{font-size:24px;position:relative}
+.sig-card p{position:relative}
+.sig-card .arr-link{display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:var(--accent-cyan);font-weight:600;font-size:14px;position:relative}
+
+/* Services — with real icons */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.svc{padding:28px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02);transition:transform .25s,border-color .25s,background .25s;position:relative;overflow:hidden}
+.svc:hover{transform:translateY(-4px);border-color:var(--line-2);background:rgba(255,255,255,.04)}
+.svc-iconbox{width:80px;height:80px;border-radius:20px;margin-bottom:20px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(255,79,183,.06));display:grid;place-items:center;padding:14px;border:1px solid var(--line-2)}
+.svc-iconbox img{width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(124,92,255,.5))}
+.svc.cool .svc-iconbox{background:linear-gradient(135deg,rgba(61,227,255,.18),rgba(124,92,255,.06))}
+.svc.cool .svc-iconbox img{filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(61,227,255,.5))}
+.svc h3{font-size:18px;margin-bottom:6px}
+.svc p{font-size:13px;color:var(--ink-2);margin:0}
+.svc .more{margin-top:18px;font-size:12px;color:var(--accent-cyan);letter-spacing:.08em;text-transform:uppercase}
+
+/* Wasabi10 bridge — phone with real product cards */
+.bridge{margin-top:40px;padding:60px;border-radius:var(--radius-lg);background:linear-gradient(120deg,rgba(255,79,183,.18),rgba(124,92,255,.10) 60%,rgba(61,227,255,.10));border:1px solid var(--line-2);display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+.bridge::before{content:"わさび10";position:absolute;font-family:var(--font-display);font-weight:900;font-size:240px;line-height:.8;letter-spacing:-.06em;right:-60px;bottom:-90px;color:rgba(255,255,255,.03);pointer-events:none}
+.bridge h2{font-size:42px}
+.bridge .meta{display:flex;gap:18px;margin-top:24px;flex-wrap:wrap}
+.bridge .meta div{font-size:13px;color:var(--ink-2)}
+.bridge .meta strong{display:block;font-family:var(--font-display);font-size:24px;color:var(--ink-0)}
+
+.phone-mock{aspect-ratio:9/16;max-width:260px;margin:0 auto;border-radius:36px;background:linear-gradient(180deg,#FFC857,#FF4FB7);padding:8px;box-shadow:0 30px 80px rgba(255,79,183,.3);position:relative;animation:lev 5s ease-in-out infinite}
+.phone-mock .screen{background:#0a0c18;border-radius:30px;height:100%;padding:16px;display:flex;flex-direction:column;gap:10px;overflow:hidden;position:relative}
+.phone-mock .topnav{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 10px;border-bottom:1px solid rgba(255,255,255,.1)}
+.phone-mock .topnav .logo{font-family:var(--font-display);font-size:18px;font-weight:800;background:linear-gradient(135deg,#FFC857,#FF4FB7);-webkit-background-clip:text;color:transparent;letter-spacing:-.02em}
+.phone-mock .topnav .menu{color:var(--ink-3);font-size:18px}
+.phone-mock .product-card{position:relative;border-radius:14px;overflow:hidden;background:#11142a;aspect-ratio:1/1;border:1px solid var(--line)}
+.phone-mock .product-card img{width:100%;height:100%;object-fit:cover}
+.phone-mock .product-card .price{position:absolute;top:8px;right:8px;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,.6);color:var(--accent-amber);font-size:10px;font-weight:700;backdrop-filter:blur(6px)}
+.phone-mock .product-card .title{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85));color:#fff;font-size:10px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.phone-mock .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.phone-mock .grid2 .product-card{aspect-ratio:1/1}
+.phone-mock .grid2 .product-card .title{font-size:9px;padding:6px 8px}
+.phone-mock .grid2 .product-card .price{font-size:9px;padding:2px 6px;top:4px;right:4px}
+.phone-mock .footer{margin-top:auto;background:var(--grad-cool);color:#05060d;padding:10px;border-radius:12px;font-weight:700;font-size:11px;text-align:center}
+
+/* Cases — with real product images */
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.case{position:relative;padding:0;border-radius:var(--radius-lg);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));overflow:hidden;min-height:380px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.case:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.case .case-img{aspect-ratio:16/10;overflow:hidden;background:#11142a;position:relative}
+.case .case-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.case:hover .case-img img{transform:scale(1.06)}
+.case .case-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(5,6,13,.75));pointer-events:none}
+.case .case-body{padding:24px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.case .platform{display:inline-block;padding:5px 10px;border-radius:6px;font-size:11px;letter-spacing:.1em;background:rgba(124,92,255,.16);color:var(--accent-cyan);margin-bottom:14px;width:fit-content}
+.case h3{font-size:18px;line-height:1.3}
+.case .kpi{margin-top:18px;display:flex;gap:18px}
+.case .kpi div{font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.case .kpi strong{display:block;font-family:var(--font-display);font-size:24px;color:var(--accent-cyan);letter-spacing:-.02em;background:var(--grad-cool);-webkit-background-clip:text;color:transparent}
+
+/* Process */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px;counter-reset:step}
+.step{padding:28px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02);position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:var(--font-display);font-size:48px;font-weight:800;line-height:1;background:var(--grad-cool);-webkit-background-clip:text;color:transparent;letter-spacing:-.04em;display:block;margin-bottom:18px}
+.step h3{font-size:18px}
+.step p{font-size:13px;color:var(--ink-2)}
+
+/* News */
+.news-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:18px;margin-top:48px}
+.news{padding:0;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02);overflow:hidden;display:flex;flex-direction:column}
+.news .news-img{aspect-ratio:16/9;overflow:hidden;background:#0a0c18;position:relative}
+.news .news-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.9)}
+.news .news-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,13,.2),rgba(5,6,13,.7));pointer-events:none}
+.news-body{padding:24px;flex:1}
+.news .cat{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-magenta)}
+.news h3{margin:14px 0 10px;font-size:18px}
+.news .date{font-size:12px;color:var(--ink-3)}
+/* 클릭 가능한 뉴스/프레스 카드 (외부 기사 링크) */
+a.news,a.case-big{color:inherit;text-decoration:none;transition:transform .22s,border-color .22s,box-shadow .22s}
+a.case-big:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:0 18px 50px rgba(0,0,0,.42)}
+a.news:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:0 18px 50px rgba(0,0,0,.42)}
+a.news h3{transition:color .22s}
+a.news:hover h3{color:#fff}
+a.news:hover .news-img img{transform:scale(1.04)}
+a.news .news-img img{transition:transform .4s ease}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;background:linear-gradient(180deg,transparent,rgba(124,92,255,.04))}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.foot-grid h4{font-family:var(--font-sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px;font-weight:600}
+.foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.foot-grid a{color:var(--ink-2);font-size:14px}
+.foot-grid a:hover{color:var(--ink-0)}
+.foot-bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:var(--ink-3);flex-wrap:wrap;gap:10px}
+
+/* About */
+.about-hero{padding:160px 0 80px;text-align:center}
+.about-hero h1{max-width:900px;margin:0 auto 24px}
+.about-hero-img{margin:50px auto 0;max-width:900px;border-radius:24px;overflow:hidden;border:1px solid var(--line-2);aspect-ratio:21/9;position:relative}
+.about-hero-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.85)}
+.about-hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,92,255,.2),transparent 50%,rgba(255,79,183,.15));mix-blend-mode:overlay}
+.about-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:60px}
+.val{padding:32px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.val .num{font-family:var(--font-display);font-size:14px;color:var(--accent-cyan);letter-spacing:.2em}
+.val h3{margin:16px 0 8px;font-size:22px}
+.timeline{margin-top:60px;border-left:1px solid var(--line-2);padding-left:32px;position:relative}
+.tline{padding:18px 0;display:grid;grid-template-columns:120px 1fr;gap:24px;position:relative}
+.tline::before{content:"";position:absolute;left:-39px;top:24px;width:12px;height:12px;border-radius:50%;background:var(--grad-hero);box-shadow:0 0 12px var(--accent-violet)}
+.tline .yr{font-family:var(--font-display);font-size:26px;color:var(--ink-0);letter-spacing:-.02em}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.member{padding:24px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02);text-align:center}
+.member .avatar{width:88px;height:88px;margin:0 auto 18px;border-radius:50%;background:var(--grad-cool)}
+
+/* Services */
+.svc-hero{padding:160px 0 60px}
+.svc-tab-wrap{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0 60px}
+.svc-tab{padding:10px 20px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);background:rgba(255,255,255,.02);font-size:13px;cursor:pointer}
+.svc-tab.active{background:var(--grad-hero);color:#0a0a14;border-color:transparent;font-weight:600}
+.svc-detail{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:80px;align-items:start}
+.svc-detail .vis{aspect-ratio:4/3;border-radius:var(--radius-lg);background:#0a0c18;border:1px solid var(--line);position:relative;overflow:hidden}
+.svc-detail .vis img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.85)}
+.svc-detail .vis::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,92,255,.2),transparent 50%,rgba(61,227,255,.15));mix-blend-mode:overlay}
+.svc-detail .feat{display:grid;gap:14px;margin-top:24px}
+.svc-detail .feat div{padding:18px;border-left:2px solid var(--accent-violet);background:rgba(124,92,255,.04);border-radius:0 12px 12px 0}
+.svc-detail .feat strong{display:block;color:var(--ink-0);font-size:15px;margin-bottom:4px}
+
+/* Cases page */
+.case-filter{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0 48px}
+.case-filter .chip{padding:8px 16px;border-radius:999px;border:1px solid var(--line-2);font-size:12px;color:var(--ink-2);background:rgba(255,255,255,.02);cursor:pointer}
+.case-filter .chip.active{background:var(--grad-cool);color:#05060d;border-color:transparent;font-weight:600}
+.case-list{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.case-big{padding:0;border-radius:var(--radius-lg);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));position:relative;overflow:hidden;display:flex;flex-direction:column}
+.case-big .case-cover{aspect-ratio:16/9;overflow:hidden;background:#0a0c18;position:relative}
+.case-big .case-cover img{width:100%;height:100%;object-fit:cover}
+.case-big .case-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(5,6,13,.65) 80%,rgba(5,6,13,.85))}
+.case-big .case-cover .corner-tag{position:absolute;top:18px;left:18px;padding:6px 12px;border-radius:8px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase;z-index:2;border:1px solid rgba(255,255,255,.18)}
+.case-big .case-content{padding:32px}
+.case-big .badge{display:inline-flex;gap:8px;align-items:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-cyan)}
+.case-big h3{font-size:24px;margin-top:14px}
+.case-big .quote{margin-top:20px;font-size:14px;color:var(--ink-2);font-style:italic;border-left:2px solid var(--line-2);padding-left:14px}
+.case-big .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.case-big .metrics div{padding:14px;border-radius:12px;background:rgba(0,0,0,.4);border:1px solid var(--line)}
+.case-big .metrics strong{font-family:var(--font-display);font-size:22px;background:var(--grad-hero);-webkit-background-clip:text;color:transparent;display:block;line-height:1}
+.case-big .metrics span{font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;display:block}
+
+/* Brands */
+.brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.brand-card{padding:0;border-radius:var(--radius-lg);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));position:relative;overflow:hidden;min-height:360px;display:grid;grid-template-columns:1fr 1fr;transition:transform .25s,border-color .25s}
+.brand-card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.brand-card .brand-vis{position:relative;overflow:hidden;background:linear-gradient(135deg,#11142a,#05060d)}
+.brand-card .brand-vis img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+.brand-card .brand-vis::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,13,.05),rgba(5,6,13,.5));pointer-events:none}
+.brand-card .brand-body{padding:32px;display:flex;flex-direction:column;justify-content:space-between}
+.brand-card .brand-logo-text{font-family:var(--font-display);font-weight:800;font-size:34px;letter-spacing:-.03em;margin-bottom:8px;background:var(--grad-hero);-webkit-background-clip:text;color:transparent}
+.brand-card.b2 .brand-logo-text{background:var(--grad-cool);-webkit-background-clip:text;color:transparent}
+.brand-card.b3 .brand-logo-text{background:linear-gradient(135deg,#FFC857,#FF4FB7);-webkit-background-clip:text;color:transparent}
+.brand-card.b4 .brand-logo-text{background:linear-gradient(135deg,#C8FF52,#3DE3FF);-webkit-background-clip:text;color:transparent}
+.brand-card .tagline{font-size:13px;color:var(--ink-3);letter-spacing:.04em;margin-bottom:14px;font-style:italic}
+.brand-card .biz-pill{display:inline-block;padding:4px 10px;border:1px solid var(--line-2);border-radius:6px;font-size:10px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;width:fit-content}
+.brand-card .brand-meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.brand-card .brand-meta span{font-size:10px;letter-spacing:.1em;padding:5px 9px;border-radius:6px;background:rgba(124,92,255,.16);color:var(--accent-cyan);text-transform:uppercase}
+
+/* Wasabi10 — campaign grid */
+.wasabi-hero{padding:160px 0 60px;text-align:center;position:relative}
+.wasabi-hero h1 .jp{font-family:var(--font-display);background:linear-gradient(135deg,#FF4FB7,#FFC857);-webkit-background-clip:text;color:transparent}
+.wasabi-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.wasabi-stats .stat{text-align:center;padding:28px 18px}
+.wasabi-stats .num{font-size:38px}
+.campaign-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.camp{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1/1;background:#0a0c18;transition:transform .25s,border-color .25s}
+.camp:hover{transform:translateY(-4px);border-color:var(--accent-magenta)}
+.camp img{width:100%;height:100%;object-fit:cover}
+.camp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,6,13,.85));pointer-events:none}
+.camp .meta{position:absolute;bottom:0;left:0;right:0;padding:14px;z-index:2}
+.camp .meta .ttl{font-size:12px;color:#fff;font-weight:600;line-height:1.3;margin-bottom:6px}
+.camp .meta .price{font-size:11px;color:var(--accent-amber);font-weight:700}
+.camp .platform-pill{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:6px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:#fff;font-size:9px;letter-spacing:.08em;text-transform:uppercase;z-index:2;border:1px solid rgba(255,255,255,.15)}
+
+/* Careers */
+.career-hero{padding:160px 0 60px;text-align:center}
+.career-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
+.culture{padding:32px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02);display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start}
+.culture .emoji{width:64px;height:64px;border-radius:16px;background:var(--grad-cool);display:grid;place-items:center;font-size:28px;color:#05060d;font-weight:800}
+.openings{margin-top:60px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
+.openings .row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 60px;padding:20px 28px;border-top:1px solid var(--line);align-items:center;transition:background .2s;cursor:pointer}
+.openings .row:first-child{border-top:0;background:rgba(255,255,255,.04);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.openings .row:hover{background:rgba(255,255,255,.05)}
+.openings .row:not(:first-child) .pos{font-weight:600;color:var(--ink-0);font-size:16px}
+.openings .row .arr-r{text-align:right;color:var(--accent-cyan)}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-form{padding:36px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.field input,.field textarea,.field select{width:100%;padding:14px 16px;border:1px solid var(--line-2);background:rgba(0,0,0,.3);color:var(--ink-0);border-radius:12px;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent-violet)}
+.field textarea{min-height:120px;resize:vertical}
+.contact-info .row{display:flex;gap:18px;padding:24px 0;border-top:1px solid var(--line)}
+.contact-info .row:first-child{border-top:0}
+.contact-info .row .ico{width:40px;height:40px;border-radius:10px;background:rgba(124,92,255,.16);display:grid;place-items:center;color:var(--accent-violet);font-size:18px;font-weight:700;flex-shrink:0}
+.contact-info .row strong{display:block;color:var(--ink-0);margin-bottom:4px}
+
+/* Sitemap FAB */
+.sitemap-toggle{position:fixed;bottom:24px;right:24px;z-index:60;background:var(--grad-hero);color:#0a0a14;padding:14px 22px;border-radius:999px;font-weight:700;box-shadow:var(--shadow-glow);cursor:pointer;font-size:13px}
+.sitemap-panel{position:fixed;bottom:80px;right:24px;width:320px;max-height:70vh;overflow-y:auto;background:rgba(10,12,24,.95);backdrop-filter:blur(20px);border:1px solid var(--line-2);border-radius:var(--radius-lg);padding:24px;z-index:60;display:none;box-shadow:var(--shadow-1)}
+.sitemap-panel.open{display:block}
+.sitemap-panel h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
+.sitemap-panel a{display:block;padding:8px 12px;border-radius:8px;font-size:13px;color:var(--ink-1);cursor:pointer}
+.sitemap-panel a:hover{background:rgba(255,255,255,.06)}
+.sitemap-panel a.current{background:rgba(124,92,255,.16);color:#fff}
+
+@media (max-width:900px){
+  .hero-inner,.bridge,.svc-detail,.contact-grid{grid-template-columns:1fr}
+  .svc-grid,.case-grid,.proc,.team-grid,.case-list,.brand-grid,.career-grid,.news-grid,.campaign-grid{grid-template-columns:1fr 1fr}
+  .sig-grid,.foot-grid{grid-template-columns:1fr}
+  .wasabi-stats{grid-template-columns:1fr 1fr}
+  .brand-card{grid-template-columns:1fr;min-height:auto}
+  .brand-card .brand-vis{aspect-ratio:16/10}
+  .nav{display:none}
+  section{padding:80px 0}
+  .hero{padding:120px 0 40px}
+  .openings .row{grid-template-columns:1fr;gap:6px}
+  .openings .row:first-child{display:none}
+}
+/* i18n-injected */
+.lang-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04)}
+.lang-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border:0;border-radius:999px;background:transparent;color:var(--ink-2,inherit);font:inherit;font-size:12px;font-weight:600;line-height:1;letter-spacing:.02em;cursor:pointer;opacity:.6;transition:opacity .15s,background .15s}
+.lang-btn:hover{opacity:1}
+.lang-btn.active{opacity:1;background:rgba(255,255,255,.14)}
+.lang-flag{font-size:14px}
+.lang-code{font-size:11px}
+@media(max-width:720px){.lang-code{display:none}.lang-btn{padding:4px 6px}}
+/* logo-wordmark */
+.brand-logo{font-family:'Poppins',var(--font-display);font-weight:600;font-size:30px;line-height:1;letter-spacing:-.01em;color:#fff;white-space:nowrap}
+.brand-logo-sm{font-size:20px}
+.topbar .brand{font-size:30px}
+@media(max-width:720px){.brand-logo{font-size:22px}}
+/* logo-img */
+.brand-img{height:44px;width:auto;display:block}
+.brand-img-sm{height:28px}
+@media(max-width:720px){.brand-img{height:32px}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#home" class="brand" data-page="home" data-no-i18n><img src="aidenlab%20logo%20.png" alt="Aiden Lab" class="brand-img" /></a>
+    <nav class="nav">
+      <a href="#home" data-page="home" class="active">Home</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#services" data-page="services">Services</a>
+      <a href="#cases" data-page="cases">Cases</a>
+      <a href="#brands" data-page="brands">Brands</a>
+      <a href="#wasabi10" data-page="wasabi10">Wasabi10</a>
+      <a href="#news" data-page="news">Insights</a>
+      <a href="#careers" data-page="careers">Careers</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang-switch" role="group" aria-label="Language" data-no-i18n><button type="button" class="lang-btn active" data-loc="ko"><span class="lang-flag">🇰🇷</span><span class="lang-code">KO</span></button><button type="button" class="lang-btn" data-loc="en"><span class="lang-flag">🇺🇸</span><span class="lang-code">EN</span></button><button type="button" class="lang-btn" data-loc="zh"><span class="lang-flag">🇨🇳</span><span class="lang-code">ZH</span></button><button type="button" class="lang-btn" data-loc="ja"><span class="lang-flag">🇯🇵</span><span class="lang-code">JA</span></button></div>
+      <a href="#contact" data-page="contact" class="btn btn-primary">상담 신청 <span class="arr">→</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HOME ===================== -->
+<main id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;background:url('https://cdn.imweb.me/thumbnail/20260409/140f4b486c83a.jpeg') center/cover;background-attachment:fixed"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(5,6,13,.52) 0%,rgba(5,6,13,.80) 55%,rgba(5,6,13,.97) 100%)"></div>
+    <div class="wrap" style="position:relative;z-index:1">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>GLOBAL MARKETING × COMMERCE PARTNER</div>
+          <h1 style="margin-top:24px">
+            <span class="l1">K-브랜드의</span>
+            <span class="l1 grad-text">글로벌 매출을</span>
+            <span class="l1">설계합니다.</span>
+          </h1>
+          <p class="muted" style="margin-top:24px;font-size:18px;max-width:540px">
+            일본 큐텐 카테고리 1위 17건, 런칭 6개월 만에 월매출 1억 돌파. <br/>
+            에이든랩은 데이터·AI·인플루언서 네트워크로 K-브랜드의 해외 매출을 만들어내는 단 하나의 파트너입니다.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#contact" data-page="contact">무료 진단 받기 <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="#cases" data-page="cases">실적 보기</a>
+            <a class="btn btn-ghost" href="#wasabi10" data-page="wasabi10">와사비텐 자세히</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><div class="num" style="font-size:21px;line-height:1.15">Qoo10 랭킹 1위</div><div class="lbl">일본 Qoo10 카테고리 1위 20건 이상</div></div>
+            <div class="stat"><div class="num">¥1억+</div><div class="lbl">런칭 6개월 월매출 달성</div></div>
+            <div class="stat"><div class="num">20,000+</div><div class="lbl">일본 인플루언서 네트워크</div></div>
+          </div>
+        </div>
+
+        <!-- HERO ART: 4-image collage of real PB products + floating badge -->
+        <div class="hero-art" aria-hidden="true">
+          <div class="photo-wrap">
+            <div class="img featured">
+              <img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/8694aec7b8058.png" alt="Qoo10 카테고리 1위 트로피" />
+            </div>
+            <div class="img">
+              <img src="https://cdn.imweb.me/thumbnail/20260410/553afd2222022.png" alt="MEAL IT 제품 캠페인" />
+            </div>
+            <div class="img wide">
+              <img src="https://cdn.imweb.me/thumbnail/20260413/a7e5737139c7f.png" alt="わさび10 일본 인플루언서 네트워크" />
+            </div>
+          </div>
+          <div class="badge-float">
+            <span style="font-size:18px">🏆</span>
+            <span>Qoo10 카테고리 <em>1위</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note wrap" style="margin-top:60px">P1-S01 — 히어로 배경은 실제 aidenlab 글로벌 키비주얼(골드 글로브). 우측 콜라주는 Qoo10 1위 트로피 + MEAL IT 제품 캠페인 + わさび10 인플루언서 네트워크로 "실적·제품·플랫폼" 3대 강점을 한 화면에 전달.</div>
+  </section>
+
+  <!-- LOGO MARQUEE -->
+  <section style="padding:0">
+    <div class="wrap" style="padding-top:60px;padding-bottom:20px">
+      <p class="dim" style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-align:center;margin-bottom:30px">100+ K-Brands &amp; Global Partners</p>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee">
+        <span class="ml">MEAL IT</span><span class="sep">·</span><span class="ml">GLOW U</span><span class="sep">·</span><span class="ml">PIMPLE LAB</span><span class="sep">·</span><span class="ml">MALDDA</span><span class="sep">·</span><span class="ml">SERUMKIND</span><span class="sep">·</span><span class="ml">SUREBASE</span><span class="sep">·</span><span class="ml">@TRENDSEOUL</span><span class="sep">·</span><span class="ml">OLIVE YOUNG 1,300+</span><span class="sep">·</span><span class="ml">Qoo10</span><span class="sep">·</span><span class="ml">RAKUTEN</span><span class="sep">·</span><span class="ml">@COSME</span><span class="sep">·</span><span class="ml">LIPS</span><span class="sep">·</span><span class="ml">AMAZON JP</span>
+        <span class="ml">MEAL IT</span><span class="sep">·</span><span class="ml">GLOW U</span><span class="sep">·</span><span class="ml">PIMPLE LAB</span><span class="sep">·</span><span class="ml">MALDDA</span><span class="sep">·</span><span class="ml">SERUMKIND</span><span class="sep">·</span><span class="ml">SUREBASE</span><span class="sep">·</span><span class="ml">@TRENDSEOUL</span><span class="sep">·</span><span class="ml">OLIVE YOUNG 1,300+</span><span class="sep">·</span><span class="ml">Qoo10</span><span class="sep">·</span><span class="ml">RAKUTEN</span><span class="sep">·</span><span class="ml">@COSME</span><span class="sep">·</span><span class="ml">LIPS</span><span class="sep">·</span><span class="ml">AMAZON JP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE OFFERS -->
+  <section class="signature">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Signature Services</div>
+      <h2 style="margin-top:18px">에이든랩만의 <span class="grad-text">간판 서비스</span></h2>
+      <p class="muted" style="max-width:680px">시장의 평균이 아닌, 1위를 만드는 두 가지 보장형 프로그램. 모든 캠페인은 데이터 진단부터 시작됩니다.</p>
+
+      <div class="sig-grid">
+        <div class="sig-card">
+          <div class="sig-bgimg"><img src="https://cdn.imweb.me/thumbnail/20260409/b4d1a0dca336b.png" alt="" /></div>
+          <div class="eyebrow" style="margin-bottom:18px">JAPAN GROWTH PLAN</div>
+          <div class="num">#1</div>
+          <h3>일본 Qoo10 카테고리 1위 만들기</h3>
+          <p class="muted" style="margin-top:12px">랭킹 알고리즘 기반 부스팅 + 일본 체험단(わさび10) + 인플루언서 시딩의 3단 결합. 평균 8주 내 카테고리 톱10 진입 보장.</p>
+          <a class="arr-link" href="#services" data-page="services">프로그램 자세히 보기 →</a>
+        </div>
+        <div class="sig-card cool">
+          <div class="sig-bgimg"><img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/1dbf614fc7c33.png" alt="" /></div>
+          <div class="eyebrow" style="margin-bottom:18px">LAUNCH BOOSTER</div>
+          <div class="num">¥1억</div>
+          <h3>런칭 6개월 월매출 1억 만들기</h3>
+          <p class="muted" style="margin-top:12px">브랜드 진단 → 일본 현지화 → 멀티채널 동시 런칭(Qoo10·Rakuten·Amazon·Instagram) → 성과형 운영대행. 매출 미달 시 컨설팅 비용 환급.</p>
+          <a class="arr-link" href="#services" data-page="services">프로그램 자세히 보기 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>What we do</div>
+      <h2 style="margin-top:18px">브랜드 전략부터 매출까지, <br/><span class="cool-text">통합 글로벌 서비스</span></h2>
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="svc-iconbox" style="padding:8px;background:linear-gradient(135deg,rgba(255,200,87,.18),rgba(255,79,183,.05))"><img style="filter:drop-shadow(0 6px 16px rgba(255,200,87,.45))" src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/1bf80494592a2.png" alt="" /></div>
+          <h3>글로벌 인플루언서 마케팅</h3>
+          <p>일본 2만+ 인플루언서 네트워크와 AI 매칭으로 ROI 입증된 시딩·콘텐츠 캠페인.</p>
+          <div class="more">Marketing →</div>
+        </div>
+        <div class="svc cool">
+          <div class="svc-iconbox" style="padding:8px;background:linear-gradient(135deg,rgba(61,227,255,.18),rgba(124,92,255,.05))"><img style="filter:drop-shadow(0 6px 16px rgba(61,227,255,.45))" src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/10e7b35b7f5b9.png" alt="" /></div>
+          <h3>글로벌 이커머스 운영대행</h3>
+          <p>Qoo10·Rakuten·Amazon JP·Yahoo쇼핑 입점·MD협업·CS·반품까지 풀스택.</p>
+          <div class="more">E-Commerce →</div>
+        </div>
+        <div class="svc">
+          <div class="svc-iconbox" style="padding:8px;background:linear-gradient(135deg,rgba(255,79,183,.18),rgba(124,92,255,.05))"><img style="filter:drop-shadow(0 6px 16px rgba(255,79,183,.45))" src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/d8417c5e4487e.png" alt="" /></div>
+          <h3>PB 브랜드 개발 &amp; 유통</h3>
+          <p>Meal it·Glow u·Pimple Lab·Maldda — 직접 만들고 키운 브랜드 4종.</p>
+          <div class="more">Brands →</div>
+        </div>
+        <div class="svc cool">
+          <div class="svc-iconbox" style="padding:8px;background:linear-gradient(135deg,rgba(200,255,82,.16),rgba(61,227,255,.05))"><img style="filter:drop-shadow(0 6px 16px rgba(124,92,255,.45))" src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/ef6f4bda6716c.png" alt="" /></div>
+          <h3>상품 사입 &amp; 총판</h3>
+          <p>국내 올리브영 1,300+ 매장 / 일본 드럭스토어 입점 유통망 보유.</p>
+          <div class="more">Distribution →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WASABI10 BRIDGE -->
+  <section style="padding-top:60px">
+    <div class="wrap">
+      <div class="bridge">
+        <div>
+          <div class="eyebrow" style="background:rgba(255,79,183,.1);border-color:rgba(255,79,183,.3)"><span class="dot" style="background:var(--accent-magenta);box-shadow:0 0 8px var(--accent-magenta)"></span>OUR OWN PLATFORM</div>
+          <h2 style="margin-top:18px">일본 체험단 마케팅의 표준<br/><span class="grad-text">わさび10 (Wasabi10)</span></h2>
+          <p class="muted">4,000+ 일본 현지 인플루언서, 누적 팔로워 1,000만+. 브랜드 등록 후 3개월 무료, Qoo10·Rakuten·Instagram·X 동시 캠페인.</p>
+          <div class="meta">
+            <div><strong>4,000+</strong>현지 인플루언서</div>
+            <div><strong>10M+</strong>누적 팔로워</div>
+            <div><strong>3개월</strong>무료 이용</div>
+          </div>
+          <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#wasabi10" data-page="wasabi10">わさび10 자세히 <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="https://wasabi10.com" target="_blank">플랫폼 바로가기</a>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div class="phone-mock">
+            <div class="screen">
+              <div class="topnav">
+                <div class="logo">わさび10</div>
+                <div class="menu">≡</div>
+              </div>
+              <div class="product-card" style="aspect-ratio:1.1/1">
+                <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/28/thumbnails/07962524302750844486.png" alt="Pureka" />
+                <div class="price">3,000 ¥P</div>
+                <div class="title">飲むサラダ Pureka ウォーターミックス4種</div>
+              </div>
+              <div class="grid2">
+                <div class="product-card">
+                  <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="Glow u" />
+                  <div class="price">8,900 ¥P</div>
+                  <div class="title">Glow u 韓国ヘアアイロン</div>
+                </div>
+                <div class="product-card">
+                  <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="MEAL IT" />
+                  <div class="price">3,900 ¥P</div>
+                  <div class="title">MEAL IT 置き換えプロテイン</div>
+                </div>
+              </div>
+              <div class="footer">今すぐ申し込み →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES PREVIEW -->
+  <section>
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:20px">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>Proven Results</div>
+          <h2 style="margin-top:18px">숫자로 증명하는 <span class="cool-text">성장 파트너</span></h2>
+        </div>
+        <a class="btn btn-ghost" href="#cases" data-page="cases">모든 사례 보기 →</a>
+      </div>
+      <div class="case-grid">
+        <div class="case">
+          <div class="case-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="Glow u 사례" /></div>
+          <div class="case-body">
+            <div>
+              <span class="platform">Qoo10 · 헤어케어</span>
+              <h3>"6주 만에 일본 큐텐 헤어 카테고리 1위"</h3>
+            </div>
+            <div class="kpi"><div><strong>#1</strong>카테고리</div><div><strong>+820%</strong>월매출</div></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="Meal it 사례" /></div>
+          <div class="case-body">
+            <div>
+              <span class="platform">Rakuten · 다이어트</span>
+              <h3>"런칭 5개월차, 월매출 1.2억엔 돌파"</h3>
+            </div>
+            <div class="kpi"><div><strong>¥120M</strong>월매출</div><div><strong>×4.8</strong>ROAS</div></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="Surebase 사례" /></div>
+          <div class="case-body">
+            <div>
+              <span class="platform">Olive Young · 메이크업</span>
+              <h3>"올리브영 전점 1,300매장 입점 돌파"</h3>
+            </div>
+            <div class="kpi"><div><strong>1,300+</strong>매장</div><div><strong>12K</strong>리뷰</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>How we work</div>
+      <h2 style="margin-top:18px">4단계 성장 프로세스</h2>
+      <p class="muted" style="max-width:680px">진단·전략·실행·증명. 모든 캠페인은 데이터 기반 진단으로 시작합니다.</p>
+      <div class="proc">
+        <div class="step"><h3>Diagnose</h3><p>브랜드 진단, 일본 시장·경쟁사 분석, KPI 셋업</p></div>
+        <div class="step"><h3>Localize</h3><p>일본 현지화 카피·비주얼·패키지, MD 매칭</p></div>
+        <div class="step"><h3>Launch</h3><p>채널 동시 런칭, 인플루언서 시딩, 광고 운영</p></div>
+        <div class="step"><h3>Scale</h3><p>주간 리포팅, A/B 테스트, 카테고리 1위 부스팅</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section>
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:20px">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>News &amp; Press</div>
+          <h2 style="margin-top:18px">에이든랩, 지금 이 순간의 뉴스</h2>
+        </div>
+        <a class="btn btn-ghost" href="#news" data-page="news">모든 뉴스 →</a>
+      </div>
+      <div class="news-grid">
+        <a class="news" style="border-color:var(--line-2)" href="https://magazine.hankyung.com/business/article/202603050937b" target="_blank" rel="noopener noreferrer">
+          <div class="news-img"><img src="https://img.hankyung.com/photo/202603/AD.43497291.1.jpg" alt="에이든랩 글로벌 투자 유치" referrerpolicy="no-referrer" /></div>
+          <div class="news-body">
+            <span class="cat">PRESS · 한국경제</span>
+            <h3>일본 마케팅 전문기업 에이든랩, 글로벌 투자 유치</h3>
+            <p class="muted" style="font-size:13px">신한벤처투자·글로벌브레인이 공동 운용하는 글로벌 펀드로부터 투자를 유치, 일본 인플루언서 마케팅·이커머스 운영을 가속합니다.</p>
+            <div class="date">2026.03.05 · 한국경제매거진</div>
+          </div>
+        </a>
+        <a class="news" href="https://www.venturesquare.net/1003413" target="_blank" rel="noopener noreferrer">
+          <div class="news-img"><img src="https://www.venturesquare.net/wp-content/uploads/2025/09/dsfghjsdf.jpg" alt="에이든랩 싱가포르 홀썸 독점 유통 계약" referrerpolicy="no-referrer" /></div>
+          <div class="news-body">
+            <span class="cat">PRESS · 벤처스퀘어</span>
+            <h3>에이든랩, 싱가포르 홀썸과 독점 유통 계약 체결</h3>
+            <div class="date">2025.09.08</div>
+          </div>
+        </a>
+        <a class="news" href="https://view.asiae.co.kr/article/2026031907450481540" target="_blank" rel="noopener noreferrer">
+          <div class="news-img"><img src="https://cphoto.asiae.co.kr/listimglink/1/2026030507265761997_1772663217.jpg" alt="매쉬업벤처스 인터뷰 - 에이든랩 주요 포트폴리오" referrerpolicy="no-referrer" /></div>
+          <div class="news-body">
+            <span class="cat">PRESS · 아시아경제</span>
+            <h3>매쉬업벤처스 'AI 시대, PMF 가장 빨리 찾는 팀이 생존'</h3>
+            <div class="date">2026.03.20</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:80px 0">
+    <div class="wrap">
+      <div style="position:relative;text-align:center;padding:80px 40px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(255,79,183,.12));border:1px solid var(--line-2);overflow:hidden">
+        <div style="position:absolute;inset:0;background:url('https://cdn.imweb.me/thumbnail/20260409/10284acd42181.png') center/cover;opacity:.18;mix-blend-mode:overlay;pointer-events:none"></div>
+        <div style="position:relative">
+          <div class="eyebrow"><span class="dot"></span>Ready to grow?</div>
+          <h2 style="margin-top:18px;max-width:760px;margin-left:auto;margin-right:auto">한국에서 검증된 브랜드,<br/><span class="grad-text">일본에서 한 번 더 폭발시킵니다.</span></h2>
+          <p class="muted" style="max-width:600px;margin:18px auto 30px">30분 무료 진단 신청 — 일본 시장 적합도, 카테고리별 매출 시뮬레이션, 6개월 로드맵을 받아보세요.</p>
+          <a class="btn btn-primary" href="#contact" data-page="contact">무료 진단 신청하기 <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="brand" data-no-i18n><img src="aidenlab%20logo%20.png" alt="Aiden Lab" class="brand-img brand-img-sm" /></div>
+          <p class="dim" style="font-size:13px;margin-top:14px;max-width:300px">K-브랜드의 글로벌 매출을 설계합니다. <br/>Seoul · Tokyo</p>
+          <p class="dim" style="font-size:12px;margin-top:24px">admin@aidenlab.io · 02-6737-1922</p>
+        </div>
+        <div><h4>Services</h4><ul><li><a href="#services" data-page="services">인플루언서 마케팅</a></li><li><a href="#services" data-page="services">퍼포먼스 마케팅</a></li><li><a href="#services" data-page="services">이커머스 운영대행</a></li><li><a href="#services" data-page="services">사입 &amp; 유통</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#about" data-page="about">About</a></li><li><a href="#brands" data-page="brands">Brands</a></li><li><a href="#cases" data-page="cases">Cases</a></li><li><a href="#careers" data-page="careers">Careers</a></li></ul></div>
+        <div><h4>Platforms</h4><ul><li><a href="#wasabi10" data-page="wasabi10">わさび10</a></li><li><a href="#news" data-page="news">Insights</a></li><li><a href="#contact" data-page="contact">Contact</a></li></ul></div>
+      </div>
+      <div class="foot-bottom">
+        <div>© 2026 (주)에이든랩. All rights reserved.</div>
+        <div>대표 강철용 · 사업자번호 464-87-01922 · 서울 마포구 마포대로 19, 14층</div>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- ===================== ABOUT ===================== -->
+<main id="page-about" class="page">
+  <section class="about-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>About aidenlab</div>
+      <h1 style="margin-top:24px">한국의 좋은 브랜드가<br/><span class="grad-text">세계의 좋은 브랜드</span>가 되도록.</h1>
+      <p class="muted" style="max-width:720px;margin:24px auto 0;font-size:18px">에이든랩은 K-브랜드와 글로벌 소비자 사이의 거리를 줄이는 일을 합니다. 데이터·AI·현지 네트워크로 매출이라는 결과를 만들어냅니다.</p>
+      <div class="about-hero-img"><img src="https://cdn.imweb.me/thumbnail/20260409/10284acd42181.png" alt="aidenlab 글로벌 비즈니스" /></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>우리가 일하는 방식</h2>
+      <div class="about-grid">
+        <div class="val"><div class="num">01 / VALUE</div><h3>숫자로 증명한다</h3><p class="muted">정성적 보고서가 아닌 매출·랭킹·ROAS로 말합니다. 모든 캠페인은 측정 가능한 KPI를 선언하고 시작합니다.</p></div>
+        <div class="val"><div class="num">02 / VALUE</div><h3>현지에서 만든다</h3><p class="muted">도쿄·시부야 거점 + 4,000명 일본 현지 크리에이터 + 일본인 MD·CS 인력. 번역이 아닌 현지 기획.</p></div>
+        <div class="val"><div class="num">03 / VALUE</div><h3>AI로 가속한다</h3><p class="muted">인플루언서 매칭, 콘텐츠 생성, 광고 입찰, 리포팅까지 자체 AI 스택으로 30배 빠르게 운영합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>에이든랩 성장 연혁</h2>
+      <div class="timeline">
+        <div class="tline"><div class="yr">2023</div><div><strong>법인 설립.</strong> 강철용 대표 중심으로 글로벌 인플루언서 마케팅 사업 시작. 첫 PB 브랜드 Meal it 런칭.</div></div>
+        <div class="tline"><div class="yr">2024</div><div><strong>일본 시장 본격 진출.</strong> 도쿄 시부야 오피스 개설. わさび10 플랫폼 베타 런칭. Glow u 일본 Qoo10 헤어 카테고리 1위.</div></div>
+        <div class="tline"><div class="yr">2025</div><div><strong>유통 인프라 확보.</strong> 올리브영 1,300+ 매장 입점 돌파(Meal it). Serumkind·Surebase 총판 계약. 사내 AI 시딩 솔루션 'Aiden AI' 출시.</div></div>
+        <div class="tline"><div class="yr">2026</div><div><strong>스케일업.</strong> 시리즈 B 50억원 투자 유치. 동남아 확장 시작. わさび10 4,000+ 인플루언서 / 1,000만+ 팔로워 돌파.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Leadership</div>
+      <h2 style="margin-top:18px">팀이 곧 신뢰입니다</h2>
+      <p class="muted" style="max-width:640px">한국·일본·중화권 출신 60+ 명의 마케터·MD·크리에이터·엔지니어가 함께 합니다.</p>
+      <div class="team-grid">
+        <div class="member"><div class="avatar"></div><h3 style="font-size:16px">강철용</h3><p class="dim" style="font-size:12px">CEO / Founder</p></div>
+        <div class="member"><div class="avatar" style="background:var(--grad-hero)"></div><h3 style="font-size:16px">[CSO]</h3><p class="dim" style="font-size:12px">Strategy &amp; Insights</p></div>
+        <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#FFC857,#FF4FB7)"></div><h3 style="font-size:16px">[CMO]</h3><p class="dim" style="font-size:12px">Global Marketing</p></div>
+        <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#C8FF52,#3DE3FF)"></div><h3 style="font-size:16px">[CTO]</h3><p class="dim" style="font-size:12px">AI &amp; Platform</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Investors &amp; Press</h2>
+      <p class="muted" style="margin-top:8px">에이든랩의 비전에 공감하는 파트너들과 함께합니다.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px">
+        <div class="card" style="display:flex;align-items:center;justify-content:center;height:100px;font-weight:bold;color:var(--ink-2)">INVESTOR A</div>
+        <div class="card" style="display:flex;align-items:center;justify-content:center;height:100px;font-weight:bold;color:var(--ink-2)">INVESTOR B</div>
+        <div class="card" style="display:flex;align-items:center;justify-content:center;height:100px;font-weight:bold;color:var(--ink-2)">PRESS 1</div>
+        <div class="card" style="display:flex;align-items:center;justify-content:center;height:100px;font-weight:bold;color:var(--ink-2)">PRESS 2</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Seoul × Tokyo</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px">
+        <div class="card">
+          <div class="eyebrow">HQ · SEOUL</div>
+          <h3 style="margin-top:18px">서울 마포구 마포대로 19, 14층 (신화빌딩)</h3>
+          <p class="muted">전략, AI, MD, 운영 본부</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">JAPAN · TOKYO</div>
+          <h3 style="margin-top:18px">東京都渋谷区神南一丁目12番14号 渋谷宮田ビル 6階</h3>
+          <p class="muted">わさび10 운영, 일본 인플루언서·CS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== SERVICES ===================== -->
+<main id="page-services" class="page">
+  <section class="svc-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Services</div>
+      <h1 style="margin-top:24px">하나의 파트너,<br/><span class="cool-text">통합 글로벌 솔루션</span></h1>
+      <p class="muted" style="max-width:680px;margin-top:24px;font-size:18px">전략 · 마케팅 · 운영 · 유통까지. 에이전시 4곳에 흩어진 일을 한 팀이 합니다.</p>
+      <div class="svc-tab-wrap">
+        <button class="svc-tab active" data-tab="influencer">글로벌 인플루언서</button>
+        <button class="svc-tab" data-tab="performance">퍼포먼스 마케팅</button>
+        <button class="svc-tab" data-tab="ecommerce">이커머스 운영대행</button>
+        <button class="svc-tab" data-tab="distribution">사입 &amp; 유통</button>
+        <button class="svc-tab" data-tab="signature">시그니처 프로그램</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="svc-detail svc-pane" data-pane="influencer">
+      <div>
+        <div class="eyebrow">01 · INFLUENCER MARKETING</div>
+        <h2 style="margin-top:18px">일본 2만+ 인플루언서, <br/>AI로 매칭합니다.</h2>
+        <p class="muted">わさび10 자체 플랫폼 + 외부 매크로/메가 인플루언서까지. 브랜드 톤·타겟·예산에 맞춰 AI가 후보군을 추천하고, 캠페인 운영부터 성과 분석까지 한 번에.</p>
+        <div class="feat">
+          <div><strong>나노 → 메가 풀스펙</strong>1만 팔로워부터 100만 팔로워까지 단계별 시딩 전략</div>
+          <div><strong>플랫폼 다채널</strong>Instagram · X · TikTok · YouTube · LINE VOOM 동시 운영</div>
+          <div><strong>실시간 대시보드</strong>도달·저장·구매전환을 ROAS 단위로 추적</div>
+          <div><strong>일본 현지 매니저</strong>일본인 PM이 크리에이터와 직접 커뮤니케이션</div>
+        </div>
+        <a class="btn btn-primary" href="#contact" data-page="contact" style="margin-top:30px">상담 신청 <span class="arr">→</span></a>
+      </div>
+      <div class="vis"><img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/81c6524a4c1c2.png" alt="" /></div>
+    </div>
+
+    <div class="svc-detail svc-pane" data-pane="performance" style="display:none">
+      <div>
+        <div class="eyebrow">02 · PERFORMANCE MARKETING</div>
+        <h2 style="margin-top:18px">일본 광고 효율,<br/>국내 최고 수준.</h2>
+        <p class="muted">Meta · TikTok · Google · LINE · X 광고를 일본 현지 계정·결제·세무로 운영. 평균 ROAS 4.2배.</p>
+        <div class="feat">
+          <div><strong>매체별 전문 인력</strong>Meta·Google·LINE·TikTok 각 매체 인증 운영자 보유</div>
+          <div><strong>크리에이티브 스튜디오</strong>일본인 카피라이터·디자이너가 직접 광고 소재 제작</div>
+          <div><strong>주간 옵티마이저 리뷰</strong>일본·한국 합동 위클리로 캠페인 튜닝</div>
+          <div><strong>후불 정산 옵션</strong>실제 매출 발생분의 % 정산 가능 (조건부)</div>
+        </div>
+        <a class="btn btn-primary" href="#contact" data-page="contact" style="margin-top:30px">상담 신청 <span class="arr">→</span></a>
+      </div>
+      <div class="vis"><img src="https://cdn.imweb.me/thumbnail/20260409/b4d1a0dca336b.png" alt="" /></div>
+    </div>
+
+    <div class="svc-detail svc-pane" data-pane="ecommerce" style="display:none">
+      <div>
+        <div class="eyebrow">03 · GLOBAL E-COMMERCE</div>
+        <h2 style="margin-top:18px">Qoo10 · Rakuten · Amazon JP<br/>풀스택 운영대행.</h2>
+        <p class="muted">입점 신청부터 상세페이지 제작·MD 협업·CS·반품·세무까지. 자체 일본 법인을 통한 합법적 운영.</p>
+        <div class="feat">
+          <div><strong>입점 컨설팅</strong>Qoo10 메가포트 / 라쿠텐 / 아마존 등록 풀패키지</div>
+          <div><strong>상세페이지 현지화</strong>일본인 카피라이터 + 디자이너의 현지 톤 제작</div>
+          <div><strong>MD 협업 / 행사 진행</strong>큐텐 메가할인·블랙프라이데이 등 전략적 노출</div>
+          <div><strong>물류 / 통관 / CS</strong>일본 풀필먼트 센터 직접 운영 (시즈오카·도쿄)</div>
+        </div>
+        <a class="btn btn-primary" href="#contact" data-page="contact" style="margin-top:30px">상담 신청 <span class="arr">→</span></a>
+      </div>
+      <div class="vis"><img src="https://cdn.imweb.me/thumbnail/20260410/ca0e612af256b.png" alt="" /></div>
+    </div>
+
+    <div class="svc-detail svc-pane" data-pane="distribution" style="display:none">
+      <div>
+        <div class="eyebrow">04 · DISTRIBUTION</div>
+        <h2 style="margin-top:18px">국내 1,300+ 매장,<br/>일본 드럭스토어까지.</h2>
+        <p class="muted">올리브영·랄라블라·CU·H&amp;B 등 국내 메이저 채널, 일본 마츠모토키요시·웰시아 등 현지 드럭스토어 입점망 보유.</p>
+        <div class="feat">
+          <div><strong>국내 사입 &amp; 총판</strong>Serumkind, Surebase, @trendseoul 등 운영 사례</div>
+          <div><strong>PB 브랜드 개발</strong>Meal it / Glow u / Pimple lab / Maldda 등 자체 4개 PB</div>
+          <div><strong>해외 유통</strong>일본·동남아·미국 셀렉트숍 입점 컨설팅</div>
+          <div><strong>리스크 부담</strong>매절·위탁·총판 등 유연한 거래 구조 협의</div>
+        </div>
+        <a class="btn btn-primary" href="#contact" data-page="contact" style="margin-top:30px">상담 신청 <span class="arr">→</span></a>
+      </div>
+      <div class="vis"><img src="https://cdn.imweb.me/thumbnail/20260409/cb541ecc20362.jpeg" alt="" /></div>
+    </div>
+
+    <div class="svc-pane" data-pane="signature" style="display:none">
+      <div class="eyebrow">SIGNATURE PROGRAM</div>
+      <h2 style="margin-top:18px">간판 프로그램 두 가지</h2>
+      <div class="sig-grid" style="margin-top:36px">
+        <div class="sig-card">
+          <div class="sig-bgimg"><img src="https://cdn.imweb.me/thumbnail/20260409/b4d1a0dca336b.png" alt="" /></div>
+          <div class="eyebrow" style="margin-bottom:18px">JAPAN GROWTH PLAN</div>
+          <div class="num">#1</div>
+          <h3>일본 Qoo10 카테고리 1위 만들기</h3>
+          <p class="muted" style="margin-top:12px">① 카테고리·경쟁 진단 → ② わさび10 체험단 200명 시딩 → ③ Qoo10 랭킹 부스팅 + 메가포트 광고 → ④ 8주 내 카테고리 톱10, 12주 내 1위 진입</p>
+          <div style="margin-top:24px;padding:18px;border:1px solid var(--line);border-radius:12px;position:relative"><div class="dim" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">3개월 패키지 / 견적 별도</div><strong style="display:block;color:var(--ink-0);margin-top:6px">미달성시 운영 수수료 환급 <a href="#terms" onclick="alert('환급 보장 조건 상세 페이지는 준비 중입니다.')" style="font-size:12px;color:var(--ink-3);text-decoration:underline;margin-left:6px;font-weight:normal">(조건 확인)</a></strong></div>
+        </div>
+        <div class="sig-card cool">
+          <div class="sig-bgimg"><img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/1dbf614fc7c33.png" alt="" /></div>
+          <div class="eyebrow" style="margin-bottom:18px">LAUNCH BOOSTER</div>
+          <div class="num">¥1억</div>
+          <h3>런칭 6개월 월매출 1억 만들기</h3>
+          <p class="muted" style="margin-top:12px">① 브랜드 진단·일본 현지화 → ② Qoo10·Rakuten·Amazon 동시 런칭 → ③ 인플루언서 300명 시딩 + 광고 3,000만원 집행 → ④ 6개월 차 월매출 ¥1억엔 도전</p>
+          <div style="margin-top:24px;padding:18px;border:1px solid var(--line);border-radius:12px;position:relative"><div class="dim" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">6개월 풀패키지 / 견적 별도</div><strong style="display:block;color:var(--ink-0);margin-top:6px">매출 미달 시 컨설팅 비용 환급 <a href="#terms" onclick="alert('환급 보장 조건 상세 페이지는 준비 중입니다.')" style="font-size:12px;color:var(--ink-3);text-decoration:underline;margin-left:6px;font-weight:normal">(조건 확인)</a></strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div style="text-align:center;padding:60px 40px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,255,255,.02)">
+        <h2>가격은 매출에 맞춰서.</h2>
+        <p class="muted" style="max-width:560px;margin:18px auto 30px">초기 컨설팅 무료 · 운영 수수료는 매출의 % 또는 월 고정 패키지로 협의. 30분 진단 미팅 후 맞춤 견적을 드립니다.</p>
+        <a class="btn btn-primary" href="#contact" data-page="contact">무료 진단 신청하기 <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== CASES ===================== -->
+<main id="page-cases" class="page">
+  <section class="svc-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Case studies</div>
+      <h1 style="margin-top:24px"><span class="grad-text">100+ K-브랜드</span>의<br/>글로벌 성장 기록.</h1>
+      <p class="muted" style="max-width:680px;margin-top:24px;font-size:18px">에이든랩과 함께한 브랜드의 실적과 비하인드를 카테고리·플랫폼별로 모아 보세요.</p>
+      <div class="case-filter">
+        <button class="chip active">전체</button>
+        <button class="chip">Qoo10 1위</button>
+        <button class="chip">Rakuten</button>
+        <button class="chip">Amazon JP</button>
+        <button class="chip">올리브영</button>
+        <button class="chip">Beauty</button>
+        <button class="chip">F&amp;B</button>
+        <button class="chip">Lifestyle</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="case-list">
+        <div class="case-big">
+          <div class="case-cover">
+            <span class="corner-tag">Qoo10 · 헤어케어 · 6주</span>
+            <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="Glow u" />
+          </div>
+          <div class="case-content">
+            <span class="badge">CASE 01 · GLOW U</span>
+            <h3>6주 만에 일본 큐텐 헤어 카테고리 1위</h3>
+            <div class="quote">"체험단 시딩과 메가포트 광고를 동시에 진행했더니, 광고를 끊은 뒤에도 오가닉 매출이 유지됐어요."</div>
+            <div class="metrics">
+              <div><strong>#1</strong><span>카테고리</span></div>
+              <div><strong>+820%</strong><span>월매출</span></div>
+              <div><strong>×4.7</strong><span>ROAS</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-big">
+          <div class="case-cover">
+            <span class="corner-tag">Rakuten · 다이어트 · 5개월</span>
+            <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="Meal it" />
+          </div>
+          <div class="case-content">
+            <span class="badge">CASE 02 · MEAL IT</span>
+            <h3>런칭 5개월차 월매출 1.2억엔</h3>
+            <div class="quote">"가격대가 높은 브랜드라 광고만으로는 어렵다고 했는데, 인플루언서 콘텐츠가 결정타였습니다."</div>
+            <div class="metrics">
+              <div><strong>¥120M</strong><span>월매출</span></div>
+              <div><strong>×4.8</strong><span>ROAS</span></div>
+              <div><strong>52</strong><span>인플루언서</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-big">
+          <div class="case-cover">
+            <span class="corner-tag">Olive Young · 1,300매장</span>
+            <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="Surebase" />
+          </div>
+          <div class="case-content">
+            <span class="badge">CASE 03 · SUREBASE</span>
+            <h3>올리브영 1,300매장 전점 입점 돌파</h3>
+            <div class="quote">"입점은 운이 아니라 실력. 매출 데이터·리뷰 12,000개로 MD를 설득했습니다."</div>
+            <div class="metrics">
+              <div><strong>1,300+</strong><span>매장</span></div>
+              <div><strong>12K</strong><span>리뷰</span></div>
+              <div><strong>4.7★</strong><span>평점</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-big">
+          <div class="case-cover">
+            <span class="corner-tag">Qoo10 · 트러블 케어</span>
+            <img src="https://pimplelab.kr/cdn/shop/files/preview_images/Untitled-1_06.jpg?width=1400" alt="Pimple Lab 캠페인" />
+          </div>
+          <div class="case-content">
+            <span class="badge">CASE 04 · PIMPLE LAB</span>
+            <h3>Qoo10 트러블 카테고리 1위 진입</h3>
+            <div class="quote">"제품력은 자신 있었지만, 일본 소비자의 언어로 풀어내는 콘텐츠가 부족했습니다. 그 부분을 에이든랩이 채워줬어요."</div>
+            <div class="metrics">
+              <div><strong>#1</strong><span>카테고리</span></div>
+              <div><strong>+540%</strong><span>월매출</span></div>
+              <div><strong>2,400</strong><span>리뷰</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+        <div class="card" style="text-align:center"><div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:var(--grad-hero);-webkit-background-clip:text;color:transparent">100+</div><p class="dim">함께한 K-브랜드</p></div>
+        <div class="card" style="text-align:center"><div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:var(--grad-cool);-webkit-background-clip:text;color:transparent">17</div><p class="dim">Qoo10 카테고리 1위</p></div>
+        <div class="card" style="text-align:center"><div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:linear-gradient(135deg,#FFC857,#FF4FB7);-webkit-background-clip:text;color:transparent">¥30B+</div><p class="dim">고객사 누적 매출</p></div>
+        <div class="card" style="text-align:center"><div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:linear-gradient(135deg,#C8FF52,#3DE3FF);-webkit-background-clip:text;color:transparent">4,000+</div><p class="dim">일본 인플루언서</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== BRANDS ===================== -->
+<main id="page-brands" class="page">
+  <section class="svc-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Our Brands</div>
+      <h1 style="margin-top:24px">우리는 <span class="cool-text">브랜드를 만들고 키우는 회사</span>이기도 합니다.</h1>
+      <p class="muted" style="max-width:680px;margin-top:24px;font-size:18px">에이든랩이 직접 기획·런칭한 PB 브랜드와, 유통 파트너십을 맺은 K-브랜드를 소개합니다.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="eyebrow">PB Brands · Owned by aidenlab</div>
+      <h2 style="margin-top:18px">자체 브랜드 4종</h2>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="Meal it" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">F&amp;B · DIET</span>
+              <div class="brand-logo-text">Meal it</div>
+              <div class="tagline">Grab it, Taste it, Love it</div>
+              <p class="muted" style="font-size:14px">단백질 셰이크에서 시작해 건강식·이너뷰티까지. 누적 판매 300만 개, 올리브영 1,300매장 입점, 일본 메가포 1위.</p>
+            </div>
+            <div class="brand-meta">
+              <span>OLIVE YOUNG</span><span>RAKUTEN #1</span><span>AMAZON US</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-card b2">
+          <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="Glow u" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">BEAUTY · HAIR TOOL</span>
+              <div class="brand-logo-text">Glow u</div>
+              <div class="tagline">Own Your Glow</div>
+              <p class="muted" style="font-size:14px">빈티지 감성 헤어 스타일링 툴. 일본 Qoo10 헤어 카테고리 1위. Amazon US·Qoo10 JP 동시 운영.</p>
+            </div>
+            <div class="brand-meta">
+              <span>Qoo10 #1</span><span>AMAZON US</span><span>INSTAGRAM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-card b3">
+          <div class="brand-vis"><img src="https://pimplelab.kr/cdn/shop/files/PPL_GEL_01_V2.jpg?width=1400" alt="Pimple Lab 트러블 케어 젤" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">BEAUTY · TROUBLE CARE</span>
+              <div class="brand-logo-text">Pimple Lab</div>
+              <div class="tagline">Spot it, Stick it, Clear it</div>
+              <p class="muted" style="font-size:14px">과학적으로 입증된 식물성 성분. 안전하고 편리한 홈케어 솔루션. Amazon US·Singapore Shopee 진출.</p>
+            </div>
+            <div class="brand-meta">
+              <span>AMAZON US</span><span>SHOPEE SG</span><span>Qoo10 JP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-card b4">
+          <div class="brand-vis"><img src="https://cdn.imweb.me/thumbnail/20260409/cb541ecc20362.jpeg" alt="Maldda" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">BEAUTY · SKINCARE</span>
+              <div class="brand-logo-text">Maldda 말따</div>
+              <div class="tagline">Stay Maldda, Stay Radiant</div>
+              <p class="muted" style="font-size:14px">한국 자연 유래 + 서양 기능 성분 처방. 클렌징·기본 스킨케어·하이드로겔 마스크 라인.</p>
+            </div>
+            <div class="brand-meta">
+              <span>BRAND.SITE</span><span>INSTAGRAM</span><span>NEW LAUNCH</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Partner Brands · Distribution</div>
+      <h2 style="margin-top:18px">유통/총판 브랜드</h2>
+      <p class="muted">에이든랩이 국내·일본 유통을 담당하는 K-뷰티 파트너 브랜드.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="Surebase" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">MAKEUP · DISTRIBUTION</span>
+              <div class="brand-logo-text" style="background:linear-gradient(135deg,#FFC857,#C8FF52);-webkit-background-clip:text;color:transparent">Surebase</div>
+              <div class="tagline">Sure-fit cushion foundation</div>
+              <p class="muted" style="font-size:14px">올리브영 메가브랜드. 쿠션·베이스 라인의 국내외 총판.</p>
+            </div>
+            <div class="brand-meta"><span>OLIVE YOUNG</span><span>JP DRUGSTORE</span></div>
+          </div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/28/thumbnails/07962524302750844486.png" alt="Pureka" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">F&amp;B · WELLNESS</span>
+              <div class="brand-logo-text" style="background:linear-gradient(135deg,#7C5CFF,#3DE3FF);-webkit-background-clip:text;color:transparent">Pureka</div>
+              <div class="tagline">飲むサラダ — 마시는 샐러드</div>
+              <p class="muted" style="font-size:14px">일본 시장 진출 워터믹스 라인. 4종 SKU.</p>
+            </div>
+            <div class="brand-meta"><span>WASABI10</span><span>QOO10 JP</span></div>
+          </div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/21/thumbnails/35393325283819660614.png" alt="ILO" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">F&amp;B · DIET</span>
+              <div class="brand-logo-text" style="background:linear-gradient(135deg,#FF4FB7,#FFC857);-webkit-background-clip:text;color:transparent">ILO</div>
+              <div class="tagline">Slim-cut diet jelly</div>
+              <p class="muted" style="font-size:14px">슬림컷 젤리·맥번 코어컷 다이어트 라인. Qoo10 JP 운영.</p>
+            </div>
+            <div class="brand-meta"><span>QOO10 JP</span><span>WASABI10</span></div>
+          </div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/19/thumbnails/28548608927119458348.jpg" alt="Dr.Reju" /></div>
+          <div class="brand-body">
+            <div>
+              <span class="biz-pill">BEAUTY · PDRN</span>
+              <div class="brand-logo-text" style="background:linear-gradient(135deg,#3DE3FF,#C8FF52);-webkit-background-clip:text;color:transparent">Dr.Reju</div>
+              <div class="tagline">All-PDRN Rejuvenating Cream</div>
+              <p class="muted" style="font-size:14px">PDRN 리주비네이팅 크림. 일본 인플루언서 마케팅 진행 중.</p>
+            </div>
+            <div class="brand-meta"><span>WASABI10</span><span>INSTAGRAM</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== WASABI10 ===================== -->
+<main id="page-wasabi10" class="page">
+  <section class="wasabi-hero">
+    <div class="wrap">
+      <div class="eyebrow" style="background:rgba(255,79,183,.1);border-color:rgba(255,79,183,.4)"><span class="dot" style="background:var(--accent-magenta);box-shadow:0 0 8px var(--accent-magenta)"></span>Owned Platform · Operated by aidenlab</div>
+      <h1 style="margin-top:24px"><span class="jp">わさび10</span><br/>일본 체험단 마케팅의 표준.</h1>
+      <p class="muted" style="max-width:720px;margin:24px auto 0;font-size:18px">4,000+ 일본 현지 인플루언서가 직접 활동하는 자체 플랫폼. 브랜드 등록 후 3개월 무료, 캠페인은 단 3일 만에 오픈됩니다.</p>
+      <div style="margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-primary" href="https://wasabi10.com" target="_blank">わさび10 바로가기 <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="#contact" data-page="contact">B2B 상담</a>
+      </div>
+      <div class="wasabi-stats">
+        <div class="stat"><div class="num">4,000+</div><div class="lbl">일본 현지 인플루언서</div></div>
+        <div class="stat"><div class="num">10M+</div><div class="lbl">누적 팔로워</div></div>
+        <div class="stat"><div class="num">200+</div><div class="lbl">진행 캠페인</div></div>
+        <div class="stat"><div class="num">3개월</div><div class="lbl">신규 브랜드 무료</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE CAMPAIGNS GRID -->
+  <section style="padding-top:120px">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot" style="background:var(--accent-magenta);box-shadow:0 0 8px var(--accent-magenta)"></span>Now Running</div>
+      <h2 style="margin-top:18px">지금 진행 중인 일본 캠페인</h2>
+      <p class="muted">わさび10에서 매주 새로운 K-브랜드 캠페인이 오픈됩니다. 실시간 현황을 확인하세요.</p>
+      <div class="campaign-grid">
+        <div class="camp">
+          <span class="platform-pill">INSTAGRAM</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/28/thumbnails/07962524302750844486.png" alt="" />
+          <div class="meta"><div class="ttl">飲むサラダ Pureka<br/>ウォーターミックス4種</div><div class="price">3,000 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">X</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/27/thumbnails/39485242957471666148.png" alt="" />
+          <div class="meta"><div class="ttl">iHEAL X投稿キャンペーン</div><div class="price">2,000 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">INSTAGRAM</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/26/thumbnails/71798732318587195651.png" alt="" />
+          <div class="meta"><div class="ttl">iHEAL トラブルケア</div><div class="price">2,000 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">INSTAGRAM</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="" />
+          <div class="meta"><div class="ttl">シュアベース クッション<br/>ファンデーション</div><div class="price">3,000 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">QOO10</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/24/thumbnails/43043853492376211178.jpg" alt="" />
+          <div class="meta"><div class="ttl">Pureka ピュレカ</div><div class="price">5,443 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">QOO10</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="" />
+          <div class="meta"><div class="ttl">Glow u 韓国ヨシンモリ<br/>ヘアアイロン</div><div class="price">8,900 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">QOO10</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="" />
+          <div class="meta"><div class="ttl">MEAL IT 置き換え<br/>ダイエットプロテイン</div><div class="price">3,900 ¥P</div></div>
+        </div>
+        <div class="camp">
+          <span class="platform-pill">QOO10</span>
+          <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/21/thumbnails/35393325283819660614.png" alt="" />
+          <div class="meta"><div class="ttl">ILOアイロ スリムカット<br/>ゼリー1+1 28本</div><div class="price">7,554 ¥P</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>3단계로 끝나는 일본 체험단</h2>
+      <div class="proc">
+        <div class="step"><h3>브랜드 등록</h3><p>わさび10 비즈니스 계정 가입 (1분), 상품·캠페인 정보 입력</p></div>
+        <div class="step"><h3>인플루언서 매칭</h3><p>AI 추천 + 일본 PM 큐레이션. 평균 24시간 내 후보 풀 확정</p></div>
+        <div class="step"><h3>발송 &amp; 콘텐츠</h3><p>일본 풀필먼트에서 제품 발송. 7~14일 내 콘텐츠 업로드</p></div>
+        <div class="step"><h3>리포트 &amp; 재구매</h3><p>도달·저장·구매전환 대시보드 + 자사몰 재구매 캠페인 연동</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div style="text-align:center;padding:80px 40px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(255,79,183,.2),rgba(255,200,87,.1));border:1px solid var(--line-2)">
+        <h2>지금 등록하면 <span class="grad-text">3개월 무료.</span></h2>
+        <p class="muted" style="max-width:600px;margin:18px auto 30px">わさび10는 에이든랩이 운영하는 자체 플랫폼입니다. 별도 계약 없이 즉시 캠페인을 시작할 수 있습니다.</p>
+        <a class="btn btn-primary" href="https://wasabi10.com" target="_blank">わさび10 무료 등록 <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== CAREERS ===================== -->
+<main id="page-careers" class="page">
+  <section class="career-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>We're hiring</div>
+      <h1 style="margin-top:24px"><span class="grad-text">경계를 허무는 사람들</span>과<br/>함께 합니다.</h1>
+      <p class="muted" style="max-width:680px;margin:24px auto 0;font-size:18px">한국·일본 양국 마켓에서 K-브랜드의 글로벌화를 만드는 일. 합리적인 동료와 빠른 의사결정 속에서 일합니다.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>에이든랩이 일하는 방식</h2>
+      <div class="career-grid">
+        <div class="culture"><div class="emoji">⚡</div><div><h3>속도가 곧 경쟁력</h3><p class="muted">월 단위가 아닌 주 단위 의사결정. 모든 미팅은 결론과 다음 액션으로 끝납니다.</p></div></div>
+        <div class="culture"><div class="emoji">📊</div><div><h3>모든 일은 숫자로</h3><p class="muted">의견 대립은 데이터로 해결. KPI 없는 캠페인은 시작하지 않습니다.</p></div></div>
+        <div class="culture"><div class="emoji">🌏</div><div><h3>한국 + 일본 듀얼</h3><p class="muted">한국 본사·도쿄 지사가 같은 슬랙·노션에서 일합니다. 일본 출장 기회 많음.</p></div></div>
+        <div class="culture"><div class="emoji">🤖</div><div><h3>AI는 동료다</h3><p class="muted">모든 직군이 AI 툴을 일상적으로 사용. 사내 AI 스택 활용 교육 매주 진행.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>채용 중인 포지션</h2>
+      <div class="openings">
+        <div class="row"><div>포지션</div><div>팀</div><div>고용형태</div><div>지역</div><div></div></div>
+        <div class="row"><div class="pos">Senior Performance Marketer (Japan)</div><div>Performance</div><div>정규직</div><div>도쿄</div><div class="arr-r">→</div></div>
+        <div class="row"><div class="pos">Global E-Commerce MD (Qoo10/Rakuten)</div><div>E-Commerce</div><div>정규직</div><div>서울</div><div class="arr-r">→</div></div>
+        <div class="row"><div class="pos">Influencer PM (일본어 가능)</div><div>Marketing</div><div>정규직</div><div>서울/도쿄</div><div class="arr-r">→</div></div>
+        <div class="row"><div class="pos">Brand Designer (K-Beauty PB)</div><div>Brand Studio</div><div>정규직</div><div>서울</div><div class="arr-r">→</div></div>
+        <div class="row"><div class="pos">AI Engineer (Influencer Matching)</div><div>Platform</div><div>정규직</div><div>서울</div><div class="arr-r">→</div></div>
+        <div class="row"><div class="pos">Content Producer (영상/숏폼)</div><div>Brand Studio</div><div>정규직/계약</div><div>서울</div><div class="arr-r">→</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>복지·환경</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px">
+        <div class="card"><h3 style="font-size:16px">⚙️ 자율 출퇴근</h3><p class="dim" style="font-size:13px">코어타임 11~17시</p></div>
+        <div class="card"><h3 style="font-size:16px">🏝 일본 워케이션</h3><p class="dim" style="font-size:13px">연 1회 도쿄 오피스 워케이션</p></div>
+        <div class="card"><h3 style="font-size:16px">💰 성과 인센티브</h3><p class="dim" style="font-size:13px">매출 기반 분기 인센티브</p></div>
+        <div class="card"><h3 style="font-size:16px">📚 학습비 지원</h3><p class="dim" style="font-size:13px">연 100만원 도서·강의</p></div>
+        <div class="card"><h3 style="font-size:16px">🍱 사내 카페테리아</h3><p class="dim" style="font-size:13px">점심·간식 무제한</p></div>
+        <div class="card"><h3 style="font-size:16px">🎁 자사 제품</h3><p class="dim" style="font-size:13px">PB 브랜드 무상 제공</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== NEWS / INSIGHTS ===================== -->
+<main id="page-news" class="page">
+  <section class="svc-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Aidenlab Insights</div>
+      <h1 style="margin-top:24px">일본 시장은 매주 바뀝니다.<br/><span class="cool-text">우리는 그 변화를 가장 먼저 봅니다.</span></h1>
+      <p class="muted" style="max-width:680px;margin-top:24px;font-size:18px">200+ 캠페인 데이터, 4,000+ 인플루언서 활동, 일본 현지 MD의 인사이트가 모이는 곳.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="case-filter">
+        <button class="chip active">전체</button>
+        <button class="chip">리포트</button>
+        <button class="chip">케이스</button>
+        <button class="chip">트렌드</button>
+        <button class="chip">프레스</button>
+        <button class="chip">에이든랩 소식</button>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-top:24px">
+        <a class="case-big" style="min-height:auto" href="https://magazine.hankyung.com/business/article/202603050937b" target="_blank" rel="noopener noreferrer">
+          <div class="case-cover" style="aspect-ratio:16/8">
+            <span class="corner-tag">PRESS · 한국경제 · 2026</span>
+            <img src="https://img.hankyung.com/photo/202603/AD.43497291.1.jpg" alt="에이든랩 글로벌 투자 유치" referrerpolicy="no-referrer" />
+          </div>
+          <div class="case-content">
+            <span class="badge">PRESS</span>
+            <h3 style="font-size:32px">일본 마케팅 전문기업 에이든랩, 글로벌 투자 유치</h3>
+            <p class="muted" style="font-size:14px;margin-top:14px">신한벤처투자·글로벌브레인이 공동 운용하는 글로벌 펀드로부터 투자를 유치했습니다. 일본 인플루언서 마케팅과 이커머스 운영 역량을 한층 강화합니다.</p>
+            <span class="btn btn-primary" style="margin-top:30px">기사 전문 보기 <span class="arr">→</span></span>
+          </div>
+        </a>
+        <div style="display:grid;gap:14px">
+          <a class="news" href="https://www.venturesquare.net/1003413" target="_blank" rel="noopener noreferrer"><div class="news-img"><img src="https://www.venturesquare.net/wp-content/uploads/2025/09/dsfghjsdf.jpg" alt="에이든랩 싱가포르 홀썸 독점 유통 계약" referrerpolicy="no-referrer" /></div><div class="news-body"><span class="cat">PRESS · 벤처스퀘어</span><h3>에이든랩, 싱가포르 홀썸과 독점 유통 계약 체결</h3><div class="date">2025.09.08</div></div></a>
+          <a class="news" href="https://view.asiae.co.kr/article/2026031907450481540" target="_blank" rel="noopener noreferrer"><div class="news-img"><img src="https://cphoto.asiae.co.kr/listimglink/1/2026030507265761997_1772663217.jpg" alt="매쉬업벤처스 인터뷰 - 에이든랩 주요 포트폴리오" referrerpolicy="no-referrer" /></div><div class="news-body"><span class="cat">PRESS · 아시아경제</span><h3>매쉬업벤처스 'AI 시대, PMF 가장 빨리 찾는 팀이 생존'</h3><div class="date">2026.03.20</div></div></a>
+        </div>
+      </div>
+      <div class="news-grid" style="grid-template-columns:repeat(3,1fr);margin-top:36px">
+        <div class="news"><div class="news-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="" /></div><div class="news-body"><span class="cat">TREND</span><h3>일본 Z세대의 K-뷰티 소비 패턴 5가지</h3><div class="date">2026.05.02</div></div></div>
+        <div class="news"><div class="news-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="" /></div><div class="news-body"><span class="cat">CASE</span><h3>Meal it 라쿠텐 다이어트 카테고리 톱10 후기</h3><div class="date">2026.04.20</div></div></div>
+        <div class="news"><div class="news-img"><img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/81c6524a4c1c2.png" alt="" /></div><div class="news-body"><span class="cat">에이든랩</span><h3>도쿄 오피스 시부야로 이전</h3><div class="date">2026.04.05</div></div></div>
+        <div class="news"><div class="news-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/26/thumbnails/71798732318587195651.png" alt="" /></div><div class="news-body"><span class="cat">트렌드</span><h3>2026 @cosme 베스트 코스메 분석</h3><div class="date">2026.03.28</div></div></div>
+        <div class="news"><div class="news-img"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/28/thumbnails/07962524302750844486.png" alt="" /></div><div class="news-body"><span class="cat">리포트</span><h3>일본 인플루언서 단가 가이드 2026</h3><div class="date">2026.03.10</div></div></div>
+        <div class="news"><div class="news-img"><img src="https://cdn.imweb.me/thumbnail/20260409/cb541ecc20362.jpeg" alt="" /></div><div class="news-body"><span class="cat">에이든랩</span><h3>わさび10 1,000번째 캠페인 돌파</h3><div class="date">2026.02.25</div></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== CONTACT ===================== -->
+<main id="page-contact" class="page">
+  <section class="svc-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Contact</div>
+      <h1 style="margin-top:24px">시작은 <span class="grad-text">30분 무료 진단</span>부터.</h1>
+      <p class="muted" style="max-width:640px;margin-top:24px;font-size:18px">일본 시장 적합도, 카테고리별 매출 시뮬레이션, 6개월 로드맵을 무료로 제공합니다. 제출 후 1영업일 내 담당자가 연락드립니다.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="contact-grid">
+        <form class="contact-form" onsubmit="event.preventDefault();alert('상담 신청이 접수되었습니다. 1영업일 내에 연락드리겠습니다.');">
+          <div class="field"><label>관심 서비스</label>
+            <select>
+              <option>일본 Qoo10 1위 만들기 (Japan Growth Plan)</option>
+              <option>런칭 6개월 1억 만들기 (Launch Booster)</option>
+              <option>글로벌 인플루언서 마케팅</option>
+              <option>퍼포먼스 마케팅</option>
+              <option>이커머스 운영대행</option>
+              <option>국내·일본 유통 입점</option>
+              <option>わさび10 (B2B)</option>
+              <option>기타 / 일반 문의</option>
+            </select>
+          </div>
+          <div class="field"><label>회사명 / 브랜드명</label><input placeholder="예: aidenlab" /></div>
+          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div><label>담당자명</label><input placeholder="홍길동" /></div>
+            <div><label>직책</label><input placeholder="마케팅 매니저" /></div>
+          </div>
+          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div><label>이메일</label><input type="email" placeholder="hello@brand.com" /></div>
+            <div><label>전화번호</label><input placeholder="010-0000-0000" /></div>
+          </div>
+          <div class="field"><label>월매출 / 카테고리</label>
+            <select>
+              <option>월 1천만 미만 / 런칭 준비중</option>
+              <option>월 1천~5천만원</option>
+              <option>월 5천만~3억원</option>
+              <option>월 3억 이상</option>
+            </select>
+          </div>
+          <div class="field"><label>문의 내용</label><textarea placeholder="진행하고 싶은 시장, 일정, 예산 등을 자유롭게 적어주세요."></textarea></div>
+          <div class="field" style="font-size:12px;color:var(--ink-3)">제출 시 개인정보 처리방침에 동의한 것으로 간주됩니다.</div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">무료 진단 신청 <span class="arr">→</span></button>
+        </form>
+        <div class="contact-info">
+          <div class="row"><div class="ico">📧</div><div><strong>일반 문의</strong><p class="muted" style="font-size:13px;margin:0">admin@aidenlab.io</p></div></div>
+          <div class="row"><div class="ico">🤝</div><div><strong>B2B 파트너십</strong><p class="muted" style="font-size:13px;margin:0">partners@aidenlab.io</p></div></div>
+          <div class="row"><div class="ico">💼</div><div><strong>채용 문의</strong><p class="muted" style="font-size:13px;margin:0">careers@aidenlab.io · <a href="#careers" data-page="careers" style="color:var(--accent-cyan)">채용 페이지 →</a></p></div></div>
+          <div class="row"><div class="ico">📰</div><div><strong>프레스 / 미디어</strong><p class="muted" style="font-size:13px;margin:0">press@aidenlab.io</p></div></div>
+          <div class="row"><div class="ico">📞</div><div><strong>전화</strong><p class="muted" style="font-size:13px;margin:0">+82 2-6737-1922 (KR) · +81 70-4141-0466 (JP)</p></div></div>
+          <div class="row"><div class="ico">📍</div><div><strong>서울 본사</strong><p class="muted" style="font-size:13px;margin:0">서울 마포구 마포대로 19, 14층 (신화빌딩)</p><strong style="margin-top:14px;display:block">도쿄 지사</strong><p class="muted" style="font-size:13px;margin:0">東京都渋谷区神南一丁目12番14号 渋谷宮田ビル 6F</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="sitemap-toggle" id="sitemapBtn">SITEMAP</button>
+<div class="sitemap-panel" id="sitemapPanel">
+  <h4>Prototype v2.0 — with real assets</h4>
+  <a data-page="home">P1 · Home</a>
+  <a data-page="about">P2 · About</a>
+  <a data-page="services">P3 · Services</a>
+  <a data-page="cases">P4 · Cases</a>
+  <a data-page="brands">P5 · Brands</a>
+  <a data-page="wasabi10">P6 · わさび10 Bridge</a>
+  <a data-page="careers">P7 · Careers</a>
+  <a data-page="news">P8 · Insights / News</a>
+  <a data-page="contact">P9 · Contact</a>
+  <hr style="border:0;border-top:1px solid var(--line);margin:14px 0" />
+  <h4>Documents</h4>
+  <a href="./rfp.html" target="_blank">📄 요구정의서 (RFP)</a>
+  <a href="https://www.aidenlab.io" target="_blank">↗ 현재 사이트</a>
+  <a href="https://wasabi10.com" target="_blank">↗ わさび10</a>
+</div>
+
+<script>
+function go(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById('page-'+page);
+  if(target){target.classList.add('active');window.scrollTo({top:0,behavior:'instant'})}
+  document.querySelectorAll('.nav a').forEach(a=>{a.classList.toggle('active',a.dataset.page===page)});
+  document.querySelectorAll('.sitemap-panel a[data-page]').forEach(a=>{a.classList.toggle('current',a.dataset.page===page)});
+  if(history.pushState){history.pushState({},'',location.pathname+'#'+page)}
+}
+document.querySelectorAll('[data-page]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();go(a.dataset.page);})});
+const startPage=(location.hash||'#home').replace('#','');go(startPage);
+const btn=document.getElementById('sitemapBtn'),panel=document.getElementById('sitemapPanel');
+btn.addEventListener('click',()=>panel.classList.toggle('open'));
+document.addEventListener('click',(e)=>{if(!btn.contains(e.target)&&!panel.contains(e.target)){panel.classList.remove('open')}});
+document.querySelectorAll('.svc-tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.svc-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.svc-pane').forEach(p=>p.style.display='none');document.querySelector('.svc-pane[data-pane="'+t.dataset.tab+'"]').style.display='';})});
+document.querySelectorAll('.case-filter').forEach(group=>{group.querySelectorAll('.chip').forEach(c=>{c.addEventListener('click',()=>{group.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');const filter=c.textContent.trim();const wrap=group.closest('.wrap');wrap.querySelectorAll('.case-big, .news').forEach(card=>{if(filter==='전체'){card.style.display='';}else{if(card.textContent.includes(filter)){card.style.display='';}else{card.style.display='none';}}});})})});
+document.querySelectorAll('.openings .row:not(:first-child)').forEach(row => { row.style.cursor = 'pointer'; row.addEventListener('click', () => { alert('상세 요강은 준비 중입니다.'); }); });
+</script>
+<script>/* i18n-injected */
+(function(){
+  var MAP={"와사비텐 자세히": {"en": "About Wasabi10", "zh": "Wasabi10 详情", "ja": "わさび10 詳細"}, "Qoo10 랭킹 1위": {"en": "#1 on Qoo10", "zh": "Qoo10 排名第一", "ja": "Qoo10 ランキング1位"}, "일본 Qoo10 카테고리 1위 20건 이상": {"en": "20+ category #1 rankings on Japan Qoo10", "zh": "日本Qoo10品类第一 20次以上", "ja": "日本Qoo10カテゴリー1位 20件以上"}, "에이든랩, 지금 이 순간의 뉴스": {"en": "Aiden Lab in the News, Right Now", "zh": "艾登实验室，此刻的新闻", "ja": "エイデンラボ、いまの最新ニュース"}, "모든 뉴스": {"en": "All News", "zh": "全部新闻", "ja": "すべてのニュース"}, "PRESS · 한국경제": {"en": "PRESS · Hankyung", "zh": "PRESS · 韩国经济", "ja": "PRESS · 韓国経済"}, "PRESS · 벤처스퀘어": {"en": "PRESS · VentureSquare", "zh": "PRESS · VentureSquare", "ja": "PRESS · VentureSquare"}, "PRESS · 아시아경제": {"en": "PRESS · Asia Economy", "zh": "PRESS · 亚洲经济", "ja": "PRESS · アジア経済"}, "PRESS · 한국경제 · 2026": {"en": "PRESS · Hankyung · 2026", "zh": "PRESS · 韩国经济 · 2026", "ja": "PRESS · 韓国経済 · 2026"}, "일본 마케팅 전문기업 에이든랩, 글로벌 투자 유치": {"en": "Aiden Lab, a Japan-marketing specialist, secures global investment", "zh": "日本营销专家艾登实验室获全球投资", "ja": "日本マーケティング専門企業エイデンラボ、グローバル投資を誘致"}, "에이든랩, 싱가포르 홀썸과 독점 유통 계약 체결": {"en": "Aiden Lab signs exclusive distribution deal with Singapore's Wholesome", "zh": "艾登实验室与新加坡Wholesome签订独家分销协议", "ja": "エイデンラボ、シンガポールのホールサムと独占流通契約を締結"}, "매쉬업벤처스 'AI 시대, PMF 가장 빨리 찾는 팀이 생존'": {"en": "Mashup Ventures: 'In the AI era, the team that finds PMF fastest survives'", "zh": "Mashup Ventures：'AI时代，最快找到PMF的团队才能生存'", "ja": "マッシュアップベンチャーズ「AI時代、PMFを最速で見つけるチームが生き残る」"}, "신한벤처투자·글로벌브레인이 공동 운용하는 글로벌 펀드로부터 투자를 유치, 일본 인플루언서 마케팅·이커머스 운영을 가속합니다.": {"en": "Backed by a global fund co-run by Shinhan Venture Investment and Global Brain, accelerating influencer marketing and e-commerce operations in Japan.", "zh": "获得由新韩创投与Global Brain共同运营的全球基金投资，加速日本红人营销与电商运营。", "ja": "新韓ベンチャー投資とグローバルブレインが共同運用するグローバルファンドから投資を誘致し、日本のインフルエンサーマーケティングとEC運営を加速します。"}, "신한벤처투자·글로벌브레인이 공동 운용하는 글로벌 펀드로부터 투자를 유치했습니다. 일본 인플루언서 마케팅과 이커머스 운영 역량을 한층 강화합니다.": {"en": "Aiden Lab secured investment from a global fund co-managed by Shinhan Venture Investment and Global Brain, further strengthening its influencer marketing and e-commerce operations in Japan.", "zh": "艾登实验室获得由新韩创投与Global Brain共同运营的全球基金投资，进一步强化日本红人营销与电商运营能力。", "ja": "エイデンラボは、新韓ベンチャー投資とグローバルブレインが共同運用するグローバルファンドから投資を誘致しました。日本のインフルエンサーマーケティングとEC運営力をさらに強化します。"}, "기사 전문 보기": {"en": "Read full article", "zh": "阅读全文", "ja": "記事全文を読む"}, "Qoo10 · 헤어케어": {"en": "Qoo10 · Haircare", "zh": "Qoo10 · 护发", "ja": "Qoo10 · ヘアケア"}, "\"6주 만에 일본 큐텐 헤어 카테고리 1위\"": {"en": "\"#1 in Japan Qoo10 Hair in just 6 weeks\"", "zh": "\"6周登顶日本Qoo10护发品类第一\"", "ja": "「6週間で日本Qoo10ヘアカテゴリー1位」"}, "카테고리": {"en": "Category", "zh": "品类", "ja": "カテゴリー"}, "월매출": {"en": "Monthly Sales", "zh": "月销售额", "ja": "月商"}, "Rakuten · 다이어트": {"en": "Rakuten · Diet", "zh": "Rakuten · 减肥", "ja": "Rakuten · ダイエット"}, "\"런칭 5개월차, 월매출 1.2억엔 돌파\"": {"en": "\"¥120M monthly sales in month 5 after launch\"", "zh": "\"上市第5个月，月销售额突破1.2亿日元\"", "ja": "「ローンチ5カ月目、月商1.2億円突破」"}, "Olive Young · 메이크업": {"en": "Olive Young · Makeup", "zh": "Olive Young · 彩妆", "ja": "Olive Young · メイク"}, "\"올리브영 전점 1,300매장 입점 돌파\"": {"en": "\"Launched in all 1,300 Olive Young stores\"", "zh": "\"入驻Olive Young全部1,300家门店\"", "ja": "「Olive Young全1,300店舗導入突破」"}, "매장": {"en": "Stores", "zh": "门店", "ja": "店舗"}, "리뷰": {"en": "Reviews", "zh": "评价", "ja": "レビュー"}, "2026 일본 뷰티 커머스 트렌드 백서": {"en": "2026 Japan Beauty Commerce Trend Report", "zh": "2026日本美妆电商趋势白皮书", "ja": "2026 日本ビューティーコマース トレンド白書"}, "에이든랩이 운영한 200+ 캠페인 데이터로 정리한 일본 시장 진출 플레이북.": {"en": "A Japan market-entry playbook built from data across 200+ campaigns run by Aidenlab.", "zh": "基于Aidenlab运营的200+营销活动数据整理的日本市场进入指南。", "ja": "Aidenlabが運用した200+キャンペーンのデータでまとめた日本市場進出プレイブック。"}, "2026.05 · 무료 다운로드": {"en": "2026.05 · Free Download", "zh": "2026.05 · 免费下载", "ja": "2026.05 · 無料ダウンロード"}, "핌플랩, 일본 Qoo10 트러블 카테고리 1위 진입": {"en": "Pimple Lab hits #1 in Japan Qoo10 Trouble-Care", "zh": "Pimple Lab登顶日本Qoo10祛痘品类第一", "ja": "Pimple Lab、日本Qoo10トラブルケアカテゴリー1位獲得"}, "에이든랩, 시리즈 B 50억원 투자 유치": {"en": "Aidenlab raises ₩5B Series B", "zh": "Aidenlab完成50亿韩元B轮融资", "ja": "Aidenlab、シリーズBで50億ウォン資金調達"}, "K-브랜드의": {"en": "K-Brands'", "zh": "K品牌的", "ja": "Kブランドの"}, "글로벌 매출을": {"en": "Global Revenue,", "zh": "全球销售", "ja": "グローバル売上を"}, "설계합니다.": {"en": "Engineered.", "zh": "由我们设计。", "ja": "設計します。"}, "무료 진단 받기": {"en": "Get a Free Diagnosis", "zh": "获取免费诊断", "ja": "無料診断を受ける"}, "실적 보기": {"en": "See Results", "zh": "查看业绩", "ja": "実績を見る"}, "わさび10 자세히": {"en": "About Wasabi10", "zh": "Wasabi10详情", "ja": "わさび10 詳細"}, "일본 Qoo10 카테고리 1위 17건": {"en": "17 #1 rankings in Japan Qoo10 categories", "zh": "日本Qoo10品类第一 17次", "ja": "日本Qoo10カテゴリー1位 17件"}, "¥1억+": {"en": "¥100M+", "zh": "¥1亿+", "ja": "¥1億+"}, "런칭 6개월 월매출 달성": {"en": "Monthly sales reached within 6 months of launch", "zh": "上市6个月达成月销售目标", "ja": "ローンチ6カ月で月商達成"}, "일본 인플루언서 네트워크": {"en": "Japan Influencer Network", "zh": "日本网红网络", "ja": "日本インフルエンサーネットワーク"}, "Glow u 헤어 스타일링 툴": {"en": "Glow u Hair Styling Tools", "zh": "Glow u 美发造型工具", "ja": "Glow u ヘアスタイリングツール"}, "Meal it 단백질 셰이크": {"en": "Meal it Protein Shake", "zh": "Meal it 蛋白奶昔", "ja": "Meal it プロテインシェイク"}, "Surebase 쿠션 파운데이션": {"en": "Surebase Cushion Foundation", "zh": "Surebase 气垫粉底", "ja": "Surebase クッションファンデ"}, "Qoo10 카테고리": {"en": "Qoo10 Category", "zh": "Qoo10品类", "ja": "Qoo10カテゴリー"}, "1위": {"en": "#1", "zh": "第1名", "ja": "1位"}, "P1-S01 — 히어로 비주얼은 실제 PB 브랜드 제품 콜라주(Glow u 헤어툴 + Meal it 셰이크 + Surebase 쿠션). 중앙 플로팅 배지로 \"Qoo10 카테고리 1위\" 즉시 인식.": {"en": "P1-S01 — Hero visual is a collage of real PB brand products (Glow u hair tool + Meal it shake + Surebase cushion). A central floating badge makes \"Qoo10 Category #1\" instantly recognizable.", "zh": "P1-S01 — 主视觉为真实自有品牌产品拼贴（Glow u美发工具 + Meal it奶昔 + Surebase气垫）。中央悬浮徽章即时呈现\"Qoo10品类第一\"。", "ja": "P1-S01 — ヒーロービジュアルは実際のPBブランド製品のコラージュ（Glow uヘアツール + Meal itシェイク + Surebaseクッション）。中央のフローティングバッジで「Qoo10カテゴリー1位」を即認識。"}, "에이든랩만의": {"en": "Aidenlab's", "zh": "Aidenlab独有的", "ja": "Aidenlabならではの"}, "간판 서비스": {"en": "Signature Services", "zh": "招牌服务", "ja": "看板サービス"}, "시장의 평균이 아닌, 1위를 만드는 두 가지 보장형 프로그램. 모든 캠페인은 데이터 진단부터 시작됩니다.": {"en": "Not market average — two guarantee-based programs that make you #1. Every campaign starts with a data diagnosis.", "zh": "不是市场平均水平，而是打造第一的两个保障型项目。每个营销活动都从数据诊断开始。", "ja": "市場の平均ではなく、1位をつくる2つの保証型プログラム。すべてのキャンペーンはデータ診断から始まります。"}, "일본 Qoo10 카테고리 1위 만들기": {"en": "Become #1 in a Japan Qoo10 Category", "zh": "打造日本Qoo10品类第一", "ja": "日本Qoo10カテゴリー1位を獲る"}, "랭킹 알고리즘 기반 부스팅 + 일본 체험단(わさび10) + 인플루언서 시딩의 3단 결합. 평균 8주 내 카테고리 톱10 진입 보장.": {"en": "A three-stage combo of ranking-algorithm boosting + Japan sampling (Wasabi10) + influencer seeding. Top-10 category entry guaranteed within 8 weeks on average.", "zh": "排名算法助推 + 日本体验团(Wasabi10) + 网红种草的三段式组合。平均8周内保证进入品类前十。", "ja": "ランキングアルゴリズムによるブースト + 日本体験団（わさび10） + インフルエンサーシーディングの3段構成。平均8週間以内にカテゴリートップ10入りを保証。"}, "프로그램 자세히 보기 →": {"en": "View Program →", "zh": "查看项目详情 →", "ja": "プログラム詳細 →"}, "¥1억": {"en": "¥100M", "zh": "¥1亿", "ja": "¥1億"}, "런칭 6개월 월매출 1억 만들기": {"en": "Hit ¥100M Monthly Sales in 6 Months", "zh": "上市6个月达成月销1亿", "ja": "ローンチ6カ月で月商1億"}, "브랜드 진단 → 일본 현지화 → 멀티채널 동시 런칭(Qoo10·Rakuten·Amazon·Instagram) → 성과형 운영대행. 매출 미달 시 컨설팅 비용 환급.": {"en": "Brand diagnosis → Japan localization → simultaneous multi-channel launch (Qoo10·Rakuten·Amazon·Instagram) → performance-based operations. Consulting fee refunded if sales targets are missed.", "zh": "品牌诊断 → 日本本地化 → 多渠道同步上市(Qoo10·Rakuten·Amazon·Instagram) → 绩效型代运营。未达销售目标退还咨询费。", "ja": "ブランド診断 → 日本ローカライズ → マルチチャネル同時ローンチ（Qoo10・Rakuten・Amazon・Instagram） → 成果型運用代行。売上未達の場合はコンサル費を返金。"}, "브랜드 전략부터 매출까지,": {"en": "From brand strategy to revenue —", "zh": "从品牌战略到销售，", "ja": "ブランド戦略から売上まで、"}, "통합 글로벌 서비스": {"en": "Integrated Global Services", "zh": "一体化全球服务", "ja": "統合グローバルサービス"}, "글로벌 인플루언서 마케팅": {"en": "Global Influencer Marketing", "zh": "全球网红营销", "ja": "グローバルインフルエンサーマーケティング"}, "일본 2만+ 인플루언서 네트워크와 AI 매칭으로 ROI 입증된 시딩·콘텐츠 캠페인.": {"en": "ROI-proven seeding and content campaigns powered by AI matching across 20,000+ Japan influencers.", "zh": "依托2万+日本网红网络与AI匹配，打造经ROI验证的种草与内容营销。", "ja": "日本2万+のインフルエンサーネットワークとAIマッチングで、ROIを実証したシーディング・コンテンツキャンペーン。"}, "글로벌 이커머스 운영대행": {"en": "Global E-commerce Operations", "zh": "全球电商代运营", "ja": "グローバルEC運用代行"}, "Qoo10·Rakuten·Amazon JP·Yahoo쇼핑 입점·MD협업·CS·반품까지 풀스택.": {"en": "Full-stack across Qoo10·Rakuten·Amazon JP·Yahoo Shopping — onboarding, MD collaboration, CS, and returns.", "zh": "Qoo10·Rakuten·Amazon JP·Yahoo购物的入驻、MD合作、客服到退货全栈服务。", "ja": "Qoo10・Rakuten・Amazon JP・Yahoo!ショッピングの出店・MD連携・CS・返品までフルスタック。"}, "PB 브랜드 개발 & 유통": {"en": "PB Brand Development & Distribution", "zh": "自有品牌开发与分销", "ja": "PBブランド開発＆流通"}, "Meal it·Glow u·Pimple Lab·Maldda — 직접 만들고 키운 브랜드 4종.": {"en": "Meal it·Glow u·Pimple Lab·Maldda — four brands we built and grew ourselves.", "zh": "Meal it·Glow u·Pimple Lab·Maldda — 我们亲手打造并培育的4个品牌。", "ja": "Meal it・Glow u・Pimple Lab・Maldda — 自ら作り育てたブランド4種。"}, "상품 사입 & 총판": {"en": "Sourcing & Distribution", "zh": "商品采购与总代理", "ja": "商品仕入れ＆総販"}, "국내 올리브영 1,300+ 매장 / 일본 드럭스토어 입점 유통망 보유.": {"en": "A distribution network spanning 1,300+ Olive Young stores in Korea and Japanese drugstores.", "zh": "拥有韩国Olive Young 1,300+门店及日本药妆店的入驻分销网络。", "ja": "韓国Olive Young 1,300+店舗／日本ドラッグストアへの流通網を保有。"}, "일본 체험단 마케팅의 표준": {"en": "The Standard in Japan Sampling Marketing", "zh": "日本体验团营销的标准", "ja": "日本体験団マーケティングのスタンダード"}, "4,000+ 일본 현지 인플루언서, 누적 팔로워 1,000만+. 브랜드 등록 후 3개월 무료, Qoo10·Rakuten·Instagram·X 동시 캠페인.": {"en": "4,000+ local Japan influencers with 10M+ combined followers. Free for 3 months after registration, with simultaneous campaigns on Qoo10·Rakuten·Instagram·X.", "zh": "4,000+日本本地网红，累计粉丝1,000万+。品牌注册后3个月免费，Qoo10·Rakuten·Instagram·X同步营销。", "ja": "4,000+の日本現地インフルエンサー、累計フォロワー1,000万+。ブランド登録後3カ月無料、Qoo10・Rakuten・Instagram・X同時キャンペーン。"}, "현지 인플루언서": {"en": "Local Influencers", "zh": "本地网红", "ja": "現地インフルエンサー"}, "누적 팔로워": {"en": "Combined Followers", "zh": "累计粉丝", "ja": "累計フォロワー"}, "3개월": {"en": "3 Months", "zh": "3个月", "ja": "3カ月"}, "무료 이용": {"en": "Free", "zh": "免费使用", "ja": "無料利用"}, "플랫폼 바로가기": {"en": "Go to Platform", "zh": "前往平台", "ja": "プラットフォームへ"}, "숫자로 증명하는": {"en": "Proven by Numbers,", "zh": "用数字证明的", "ja": "数字で証明する"}, "성장 파트너": {"en": "Your Growth Partner", "zh": "成长伙伴", "ja": "成長パートナー"}, "모든 사례 보기": {"en": "See All Cases", "zh": "查看全部案例", "ja": "すべての事例を見る"}, "4단계 성장 프로세스": {"en": "A 4-Step Growth Process", "zh": "4阶段成长流程", "ja": "4ステップ成長プロセス"}, "진단·전략·실행·증명. 모든 캠페인은 데이터 기반 진단으로 시작합니다.": {"en": "Diagnose, strategize, execute, prove. Every campaign begins with a data-driven diagnosis.", "zh": "诊断·战略·执行·验证。每个营销活动都从数据驱动的诊断开始。", "ja": "診断・戦略・実行・証明。すべてのキャンペーンはデータに基づく診断から始まります。"}, "브랜드 진단, 일본 시장·경쟁사 분석, KPI 셋업": {"en": "Brand diagnosis, Japan market & competitor analysis, KPI setup", "zh": "品牌诊断、日本市场及竞品分析、KPI设定", "ja": "ブランド診断、日本市場・競合分析、KPI設定"}, "일본 현지화 카피·비주얼·패키지, MD 매칭": {"en": "Japan-localized copy, visuals, packaging, and MD matching", "zh": "日本本地化文案·视觉·包装，MD匹配", "ja": "日本ローカライズのコピー・ビジュアル・パッケージ、MDマッチング"}, "채널 동시 런칭, 인플루언서 시딩, 광고 운영": {"en": "Simultaneous channel launch, influencer seeding, ad operations", "zh": "渠道同步上市、网红种草、广告运营", "ja": "チャネル同時ローンチ、インフルエンサーシーディング、広告運用"}, "주간 리포팅, A/B 테스트, 카테고리 1위 부스팅": {"en": "Weekly reporting, A/B testing, category #1 boosting", "zh": "周报、A/B测试、品类第一助推", "ja": "週次レポート、A/Bテスト、カテゴリー1位ブースト"}, "일본 시장의 변화를 가장 먼저": {"en": "First to See Japan's Market Shifts", "zh": "最先洞察日本市场的变化", "ja": "日本市場の変化を誰よりも先に"}, "모든 인사이트": {"en": "All Insights", "zh": "全部洞察", "ja": "すべてのインサイト"}, "한국에서 검증된 브랜드,": {"en": "A brand proven in Korea —", "zh": "在韩国验证过的品牌，", "ja": "韓国で実証されたブランド、"}, "일본에서 한 번 더 폭발시킵니다.": {"en": "we make it explode once more in Japan.", "zh": "在日本再次引爆。", "ja": "日本でもう一度爆発させます。"}, "30분 무료 진단 신청 — 일본 시장 적합도, 카테고리별 매출 시뮬레이션, 6개월 로드맵을 받아보세요.": {"en": "Book a 30-minute free diagnosis — get a Japan market-fit assessment, category-level sales simulation, and a 6-month roadmap.", "zh": "申请30分钟免费诊断 — 获取日本市场契合度、分品类销售模拟及6个月路线图。", "ja": "30分の無料診断を申し込む — 日本市場適合度、カテゴリー別売上シミュレーション、6カ月ロードマップをお届けします。"}, "무료 진단 신청하기": {"en": "Request a Free Diagnosis", "zh": "申请免费诊断", "ja": "無料診断を申し込む"}, "한국의 좋은 브랜드가": {"en": "Great Korean brands", "zh": "让韩国的好品牌", "ja": "韓国の良いブランドが"}, "세계의 좋은 브랜드": {"en": "becoming great global brands.", "zh": "成为世界的好品牌", "ja": "世界の良いブランド"}, "가 되도록.": {"en": ".", "zh": "。", "ja": "になるように。"}, "에이든랩은 K-브랜드와 글로벌 소비자 사이의 거리를 줄이는 일을 합니다. 데이터·AI·현지 네트워크로 매출이라는 결과를 만들어냅니다.": {"en": "Aidenlab closes the distance between K-brands and global consumers. We turn data, AI, and local networks into one result: revenue.", "zh": "Aidenlab致力于缩短K品牌与全球消费者之间的距离。以数据·AI·本地网络创造销售这一结果。", "ja": "AidenlabはKブランドとグローバル消費者の距離を縮めます。データ・AI・現地ネットワークで「売上」という結果を生み出します。"}, "aidenlab 글로벌 비즈니스": {"en": "aidenlab Global Business", "zh": "aidenlab 全球业务", "ja": "aidenlab グローバルビジネス"}, "우리가 일하는 방식": {"en": "How We Work", "zh": "我们的工作方式", "ja": "私たちの働き方"}, "숫자로 증명한다": {"en": "We Prove It in Numbers", "zh": "用数字证明", "ja": "数字で証明する"}, "정성적 보고서가 아닌 매출·랭킹·ROAS로 말합니다. 모든 캠페인은 측정 가능한 KPI를 선언하고 시작합니다.": {"en": "We speak in sales, rankings, and ROAS — not qualitative reports. Every campaign starts by declaring measurable KPIs.", "zh": "我们用销售·排名·ROAS说话，而非定性报告。每个营销活动都以可衡量的KPI开始。", "ja": "定性的なレポートではなく、売上・ランキング・ROASで語ります。すべてのキャンペーンは測定可能なKPIを宣言してから始めます。"}, "현지에서 만든다": {"en": "We Build It Locally", "zh": "在本地打造", "ja": "現地でつくる"}, "도쿄·시부야 거점 + 4,000명 일본 현지 크리에이터 + 일본인 MD·CS 인력. 번역이 아닌 현지 기획.": {"en": "A Tokyo/Shibuya base + 4,000 local Japanese creators + Japanese MD and CS staff. Local planning, not translation.", "zh": "东京·涩谷据点 + 4,000名日本本地创作者 + 日本籍MD·客服团队。本地策划，而非翻译。", "ja": "東京・渋谷拠点 + 4,000名の日本現地クリエイター + 日本人MD・CSスタッフ。翻訳ではなく現地企画。"}, "AI로 가속한다": {"en": "We Accelerate with AI", "zh": "用AI加速", "ja": "AIで加速する"}, "인플루언서 매칭, 콘텐츠 생성, 광고 입찰, 리포팅까지 자체 AI 스택으로 30배 빠르게 운영합니다.": {"en": "From influencer matching to content generation, ad bidding, and reporting — our in-house AI stack runs it all 30x faster.", "zh": "从网红匹配、内容生成、广告竞价到报告，依托自有AI技术栈实现30倍提速运营。", "ja": "インフルエンサーマッチング、コンテンツ生成、広告入札、レポートまで、自社AIスタックで30倍速く運用します。"}, "에이든랩 성장 연혁": {"en": "Aidenlab's Growth Timeline", "zh": "Aidenlab成长历程", "ja": "Aidenlabの成長の歩み"}, "법인 설립.": {"en": "Company founded.", "zh": "公司成立。", "ja": "法人設立。"}, "강철용 대표 중심으로 글로벌 인플루언서 마케팅 사업 시작. 첫 PB 브랜드 Meal it 런칭.": {"en": "Led by CEO Kang Cheol-yong, the global influencer marketing business begins. First PB brand, Meal it, launches.", "zh": "以姜哲龙代表为核心启动全球网红营销业务。推出首个自有品牌Meal it。", "ja": "カン・チョルヨンCEOを中心にグローバルインフルエンサーマーケティング事業を開始。初のPBブランドMeal itをローンチ。"}, "일본 시장 본격 진출.": {"en": "Full-scale entry into Japan.", "zh": "正式进军日本市场。", "ja": "日本市場へ本格進出。"}, "도쿄 시부야 오피스 개설. わさび10 플랫폼 베타 런칭. Glow u 일본 Qoo10 헤어 카테고리 1위.": {"en": "Opened Tokyo Shibuya office. Launched Wasabi10 platform beta. Glow u hits #1 in Japan Qoo10 Hair.", "zh": "开设东京涩谷办公室。Wasabi10平台启动测试。Glow u登顶日本Qoo10护发品类。", "ja": "東京・渋谷オフィス開設。わさび10プラットフォームβ版ローンチ。Glow uが日本Qoo10ヘアカテゴリー1位。"}, "유통 인프라 확보.": {"en": "Distribution infrastructure secured.", "zh": "构建分销基础设施。", "ja": "流通インフラを確保。"}, "올리브영 1,300+ 매장 입점 돌파(Meal it). Serumkind·Surebase 총판 계약. 사내 AI 시딩 솔루션 'Aiden AI' 출시.": {"en": "Surpassed 1,300+ Olive Young stores (Meal it). Signed distribution deals for Serumkind·Surebase. Launched in-house AI seeding solution 'Aiden AI'.", "zh": "Meal it入驻Olive Young超1,300家门店。签订Serumkind·Surebase总代理协议。推出自研AI种草方案'Aiden AI'。", "ja": "Olive Young 1,300+店舗導入突破（Meal it）。Serumkind・Surebaseの総販契約。自社AIシーディングソリューション「Aiden AI」をリリース。"}, "스케일업.": {"en": "Scale-up.", "zh": "规模化。", "ja": "スケールアップ。"}, "시리즈 B 50억원 투자 유치. 동남아 확장 시작. わさび10 4,000+ 인플루언서 / 1,000만+ 팔로워 돌파.": {"en": "Raised ₩5B Series B. Began Southeast Asia expansion. Wasabi10 surpasses 4,000+ influencers / 10M+ followers.", "zh": "完成50亿韩元B轮融资。启动东南亚扩张。Wasabi10突破4,000+网红/1,000万+粉丝。", "ja": "シリーズBで50億ウォン調達。東南アジア展開を開始。わさび10が4,000+インフルエンサー／1,000万+フォロワー突破。"}, "팀이 곧 신뢰입니다": {"en": "Our Team Is the Trust", "zh": "团队即信任", "ja": "チームこそ信頼です"}, "한국·일본·중화권 출신 60+ 명의 마케터·MD·크리에이터·엔지니어가 함께 합니다.": {"en": "60+ marketers, MDs, creators, and engineers from Korea, Japan, and Greater China work together.", "zh": "来自韩国·日本·大中华区的60+名营销、MD、创作者与工程师携手协作。", "ja": "韓国・日本・中華圏出身の60+名のマーケター・MD・クリエイター・エンジニアが集結。"}, "강철용": {"en": "Kang Cheol-yong", "zh": "姜哲龙", "ja": "カン・チョルヨン"}, "에이든랩의 비전에 공감하는 파트너들과 함께합니다.": {"en": "We work alongside partners who share Aidenlab's vision.", "zh": "与认同Aidenlab愿景的伙伴携手同行。", "ja": "Aidenlabのビジョンに共感するパートナーと共に歩みます。"}, "서울 마포구 마포대로 19, 14층 (신화빌딩)": {"en": "14F Shinhwa Bldg, 19 Mapo-daero, Mapo-gu, Seoul", "zh": "首尔麻浦区麻浦大路19号14层（信华大厦）", "ja": "ソウル麻浦区麻浦大路19、14階（シンファビル）"}, "전략, AI, MD, 운영 본부": {"en": "Strategy, AI, MD & Operations HQ", "zh": "战略、AI、MD、运营总部", "ja": "戦略・AI・MD・運用本部"}, "わさび10 운영, 일본 인플루언서·CS": {"en": "Wasabi10 operations, Japan influencers & CS", "zh": "Wasabi10运营，日本网红·客服", "ja": "わさび10運用、日本インフルエンサー・CS"}, "환급 보장 조건 상세 페이지는 준비 중입니다.": {"en": "The detailed refund-guarantee terms page is in preparation.", "zh": "退款保障条件详情页正在筹备中。", "ja": "返金保証条件の詳細ページは準備中です。"}, "하나의 파트너,": {"en": "One Partner,", "zh": "一个伙伴，", "ja": "ひとつのパートナー、"}, "통합 글로벌 솔루션": {"en": "One Integrated Global Solution", "zh": "一体化全球解决方案", "ja": "統合グローバルソリューション"}, "전략 · 마케팅 · 운영 · 유통까지. 에이전시 4곳에 흩어진 일을 한 팀이 합니다.": {"en": "Strategy · marketing · operations · distribution — one team does the work that's usually scattered across four agencies.", "zh": "战略·营销·运营·分销。把分散在4家代理商的工作交给一个团队。", "ja": "戦略・マーケティング・運用・流通まで。4社のエージェンシーに分散した業務をひとつのチームで。"}, "글로벌 인플루언서": {"en": "Global Influencer", "zh": "全球网红", "ja": "グローバルインフルエンサー"}, "퍼포먼스 마케팅": {"en": "Performance Marketing", "zh": "效果营销", "ja": "パフォーマンスマーケティング"}, "이커머스 운영대행": {"en": "E-commerce Operations", "zh": "电商代运营", "ja": "EC運用代行"}, "사입 & 유통": {"en": "Sourcing & Distribution", "zh": "采购与分销", "ja": "仕入れ＆流通"}, "시그니처 프로그램": {"en": "Signature Programs", "zh": "招牌项目", "ja": "シグネチャープログラム"}, "일본 2만+ 인플루언서,": {"en": "20,000+ Japan Influencers,", "zh": "2万+日本网红，", "ja": "日本2万+のインフルエンサー、"}, "AI로 매칭합니다.": {"en": "Matched by AI.", "zh": "由AI匹配。", "ja": "AIでマッチング。"}, "わさび10 자체 플랫폼 + 외부 매크로/메가 인플루언서까지. 브랜드 톤·타겟·예산에 맞춰 AI가 후보군을 추천하고, 캠페인 운영부터 성과 분석까지 한 번에.": {"en": "From our own Wasabi10 platform to external macro/mega influencers. AI recommends candidates matched to your brand tone, target, and budget — covering everything from campaign operations to performance analysis.", "zh": "从Wasabi10自有平台到外部腰部/头部网红。AI根据品牌调性·目标·预算推荐候选，从营销运营到效果分析一站式完成。", "ja": "わさび10の自社プラットフォームから外部のマクロ／メガインフルエンサーまで。ブランドのトーン・ターゲット・予算に合わせてAIが候補を推薦し、キャンペーン運用から成果分析までワンストップ。"}, "나노 → 메가 풀스펙": {"en": "Nano → Mega, Full Spectrum", "zh": "纳米级 → 头部全覆盖", "ja": "ナノ → メガ フルスペック"}, "1만 팔로워부터 100만 팔로워까지 단계별 시딩 전략": {"en": "A tiered seeding strategy from 10K to 1M followers", "zh": "从1万粉丝到100万粉丝的分级种草策略", "ja": "1万フォロワーから100万フォロワーまで段階別シーディング戦略"}, "플랫폼 다채널": {"en": "Multi-Platform", "zh": "多平台", "ja": "マルチプラットフォーム"}, "Instagram · X · TikTok · YouTube · LINE VOOM 동시 운영": {"en": "Run Instagram · X · TikTok · YouTube · LINE VOOM simultaneously", "zh": "Instagram·X·TikTok·YouTube·LINE VOOM同步运营", "ja": "Instagram・X・TikTok・YouTube・LINE VOOMを同時運用"}, "실시간 대시보드": {"en": "Real-Time Dashboard", "zh": "实时仪表盘", "ja": "リアルタイムダッシュボード"}, "도달·저장·구매전환을 ROAS 단위로 추적": {"en": "Track reach, saves, and purchase conversion by ROAS", "zh": "以ROAS为单位追踪触达·收藏·购买转化", "ja": "リーチ・保存・購入転換をROAS単位で追跡"}, "일본 현지 매니저": {"en": "Local Japan Managers", "zh": "日本本地经理", "ja": "日本現地マネージャー"}, "일본인 PM이 크리에이터와 직접 커뮤니케이션": {"en": "Japanese PMs communicate directly with creators", "zh": "日本籍PM与创作者直接沟通", "ja": "日本人PMがクリエイターと直接コミュニケーション"}, "상담 신청": {"en": "Request a Consultation", "zh": "申请咨询", "ja": "相談を申し込む"}, "일본 광고 효율,": {"en": "Japan Ad Efficiency,", "zh": "日本广告效率，", "ja": "日本の広告効率、"}, "국내 최고 수준.": {"en": "Best-in-Class in Korea.", "zh": "国内顶尖水平。", "ja": "国内最高水準。"}, "Meta · TikTok · Google · LINE · X 광고를 일본 현지 계정·결제·세무로 운영. 평균 ROAS 4.2배.": {"en": "We run Meta · TikTok · Google · LINE · X ads with local Japanese accounts, billing, and tax handling. Average ROAS 4.2x.", "zh": "以日本本地账户·结算·税务运营Meta·TikTok·Google·LINE·X广告。平均ROAS 4.2倍。", "ja": "Meta・TikTok・Google・LINE・Xの広告を日本現地アカウント・決済・税務で運用。平均ROAS 4.2倍。"}, "매체별 전문 인력": {"en": "Specialists per Channel", "zh": "各媒体专业人员", "ja": "媒体別の専門人材"}, "Meta·Google·LINE·TikTok 각 매체 인증 운영자 보유": {"en": "Certified operators for each of Meta·Google·LINE·TikTok", "zh": "拥有Meta·Google·LINE·TikTok各媒体认证运营人员", "ja": "Meta・Google・LINE・TikTok各媒体の認定運用者が在籍"}, "크리에이티브 스튜디오": {"en": "Creative Studio", "zh": "创意工作室", "ja": "クリエイティブスタジオ"}, "일본인 카피라이터·디자이너가 직접 광고 소재 제작": {"en": "Japanese copywriters and designers create ad assets in-house", "zh": "日本籍文案·设计师亲自制作广告素材", "ja": "日本人コピーライター・デザイナーが広告素材を直接制作"}, "주간 옵티마이저 리뷰": {"en": "Weekly Optimizer Review", "zh": "每周优化复盘", "ja": "週次オプティマイザーレビュー"}, "일본·한국 합동 위클리로 캠페인 튜닝": {"en": "Tune campaigns in a joint Japan–Korea weekly", "zh": "通过日韩联合周会调优营销活动", "ja": "日本・韓国合同のウィークリーでキャンペーンをチューニング"}, "후불 정산 옵션": {"en": "Pay-After-Performance Option", "zh": "后付结算选项", "ja": "後払い精算オプション"}, "실제 매출 발생분의 % 정산 가능 (조건부)": {"en": "Settlement as a % of actual sales generated (conditions apply)", "zh": "可按实际产生销售额的%结算（有条件）", "ja": "実際の売上発生分の%で精算可能（条件付き）"}, "풀스택 운영대행.": {"en": "Full-Stack Operations.", "zh": "全栈代运营。", "ja": "フルスタック運用代行。"}, "입점 신청부터 상세페이지 제작·MD 협업·CS·반품·세무까지. 자체 일본 법인을 통한 합법적 운영.": {"en": "From store onboarding to detail-page production, MD collaboration, CS, returns, and tax — all run compliantly through our own Japanese entity.", "zh": "从入驻申请到详情页制作·MD合作·客服·退货·税务。通过自有日本法人合法运营。", "ja": "出店申請から商品ページ制作・MD連携・CS・返品・税務まで。自社の日本法人を通じた合法的な運用。"}, "입점 컨설팅": {"en": "Onboarding Consulting", "zh": "入驻咨询", "ja": "出店コンサルティング"}, "Qoo10 메가포트 / 라쿠텐 / 아마존 등록 풀패키지": {"en": "A full package for Qoo10 MegaPort / Rakuten / Amazon registration", "zh": "Qoo10 MegaPort / 乐天 / 亚马逊注册全套服务", "ja": "Qoo10メガポート / 楽天 / Amazon登録のフルパッケージ"}, "상세페이지 현지화": {"en": "Detail-Page Localization", "zh": "详情页本地化", "ja": "商品ページのローカライズ"}, "일본인 카피라이터 + 디자이너의 현지 톤 제작": {"en": "Local-tone production by Japanese copywriters and designers", "zh": "日本籍文案+设计师打造本地化语调", "ja": "日本人コピーライター＋デザイナーによる現地トーン制作"}, "MD 협업 / 행사 진행": {"en": "MD Collaboration / Promotions", "zh": "MD合作 / 活动执行", "ja": "MD連携 / 催事運営"}, "큐텐 메가할인·블랙프라이데이 등 전략적 노출": {"en": "Strategic exposure via Qoo10 Mega Sale, Black Friday, and more", "zh": "Qoo10超级折扣·黑五等战略性曝光", "ja": "Qoo10メガ割・ブラックフライデーなど戦略的露出"}, "물류 / 통관 / CS": {"en": "Logistics / Customs / CS", "zh": "物流 / 清关 / 客服", "ja": "物流 / 通関 / CS"}, "일본 풀필먼트 센터 직접 운영 (시즈오카·도쿄)": {"en": "We operate our own Japan fulfillment centers (Shizuoka & Tokyo)", "zh": "自营日本履约中心（静冈·东京）", "ja": "日本フルフィルメントセンターを自社運営（静岡・東京）"}, "국내 1,300+ 매장,": {"en": "1,300+ Stores in Korea,", "zh": "国内1,300+门店，", "ja": "国内1,300+店舗、"}, "일본 드럭스토어까지.": {"en": "and Japanese Drugstores Too.", "zh": "直达日本药妆店。", "ja": "日本のドラッグストアまで。"}, "올리브영·랄라블라·CU·H&B 등 국내 메이저 채널, 일본 마츠모토키요시·웰시아 등 현지 드럭스토어 입점망 보유.": {"en": "A network across major Korean channels like Olive Young·Lalavla·CU·H&B and Japanese drugstores like Matsumoto Kiyoshi·Welcia.", "zh": "拥有Olive Young·Lalavla·CU·H&B等国内主流渠道，及日本松本清·Welcia等本地药妆店入驻网络。", "ja": "Olive Young・lalavla・CU・H&Bなど国内主要チャネル、日本のマツモトキヨシ・ウエルシアなど現地ドラッグストアへの導入網を保有。"}, "국내 사입 & 총판": {"en": "Domestic Sourcing & Distribution", "zh": "国内采购与总代理", "ja": "国内仕入れ＆総販"}, "Serumkind, Surebase, @trendseoul 등 운영 사례": {"en": "Track record with Serumkind, Surebase, @trendseoul, and more", "zh": "Serumkind、Surebase、@trendseoul等运营案例", "ja": "Serumkind、Surebase、@trendseoulなどの運用実績"}, "PB 브랜드 개발": {"en": "PB Brand Development", "zh": "自有品牌开发", "ja": "PBブランド開発"}, "Meal it / Glow u / Pimple lab / Maldda 등 자체 4개 PB": {"en": "Four in-house PB brands: Meal it / Glow u / Pimple lab / Maldda", "zh": "Meal it / Glow u / Pimple lab / Maldda等4个自有品牌", "ja": "Meal it / Glow u / Pimple lab / Malddaなど自社PB 4ブランド"}, "해외 유통": {"en": "Overseas Distribution", "zh": "海外分销", "ja": "海外流通"}, "일본·동남아·미국 셀렉트숍 입점 컨설팅": {"en": "Select-shop onboarding consulting across Japan, Southeast Asia, and the US", "zh": "日本·东南亚·美国精选店入驻咨询", "ja": "日本・東南アジア・米国のセレクトショップ出店コンサルティング"}, "리스크 부담": {"en": "Risk Sharing", "zh": "风险共担", "ja": "リスク負担"}, "매절·위탁·총판 등 유연한 거래 구조 협의": {"en": "Flexible deal structures — outright purchase, consignment, distribution, and more", "zh": "买断·寄售·总代理等灵活交易结构协商", "ja": "買い切り・委託・総販など柔軟な取引構造を協議"}, "간판 프로그램 두 가지": {"en": "Two Signature Programs", "zh": "两大招牌项目", "ja": "看板プログラム2種"}, "① 카테고리·경쟁 진단 → ② わさび10 체험단 200명 시딩 → ③ Qoo10 랭킹 부스팅 + 메가포트 광고 → ④ 8주 내 카테고리 톱10, 12주 내 1위 진입": {"en": "① Category & competitor diagnosis → ② Seeding to 200 Wasabi10 samplers → ③ Qoo10 ranking boost + MegaPort ads → ④ Top-10 category within 8 weeks, #1 within 12 weeks", "zh": "① 品类·竞争诊断 → ② Wasabi10体验团200人种草 → ③ Qoo10排名助推+MegaPort广告 → ④ 8周内品类前十，12周内登顶", "ja": "① カテゴリー・競合診断 → ② わさび10体験団200名シーディング → ③ Qoo10ランキングブースト＋メガポート広告 → ④ 8週間以内にカテゴリートップ10、12週間以内に1位"}, "3개월 패키지 / 견적 별도": {"en": "3-month package / quote separate", "zh": "3个月套餐 / 报价另计", "ja": "3カ月パッケージ / 見積もり別途"}, "(조건 확인)": {"en": "(terms apply)", "zh": "（详见条件）", "ja": "（条件確認）"}, "① 브랜드 진단·일본 현지화 → ② Qoo10·Rakuten·Amazon 동시 런칭 → ③ 인플루언서 300명 시딩 + 광고 3,000만원 집행 → ④ 6개월 차 월매출 ¥1억엔 도전": {"en": "① Brand diagnosis & Japan localization → ② Simultaneous launch on Qoo10·Rakuten·Amazon → ③ Seeding to 300 influencers + ₩30M ad spend → ④ Targeting ¥100M monthly sales by month 6", "zh": "① 品牌诊断·日本本地化 → ② Qoo10·Rakuten·Amazon同步上市 → ③ 网红300人种草+投放3,000万韩元广告 → ④ 第6个月冲击月销¥1亿日元", "ja": "① ブランド診断・日本ローカライズ → ② Qoo10・Rakuten・Amazon同時ローンチ → ③ インフルエンサー300名シーディング＋広告3,000万ウォン投下 → ④ 6カ月目で月商¥1億円に挑戦"}, "6개월 풀패키지 / 견적 별도": {"en": "6-month full package / quote separate", "zh": "6个月全套 / 报价另计", "ja": "6カ月フルパッケージ / 見積もり別途"}, "가격은 매출에 맞춰서.": {"en": "Pricing That Follows Your Sales.", "zh": "价格随销售而定。", "ja": "価格は売上に合わせて。"}, "초기 컨설팅 무료 · 운영 수수료는 매출의 % 또는 월 고정 패키지로 협의. 30분 진단 미팅 후 맞춤 견적을 드립니다.": {"en": "Initial consulting is free; operating fees are negotiated as a % of sales or a fixed monthly package. We provide a tailored quote after a 30-minute diagnosis meeting.", "zh": "初期咨询免费·运营费按销售额的%或月固定套餐协商。30分钟诊断会议后提供定制报价。", "ja": "初期コンサルティング無料・運用手数料は売上の%または月額固定パッケージで協議。30分の診断ミーティング後にカスタム見積もりをお出しします。"}, "Qoo10 · 헤어케어 · 6주": {"en": "Qoo10 · Haircare · 6 weeks", "zh": "Qoo10 · 护发 · 6周", "ja": "Qoo10 · ヘアケア · 6週間"}, "6주 만에 일본 큐텐 헤어 카테고리 1위": {"en": "#1 in Japan Qoo10 Hair in just 6 weeks", "zh": "6周登顶日本Qoo10护发品类", "ja": "6週間で日本Qoo10ヘアカテゴリー1位"}, "\"체험단 시딩과 메가포트 광고를 동시에 진행했더니, 광고를 끊은 뒤에도 오가닉 매출이 유지됐어요.\"": {"en": "\"We ran sampling seeding and MegaPort ads together, and organic sales held up even after we stopped the ads.\"", "zh": "\"体验团种草与MegaPort广告同步进行，停掉广告后自然销售依然保持。\"", "ja": "「体験団シーディングとメガポート広告を同時に行ったところ、広告を止めた後もオーガニック売上が維持されました。」"}, "Rakuten · 다이어트 · 5개월": {"en": "Rakuten · Diet · 5 months", "zh": "Rakuten · 减肥 · 5个月", "ja": "Rakuten · ダイエット · 5カ月"}, "런칭 5개월차 월매출 1.2억엔": {"en": "¥120M monthly sales in month 5 after launch", "zh": "上市第5个月月销1.2亿日元", "ja": "ローンチ5カ月目で月商1.2億円"}, "\"가격대가 높은 브랜드라 광고만으로는 어렵다고 했는데, 인플루언서 콘텐츠가 결정타였습니다.\"": {"en": "\"It's a premium-priced brand, so ads alone were tough — influencer content was the decisive blow.\"", "zh": "\"作为高价位品牌，仅靠广告很难，网红内容才是制胜关键。\"", "ja": "「価格帯の高いブランドで広告だけでは難しいと言われましたが、インフルエンサーコンテンツが決定打でした。」"}, "인플루언서": {"en": "Influencers", "zh": "网红", "ja": "インフルエンサー"}, "Olive Young · 1,300매장": {"en": "Olive Young · 1,300 stores", "zh": "Olive Young · 1,300家门店", "ja": "Olive Young · 1,300店舗"}, "올리브영 1,300매장 전점 입점 돌파": {"en": "Launched in all 1,300 Olive Young stores", "zh": "入驻Olive Young全部1,300家门店", "ja": "Olive Young 1,300店舗 全店導入突破"}, "\"입점은 운이 아니라 실력. 매출 데이터·리뷰 12,000개로 MD를 설득했습니다.\"": {"en": "\"Getting in isn't luck, it's skill. We convinced the MD with sales data and 12,000 reviews.\"", "zh": "\"入驻不是靠运气而是靠实力。我们用销售数据和12,000条评价说服了MD。\"", "ja": "「導入は運ではなく実力。売上データ・12,000件のレビューでMDを説得しました。」"}, "평점": {"en": "Rating", "zh": "评分", "ja": "評価点"}, "Qoo10 · 트러블 케어": {"en": "Qoo10 · Trouble Care", "zh": "Qoo10 · 祛痘护理", "ja": "Qoo10 · トラブルケア"}, "Qoo10 트러블 카테고리 1위 진입": {"en": "Reached #1 in the Qoo10 Trouble-Care category", "zh": "登顶Qoo10祛痘品类第一", "ja": "Qoo10トラブルケアカテゴリー1位獲得"}, "\"제품력은 자신 있었지만, 일본 소비자의 언어로 풀어내는 콘텐츠가 부족했습니다. 그 부분을 에이든랩이 채워줬어요.\"": {"en": "\"We were confident in the product, but lacked content that spoke in the Japanese consumer's language. Aidenlab filled that gap.\"", "zh": "\"我们对产品很有信心，但缺乏用日本消费者语言诠释的内容。Aidenlab补上了这一块。\"", "ja": "「製品力には自信がありましたが、日本の消費者の言葉で伝えるコンテンツが不足していました。その部分をAidenlabが埋めてくれました。」"}, "100+ K-브랜드": {"en": "100+ K-Brands'", "zh": "100+ K品牌", "ja": "100+ Kブランド"}, "의": {"en": "", "zh": "的", "ja": "の"}, "글로벌 성장 기록.": {"en": "Global Growth Stories.", "zh": "全球成长记录。", "ja": "グローバル成長の記録。"}, "에이든랩과 함께한 브랜드의 실적과 비하인드를 카테고리·플랫폼별로 모아 보세요.": {"en": "Explore the results and behind-the-scenes of brands that partnered with Aidenlab, sorted by category and platform.", "zh": "按品类·平台浏览与Aidenlab合作品牌的业绩与幕后故事。", "ja": "Aidenlabと共に歩んだブランドの実績と舞台裏を、カテゴリー・プラットフォーム別にご覧ください。"}, "전체": {"en": "All", "zh": "全部", "ja": "すべて"}, "Qoo10 1위": {"en": "Qoo10 #1", "zh": "Qoo10第一", "ja": "Qoo10 1位"}, "올리브영": {"en": "Olive Young", "zh": "Olive Young", "ja": "Olive Young"}, "함께한 K-브랜드": {"en": "K-Brands Partnered", "zh": "合作的K品牌", "ja": "共に歩んだKブランド"}, "Qoo10 카테고리 1위": {"en": "Qoo10 Category #1", "zh": "Qoo10品类第一", "ja": "Qoo10カテゴリー1位"}, "고객사 누적 매출": {"en": "Cumulative Client Revenue", "zh": "客户累计销售额", "ja": "クライアント累計売上"}, "일본 인플루언서": {"en": "Japan Influencers", "zh": "日本网红", "ja": "日本インフルエンサー"}, "우리는": {"en": "We Are Also", "zh": "我们", "ja": "私たちは"}, "브랜드를 만들고 키우는 회사": {"en": "a Company That Builds and Grows Brands.", "zh": "一家打造并培育品牌的公司", "ja": "ブランドを作り育てる会社"}, "이기도 합니다.": {"en": "", "zh": "。", "ja": "でもあります。"}, "에이든랩이 직접 기획·런칭한 PB 브랜드와, 유통 파트너십을 맺은 K-브랜드를 소개합니다.": {"en": "Meet the PB brands Aidenlab planned and launched, and the K-brands we partner with for distribution.", "zh": "介绍由Aidenlab亲自策划·推出的自有品牌，以及建立分销合作的K品牌。", "ja": "Aidenlabが自ら企画・ローンチしたPBブランドと、流通パートナーシップを結んだKブランドをご紹介します。"}, "자체 브랜드 4종": {"en": "4 In-House Brands", "zh": "自有品牌4种", "ja": "自社ブランド4種"}, "단백질 셰이크에서 시작해 건강식·이너뷰티까지. 누적 판매 300만 개, 올리브영 1,300매장 입점, 일본 메가포 1위.": {"en": "From protein shakes to health foods and inner beauty. 3M units sold, 1,300 Olive Young stores, and #1 on Japan MegaPort.", "zh": "从蛋白奶昔到健康食品·内服美容。累计销量300万个，入驻Olive Young 1,300门店，日本MegaPort第一。", "ja": "プロテインシェイクから健康食・インナービューティーまで。累計販売300万個、Olive Young 1,300店舗導入、日本メガポ1位。"}, "빈티지 감성 헤어 스타일링 툴. 일본 Qoo10 헤어 카테고리 1위. Amazon US·Qoo10 JP 동시 운영.": {"en": "Vintage-inspired hair styling tools. #1 in Japan Qoo10 Hair. Run simultaneously on Amazon US and Qoo10 JP.", "zh": "复古质感美发造型工具。日本Qoo10护发品类第一。Amazon US·Qoo10 JP同步运营。", "ja": "ヴィンテージ感のあるヘアスタイリングツール。日本Qoo10ヘアカテゴリー1位。Amazon US・Qoo10 JPを同時運用。"}, "과학적으로 입증된 식물성 성분. 안전하고 편리한 홈케어 솔루션. Amazon US·Singapore Shopee 진출.": {"en": "Scientifically proven plant-based ingredients. A safe, convenient home-care solution. Available on Amazon US and Singapore Shopee.", "zh": "经科学验证的植物成分。安全便捷的家庭护理方案。进驻Amazon US·新加坡Shopee。", "ja": "科学的に実証された植物性成分。安全で便利なホームケアソリューション。Amazon US・Singapore Shopeeに進出。"}, "Maldda 말따": {"en": "Maldda", "zh": "Maldda 末打", "ja": "Maldda マルタ"}, "한국 자연 유래 + 서양 기능 성분 처방. 클렌징·기본 스킨케어·하이드로겔 마스크 라인.": {"en": "Korean natural origins meet Western functional ingredients. A cleansing, basic skincare, and hydrogel mask line.", "zh": "韩国天然来源+西方功能成分配方。洁面·基础护肤·水凝胶面膜系列。", "ja": "韓国の自然由来＋西洋の機能性成分処方。クレンジング・ベーシックスキンケア・ハイドロゲルマスクのライン。"}, "유통/총판 브랜드": {"en": "Distribution / Wholesale Brands", "zh": "分销/总代理品牌", "ja": "流通／総販ブランド"}, "에이든랩이 국내·일본 유통을 담당하는 K-뷰티 파트너 브랜드.": {"en": "K-beauty partner brands for which Aidenlab handles Korea and Japan distribution.", "zh": "由Aidenlab负责国内·日本分销的K-beauty合作品牌。", "ja": "Aidenlabが国内・日本の流通を担うK-beautyパートナーブランド。"}, "올리브영 메가브랜드. 쿠션·베이스 라인의 국내외 총판.": {"en": "An Olive Young mega-brand. Domestic and overseas distribution for its cushion and base lines.", "zh": "Olive Young超级品牌。气垫·底妆系列的国内外总代理。", "ja": "Olive Youngのメガブランド。クッション・ベースラインの国内外総販。"}, "飲むサラダ — 마시는 샐러드": {"en": "Drinkable Salad", "zh": "饮用沙拉", "ja": "飲むサラダ"}, "일본 시장 진출 워터믹스 라인. 4종 SKU.": {"en": "A water-mix line entering the Japanese market. 4 SKUs.", "zh": "进军日本市场的水冲系列。4个SKU。", "ja": "日本市場進出のウォーターミックスライン。4SKU。"}, "슬림컷 젤리·맥번 코어컷 다이어트 라인. Qoo10 JP 운영.": {"en": "Slim-Cut jelly and Macburn Core-Cut diet lines. Run on Qoo10 JP.", "zh": "Slim-Cut果冻·Macburn Core-Cut减肥系列。Qoo10 JP运营。", "ja": "スリムカットゼリー・マックバーンコアカットのダイエットライン。Qoo10 JPで運用。"}, "PDRN 리주비네이팅 크림. 일본 인플루언서 마케팅 진행 중.": {"en": "PDRN rejuvenating cream. Japan influencer marketing in progress.", "zh": "PDRN赋活面霜。日本网红营销进行中。", "ja": "PDRNリジュビネイティングクリーム。日本インフルエンサーマーケティング進行中。"}, "일본 체험단 마케팅의 표준.": {"en": "The Standard in Japan Sampling Marketing.", "zh": "日本体验团营销的标准。", "ja": "日本体験団マーケティングのスタンダード。"}, "4,000+ 일본 현지 인플루언서가 직접 활동하는 자체 플랫폼. 브랜드 등록 후 3개월 무료, 캠페인은 단 3일 만에 오픈됩니다.": {"en": "Our own platform with 4,000+ active local Japan influencers. Free for 3 months after registration, with campaigns live in just 3 days.", "zh": "4,000+日本本地网红活跃的自有平台。品牌注册后3个月免费，营销活动仅需3天即可上线。", "ja": "4,000+の日本現地インフルエンサーが活動する自社プラットフォーム。ブランド登録後3カ月無料、キャンペーンはわずか3日で開始。"}, "わさび10 바로가기": {"en": "Go to Wasabi10", "zh": "前往Wasabi10", "ja": "わさび10へ"}, "B2B 상담": {"en": "B2B Inquiry", "zh": "B2B咨询", "ja": "B2B相談"}, "일본 현지 인플루언서": {"en": "Local Japan Influencers", "zh": "日本本地网红", "ja": "日本現地インフルエンサー"}, "진행 캠페인": {"en": "Active Campaigns", "zh": "进行中的营销活动", "ja": "進行中キャンペーン"}, "신규 브랜드 무료": {"en": "Free for New Brands", "zh": "新品牌免费", "ja": "新規ブランド無料"}, "지금 진행 중인 일본 캠페인": {"en": "Japan Campaigns Running Now", "zh": "正在进行的日本营销活动", "ja": "現在進行中の日本キャンペーン"}, "わさび10에서 매주 새로운 K-브랜드 캠페인이 오픈됩니다. 실시간 현황을 확인하세요.": {"en": "New K-brand campaigns open every week on Wasabi10. Check the live status.", "zh": "Wasabi10每周上线新的K品牌营销活动。请查看实时状态。", "ja": "わさび10では毎週新しいKブランドのキャンペーンが開始されます。リアルタイムの状況をご確認ください。"}, "3단계로 끝나는 일본 체험단": {"en": "Japan Sampling in 3 Steps", "zh": "3步搞定日本体验团", "ja": "3ステップで完結する日本体験団"}, "브랜드 등록": {"en": "Brand Registration", "zh": "品牌注册", "ja": "ブランド登録"}, "わさび10 비즈니스 계정 가입 (1분), 상품·캠페인 정보 입력": {"en": "Sign up for a Wasabi10 business account (1 min) and enter product and campaign details", "zh": "注册Wasabi10商业账户（1分钟），录入商品·营销活动信息", "ja": "わさび10ビジネスアカウント登録（1分）、商品・キャンペーン情報を入力"}, "인플루언서 매칭": {"en": "Influencer Matching", "zh": "网红匹配", "ja": "インフルエンサーマッチング"}, "AI 추천 + 일본 PM 큐레이션. 평균 24시간 내 후보 풀 확정": {"en": "AI recommendations + Japan PM curation. Candidate pool confirmed within 24 hours on average", "zh": "AI推荐+日本PM精选。平均24小时内确定候选池", "ja": "AI推薦＋日本PMキュレーション。平均24時間以内に候補プールを確定"}, "발송 & 콘텐츠": {"en": "Shipping & Content", "zh": "发货与内容", "ja": "発送＆コンテンツ"}, "일본 풀필먼트에서 제품 발송. 7~14일 내 콘텐츠 업로드": {"en": "Products shipped from Japan fulfillment. Content uploaded within 7–14 days", "zh": "由日本履约中心发货。7~14天内上传内容", "ja": "日本フルフィルメントから製品を発送。7〜14日以内にコンテンツをアップロード"}, "리포트 & 재구매": {"en": "Reporting & Repurchase", "zh": "报告与复购", "ja": "レポート＆リピート"}, "도달·저장·구매전환 대시보드 + 자사몰 재구매 캠페인 연동": {"en": "Reach/saves/conversion dashboard + linked repurchase campaigns on your own store", "zh": "触达·收藏·转化仪表盘 + 自有商城复购营销联动", "ja": "リーチ・保存・購入転換ダッシュボード＋自社モールのリピートキャンペーン連携"}, "지금 등록하면": {"en": "Register Now,", "zh": "现在注册即享", "ja": "今すぐ登録すれば"}, "3개월 무료.": {"en": "3 Months Free.", "zh": "3个月免费。", "ja": "3カ月無料。"}, "わさび10는 에이든랩이 운영하는 자체 플랫폼입니다. 별도 계약 없이 즉시 캠페인을 시작할 수 있습니다.": {"en": "Wasabi10 is Aidenlab's own platform. You can start campaigns immediately with no separate contract.", "zh": "Wasabi10是Aidenlab自营的平台。无需另签合同即可立即启动营销活动。", "ja": "わさび10はAidenlabが運営する自社プラットフォームです。別途契約なしで今すぐキャンペーンを開始できます。"}, "わさび10 무료 등록": {"en": "Register Wasabi10 Free", "zh": "免费注册Wasabi10", "ja": "わさび10 無料登録"}, "Qoo10·Rakuten·@cosme·LIPS의 200+ 캠페인 데이터로 본 일본 뷰티 시장 변화와 K-뷰티의 다음 기회. 50페이지 PDF 무료 다운로드.": {"en": "Shifts in Japan's beauty market and K-beauty's next opportunity, seen through 200+ campaigns on Qoo10·Rakuten·@cosme·LIPS. Free 50-page PDF download.", "zh": "通过Qoo10·Rakuten·@cosme·LIPS的200+营销数据，洞察日本美妆市场变化与K-beauty的下一个机会。50页PDF免费下载。", "ja": "Qoo10・Rakuten・@cosme・LIPSの200+キャンペーンデータで見る日本ビューティー市場の変化とK-beautyの次のチャンス。50ページPDF無料ダウンロード。"}, "Glow u Qoo10 1위 비하인드": {"en": "Behind Glow u's Qoo10 #1", "zh": "Glow u登顶Qoo10第一的幕后", "ja": "Glow u Qoo10 1位の舞台裏"}, "LINE 광고가 다시 뜨는 이유": {"en": "Why LINE Ads Are Trending Again", "zh": "LINE广告再度走红的原因", "ja": "LINE広告が再注目される理由"}, "일본 Z세대의 K-뷰티 소비 패턴 5가지": {"en": "5 K-Beauty Consumption Patterns of Japan's Gen Z", "zh": "日本Z世代的5种K-beauty消费模式", "ja": "日本Z世代のK-beauty消費パターン5選"}, "Meal it 라쿠텐 다이어트 카테고리 톱10 후기": {"en": "How Meal it Hit Top-10 in Rakuten's Diet Category", "zh": "Meal it进入乐天减肥品类前十的复盘", "ja": "Meal it 楽天ダイエットカテゴリートップ10の記録"}, "에이든랩": {"en": "Aidenlab", "zh": "Aidenlab", "ja": "Aidenlab"}, "도쿄 오피스 시부야로 이전": {"en": "Tokyo Office Relocates to Shibuya", "zh": "东京办公室迁至涩谷", "ja": "東京オフィスを渋谷へ移転"}, "트렌드": {"en": "Trend", "zh": "趋势", "ja": "トレンド"}, "2026 @cosme 베스트 코스메 분석": {"en": "2026 @cosme Best Cosme Analysis", "zh": "2026 @cosme最佳美妆分析", "ja": "2026 @cosme ベストコスメ分析"}, "일본 시장은 매주 바뀝니다.": {"en": "Japan's market changes every week.", "zh": "日本市场每周都在变化。", "ja": "日本市場は毎週変わります。"}, "우리는 그 변화를 가장 먼저 봅니다.": {"en": "We see those changes first.", "zh": "我们最先洞察这些变化。", "ja": "私たちはその変化を誰よりも先に捉えます。"}, "200+ 캠페인 데이터, 4,000+ 인플루언서 활동, 일본 현지 MD의 인사이트가 모이는 곳.": {"en": "Where data from 200+ campaigns, 4,000+ influencer activities, and local Japan MD insights come together.", "zh": "汇聚200+营销数据、4,000+网红活动及日本本地MD洞察之地。", "ja": "200+のキャンペーンデータ、4,000+のインフルエンサー活動、日本現地MDのインサイトが集まる場所。"}, "리포트": {"en": "Reports", "zh": "报告", "ja": "レポート"}, "케이스": {"en": "Cases", "zh": "案例", "ja": "ケース"}, "프레스": {"en": "Press", "zh": "媒体报道", "ja": "プレス"}, "에이든랩 소식": {"en": "Aidenlab News", "zh": "Aidenlab动态", "ja": "Aidenlabニュース"}, "경계를 허무는 사람들": {"en": "People Who Break Boundaries", "zh": "打破边界的人", "ja": "境界を壊す人々"}, "과": {"en": "", "zh": "", "ja": "と"}, "함께 합니다.": {"en": "Join us.", "zh": "与我们同行。", "ja": "共に歩みます。"}, "한국·일본 양국 마켓에서 K-브랜드의 글로벌화를 만드는 일. 합리적인 동료와 빠른 의사결정 속에서 일합니다.": {"en": "Driving the globalization of K-brands across the Korean and Japanese markets. Work with reasonable colleagues and fast decision-making.", "zh": "在韩日两国市场推动K品牌全球化。在理性的同事与快速决策中工作。", "ja": "韓国・日本の両市場でKブランドのグローバル化を実現する仕事。合理的な仲間とスピーディーな意思決定の中で働きます。"}, "에이든랩이 일하는 방식": {"en": "How Aidenlab Works", "zh": "Aidenlab的工作方式", "ja": "Aidenlabの働き方"}, "속도가 곧 경쟁력": {"en": "Speed Is Competitiveness", "zh": "速度即竞争力", "ja": "スピードこそ競争力"}, "월 단위가 아닌 주 단위 의사결정. 모든 미팅은 결론과 다음 액션으로 끝납니다.": {"en": "Decisions by the week, not the month. Every meeting ends with a conclusion and a next action.", "zh": "以周为单位而非月为单位决策。每次会议都以结论和下一步行动结束。", "ja": "月単位ではなく週単位の意思決定。すべてのミーティングは結論と次のアクションで終わります。"}, "모든 일은 숫자로": {"en": "Everything in Numbers", "zh": "一切用数字说话", "ja": "すべては数字で"}, "의견 대립은 데이터로 해결. KPI 없는 캠페인은 시작하지 않습니다.": {"en": "Disagreements are settled with data. We don't start campaigns without KPIs.", "zh": "意见分歧用数据解决。没有KPI的营销活动绝不启动。", "ja": "意見の対立はデータで解決。KPIのないキャンペーンは始めません。"}, "한국 + 일본 듀얼": {"en": "Korea + Japan Dual", "zh": "韩国+日本双轨", "ja": "韓国＋日本デュアル"}, "한국 본사·도쿄 지사가 같은 슬랙·노션에서 일합니다. 일본 출장 기회 많음.": {"en": "The Korea HQ and Tokyo branch work in the same Slack and Notion. Plenty of business-trip opportunities to Japan.", "zh": "韩国总部·东京分公司在同一Slack·Notion中协作。赴日出差机会多。", "ja": "韓国本社・東京支社が同じSlack・Notionで働きます。日本出張の機会が多数。"}, "AI는 동료다": {"en": "AI Is a Colleague", "zh": "AI是同事", "ja": "AIは仲間だ"}, "모든 직군이 AI 툴을 일상적으로 사용. 사내 AI 스택 활용 교육 매주 진행.": {"en": "Every role uses AI tools daily. Weekly training on our in-house AI stack.", "zh": "所有岗位日常使用AI工具。每周开展自有AI技术栈应用培训。", "ja": "すべての職種がAIツールを日常的に活用。社内AIスタック活用研修を毎週実施。"}, "채용 중인 포지션": {"en": "Open Positions", "zh": "招聘中的职位", "ja": "募集中のポジション"}, "포지션": {"en": "Position", "zh": "职位", "ja": "ポジション"}, "팀": {"en": "Team", "zh": "团队", "ja": "チーム"}, "고용형태": {"en": "Type", "zh": "雇佣形式", "ja": "雇用形態"}, "지역": {"en": "Location", "zh": "地点", "ja": "勤務地"}, "정규직": {"en": "Full-time", "zh": "正式员工", "ja": "正社員"}, "도쿄": {"en": "Tokyo", "zh": "东京", "ja": "東京"}, "서울": {"en": "Seoul", "zh": "首尔", "ja": "ソウル"}, "Influencer PM (일본어 가능)": {"en": "Influencer PM (Japanese-speaking)", "zh": "Influencer PM（需日语）", "ja": "Influencer PM（日本語可）"}, "서울/도쿄": {"en": "Seoul / Tokyo", "zh": "首尔/东京", "ja": "ソウル/東京"}, "Content Producer (영상/숏폼)": {"en": "Content Producer (Video / Short-form)", "zh": "Content Producer（视频/短视频）", "ja": "Content Producer（動画/ショート）"}, "정규직/계약": {"en": "Full-time / Contract", "zh": "正式/合同", "ja": "正社員/契約"}, "복지·환경": {"en": "Benefits & Environment", "zh": "福利·环境", "ja": "福利厚生・環境"}, "⚙️ 자율 출퇴근": {"en": "⚙️ Flexible Hours", "zh": "⚙️ 弹性上下班", "ja": "⚙️ フレックス勤務"}, "코어타임 11~17시": {"en": "Core hours 11:00–17:00", "zh": "核心时间11~17点", "ja": "コアタイム11〜17時"}, "🏝 일본 워케이션": {"en": "🏝 Japan Workation", "zh": "🏝 日本工作度假", "ja": "🏝 日本ワーケーション"}, "연 1회 도쿄 오피스 워케이션": {"en": "Tokyo office workation once a year", "zh": "每年一次东京办公室工作度假", "ja": "年1回の東京オフィスワーケーション"}, "💰 성과 인센티브": {"en": "💰 Performance Incentives", "zh": "💰 绩效奖励", "ja": "💰 成果インセンティブ"}, "매출 기반 분기 인센티브": {"en": "Quarterly incentives based on sales", "zh": "基于销售的季度奖励", "ja": "売上ベースの四半期インセンティブ"}, "📚 학습비 지원": {"en": "📚 Learning Stipend", "zh": "📚 学习费支持", "ja": "📚 学習費サポート"}, "연 100만원 도서·강의": {"en": "₩1M/year for books and courses", "zh": "每年100万韩元图书·课程", "ja": "年100万ウォンの書籍・講座"}, "🍱 사내 카페테리아": {"en": "🍱 In-House Cafeteria", "zh": "🍱 公司食堂", "ja": "🍱 社内カフェテリア"}, "점심·간식 무제한": {"en": "Unlimited lunch and snacks", "zh": "午餐·零食无限量", "ja": "ランチ・軽食無制限"}, "🎁 자사 제품": {"en": "🎁 Company Products", "zh": "🎁 自家产品", "ja": "🎁 自社製品"}, "PB 브랜드 무상 제공": {"en": "Free PB brand products", "zh": "免费提供自有品牌产品", "ja": "PBブランドを無償提供"}, "시작은": {"en": "It Starts with a", "zh": "始于", "ja": "はじまりは"}, "30분 무료 진단": {"en": "30-Minute Free Diagnosis", "zh": "30分钟免费诊断", "ja": "30分の無料診断"}, "부터.": {"en": ".", "zh": "。", "ja": "から。"}, "일본 시장 적합도, 카테고리별 매출 시뮬레이션, 6개월 로드맵을 무료로 제공합니다. 제출 후 1영업일 내 담당자가 연락드립니다.": {"en": "We provide a Japan market-fit assessment, category-level sales simulation, and a 6-month roadmap for free. A representative will contact you within one business day of submission.", "zh": "免费提供日本市场契合度、分品类销售模拟及6个月路线图。提交后1个工作日内专人联系。", "ja": "日本市場適合度、カテゴリー別売上シミュレーション、6カ月ロードマップを無料で提供します。送信後1営業日以内に担当者がご連絡します。"}, "관심 서비스": {"en": "Service of Interest", "zh": "感兴趣的服务", "ja": "ご関心のサービス"}, "일본 Qoo10 1위 만들기 (Japan Growth Plan)": {"en": "Become #1 on Japan Qoo10 (Japan Growth Plan)", "zh": "打造日本Qoo10第一（Japan Growth Plan）", "ja": "日本Qoo10 1位を獲る（Japan Growth Plan）"}, "런칭 6개월 1억 만들기 (Launch Booster)": {"en": "Hit ¥100M in 6 Months (Launch Booster)", "zh": "上市6个月达成1亿（Launch Booster）", "ja": "ローンチ6カ月で1億（Launch Booster）"}, "국내·일본 유통 입점": {"en": "Korea & Japan Retail Onboarding", "zh": "国内·日本渠道入驻", "ja": "国内・日本の流通出店"}, "기타 / 일반 문의": {"en": "Other / General Inquiry", "zh": "其他 / 一般咨询", "ja": "その他 / 一般問い合わせ"}, "회사명 / 브랜드명": {"en": "Company / Brand Name", "zh": "公司名 / 品牌名", "ja": "会社名 / ブランド名"}, "예: aidenlab": {"en": "e.g., aidenlab", "zh": "例：aidenlab", "ja": "例：aidenlab"}, "담당자명": {"en": "Contact Name", "zh": "联系人姓名", "ja": "ご担当者名"}, "홍길동": {"en": "John Doe", "zh": "张三", "ja": "山田太郎"}, "직책": {"en": "Title", "zh": "职位", "ja": "役職"}, "마케팅 매니저": {"en": "Marketing Manager", "zh": "市场经理", "ja": "マーケティングマネージャー"}, "이메일": {"en": "Email", "zh": "邮箱", "ja": "メール"}, "전화번호": {"en": "Phone Number", "zh": "电话号码", "ja": "電話番号"}, "월매출 / 카테고리": {"en": "Monthly Sales / Category", "zh": "月销售额 / 品类", "ja": "月商 / カテゴリー"}, "월 1천만 미만 / 런칭 준비중": {"en": "Under ₩10M/mo / Preparing to launch", "zh": "月销1千万韩元以下 / 准备上市", "ja": "月1千万ウォン未満 / ローンチ準備中"}, "월 1천~5천만원": {"en": "₩10M–50M/mo", "zh": "月销1千~5千万韩元", "ja": "月1千〜5千万ウォン"}, "월 5천만~3억원": {"en": "₩50M–300M/mo", "zh": "月销5千万~3亿韩元", "ja": "月5千万〜3億ウォン"}, "월 3억 이상": {"en": "Over ₩300M/mo", "zh": "月销3亿韩元以上", "ja": "月3億ウォン以上"}, "문의 내용": {"en": "Message", "zh": "咨询内容", "ja": "お問い合わせ内容"}, "진행하고 싶은 시장, 일정, 예산 등을 자유롭게 적어주세요.": {"en": "Feel free to share the target market, timeline, budget, and anything else.", "zh": "请自由填写希望进入的市场、时间安排、预算等。", "ja": "進出したい市場、スケジュール、予算などを自由にご記入ください。"}, "제출 시 개인정보 처리방침에 동의한 것으로 간주됩니다.": {"en": "By submitting, you are deemed to agree to the Privacy Policy.", "zh": "提交即视为同意隐私政策。", "ja": "送信をもってプライバシーポリシーに同意したものとみなされます。"}, "무료 진단 신청": {"en": "Request Free Diagnosis", "zh": "申请免费诊断", "ja": "無料診断を申し込む"}, "일반 문의": {"en": "General Inquiry", "zh": "一般咨询", "ja": "一般問い合わせ"}, "B2B 파트너십": {"en": "B2B Partnership", "zh": "B2B合作", "ja": "B2Bパートナーシップ"}, "채용 문의": {"en": "Careers Inquiry", "zh": "招聘咨询", "ja": "採用問い合わせ"}, "채용 페이지 →": {"en": "Careers Page →", "zh": "招聘页面 →", "ja": "採用ページ →"}, "프레스 / 미디어": {"en": "Press / Media", "zh": "媒体 / 公关", "ja": "プレス / メディア"}, "전화": {"en": "Phone", "zh": "电话", "ja": "電話"}, "서울 본사": {"en": "Seoul HQ", "zh": "首尔总部", "ja": "ソウル本社"}, "도쿄 지사": {"en": "Tokyo Branch", "zh": "东京分公司", "ja": "東京支社"}, "인플루언서 마케팅": {"en": "Influencer Marketing", "zh": "网红营销", "ja": "インフルエンサーマーケティング"}, "© 2026 (주)에이든랩. All rights reserved.": {"en": "© 2026 Aidenlab Inc. All rights reserved.", "zh": "© 2026 Aidenlab Inc. 版权所有。", "ja": "© 2026 Aidenlab Inc. All rights reserved."}, "대표 강철용 · 사업자번호 464-87-01922 · 서울 마포구 마포대로 19, 14층": {"en": "CEO Kang Cheol-yong · Business Reg. 464-87-01922 · 14F, 19 Mapo-daero, Mapo-gu, Seoul", "zh": "代表 姜哲龙 · 营业执照号 464-87-01922 · 首尔麻浦区麻浦大路19号14层", "ja": "代表 カン・チョルヨン · 事業者番号 464-87-01922 · ソウル麻浦区麻浦大路19、14階"}, "aidenlab 리뉴얼 홈페이지 인터랙티브 와이어프레임. 실사 이미지 적용 버전.": {"en": "aidenlab renewal homepage interactive wireframe. Photographic-image version.", "zh": "aidenlab改版主页交互式线框图。实景图片应用版本。", "ja": "aidenlabリニューアルホームページのインタラクティブワイヤーフレーム。実写画像適用版。"}, "↗ 현재 사이트": {"en": "↗ Current Site", "zh": "↗ 当前网站", "ja": "↗ 現在のサイト"}, "일본 큐텐 카테고리 1위 17건, 런칭 6개월 만에 월매출 1억 돌파.": {"en": "17 #1 rankings in Japan Qoo10 categories, and ¥100M monthly sales within 6 months of launch.", "zh": "日本Qoo10品类第一17次，上市6个月内月销突破1亿。", "ja": "日本Qoo10カテゴリー1位17件、ローンチ6カ月で月商1億突破。"}, "에이든랩은 데이터·AI·인플루언서 네트워크로 K-브랜드의 해외 매출을 만들어내는 단 하나의 파트너입니다.": {"en": "Aidenlab is the single partner that drives overseas revenue for K-brands through data, AI, and influencer networks.", "zh": "Aidenlab是以数据·AI·网红网络为K品牌创造海外销售的唯一合作伙伴。", "ja": "Aidenlabはデータ・AI・インフルエンサーネットワークでKブランドの海外売上を生み出す唯一のパートナーです。"}, "P1-S01 — 히어로 배경은 실제 aidenlab 글로벌 키비주얼(골드 글로브). 우측 콜라주는 Qoo10 1위 트로피 + MEAL IT 제품 캠페인 + わさび10 인플루언서 네트워크로 \"실적·제품·플랫폼\" 3대 강점을 한 화면에 전달.": {"en": "P1-S01 — The hero background is the actual aidenlab global key visual (gold globe). The right-side collage conveys the three core strengths — \"results, product, platform\" — in one view: a Qoo10 #1 trophy + a MEAL IT product campaign + the Wasabi10 influencer network.", "zh": "P1-S01 — 主视觉背景为aidenlab真实全球主视觉（金色地球）。右侧拼贴以Qoo10第一奖杯 + MEAL IT产品营销 + Wasabi10网红网络，将\"业绩·产品·平台\"三大优势一屏呈现。", "ja": "P1-S01 — ヒーロー背景は実際のaidenlabグローバルキービジュアル（ゴールドグローブ）。右側のコラージュはQoo10 1位トロフィー + MEAL IT製品キャンペーン + わさび10インフルエンサーネットワークで「実績・製品・プラットフォーム」の3大強みを一画面で伝達。"}, "모든 사례 보기 →": {"en": "See All Cases →", "zh": "查看全部案例 →", "ja": "すべての事例を見る →"}, "모든 인사이트 →": {"en": "All Insights →", "zh": "全部洞察 →", "ja": "すべてのインサイト →"}, "K-브랜드의 글로벌 매출을 설계합니다.": {"en": "We engineer global revenue for K-brands.", "zh": "为K品牌设计全球销售。", "ja": "Kブランドのグローバル売上を設計します。"}, "미달성시 운영 수수료 환급": {"en": "Operating fee refunded if targets aren't met", "zh": "未达标退还运营费", "ja": "未達成の場合は運用手数料を返金"}, "매출 미달 시 컨설팅 비용 환급": {"en": "Consulting fee refunded if sales targets are missed", "zh": "未达销售目标退还咨询费", "ja": "売上未達の場合はコンサル費を返金"}, "백서 다운로드": {"en": "Download Whitepaper", "zh": "下载白皮书", "ja": "白書をダウンロード"}, "일본 인플루언서 단가 가이드 2026": {"en": "2026 Japan Influencer Rate Guide", "zh": "2026日本网红报价指南", "ja": "2026 日本インフルエンサー単価ガイド"}, "わさび10 1,000번째 캠페인 돌파": {"en": "Wasabi10 surpasses its 1,000th campaign", "zh": "Wasabi10突破第1,000个营销活动", "ja": "わさび10、1,000本目のキャンペーン突破"}, "📄 요구정의서 (RFP)": {"en": "📄 Requirements Document (RFP)", "zh": "📄 需求定义书 (RFP)", "ja": "📄 要求定義書 (RFP)"}, "Qoo10 카테고리 1위 트로피": {"en": "Qoo10 Category #1 Trophy", "zh": "Qoo10品类第一奖杯", "ja": "Qoo10カテゴリー1位トロフィー"}, "MEAL IT 제품 캠페인": {"en": "MEAL IT Product Campaign", "zh": "MEAL IT产品营销", "ja": "MEAL IT 製品キャンペーン"}, "わさび10 일본 인플루언서 네트워크": {"en": "Wasabi10 Japan Influencer Network", "zh": "Wasabi10日本网红网络", "ja": "わさび10 日本インフルエンサーネットワーク"}, "Glow u 사례": {"en": "Glow u Case", "zh": "Glow u 案例", "ja": "Glow u 事例"}, "Meal it 사례": {"en": "Meal it Case", "zh": "Meal it 案例", "ja": "Meal it 事例"}, "Surebase 사례": {"en": "Surebase Case", "zh": "Surebase 案例", "ja": "Surebase 事例"}, "핌플랩 하이드로콜로이드 패치": {"en": "Pimple Lab Hydrocolloid Patch", "zh": "Pimple Lab 水胶体痘痘贴", "ja": "Pimple Lab ハイドロコロイドパッチ"}, "Pimple Lab 캠페인": {"en": "Pimple Lab Campaign", "zh": "Pimple Lab 营销", "ja": "Pimple Lab キャンペーン"}, "Pimple Lab 트러블 케어 젤": {"en": "Pimple Lab Trouble-Care Gel", "zh": "Pimple Lab 祛痘护理凝胶", "ja": "Pimple Lab トラブルケアジェル"}};
+  var ATTRS=['placeholder','title','alt','aria-label','value'];
+  var ORIG=new WeakMap();        // text node -> original string
+  var OATTR=new WeakMap();       // element -> {attr:original}
+  function lt(x){return [ (x.match(/^\s*/)||[''])[0], (x.match(/\s*$/)||[''])[0] ];}
+  function doText(node,loc){
+    var o=ORIG.get(node); if(o===undefined){o=node.nodeValue||'';ORIG.set(node,o);}
+    var key=o.trim(); if(!key) return;
+    var e=MAP[key]; if(!e) return;
+    if(loc==='ko'){ if(node.nodeValue!==o) node.nodeValue=o; return; }
+    var t=e[loc]; if(t==null) return;
+    var p=lt(o); var nv=p[0]+t+p[1];
+    if(node.nodeValue!==nv) node.nodeValue=nv;
+  }
+  function doAttrs(el,loc){
+    var store=OATTR.get(el);
+    for(var i=0;i<ATTRS.length;i++){var a=ATTRS[i];
+      if(!el.hasAttribute(a)) continue;
+      var o=store&&store[a];
+      if(o===undefined){o=el.getAttribute(a)||'';if(!store){store={};OATTR.set(el,store);}store[a]=o;}
+      var key=o.trim(); if(!key) continue;
+      var e=MAP[key]; if(!e) continue;
+      if(loc==='ko'){ if(el.getAttribute(a)!==o) el.setAttribute(a,o); continue; }
+      var t=e[loc]; if(t==null) continue;
+      var p=lt(o); el.setAttribute(a,p[0]+t+p[1]);
+    }
+  }
+  function apply(loc){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+      var p=n.parentElement; if(!p) return NodeFilter.FILTER_REJECT;
+      var tg=p.tagName; if(tg==='SCRIPT'||tg==='STYLE'||tg==='NOSCRIPT') return NodeFilter.FILTER_REJECT;
+      if(p.closest('[data-no-i18n]')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }});
+    var arr=[],n; while(n=w.nextNode()) arr.push(n);
+    for(var i=0;i<arr.length;i++) doText(arr[i],loc);
+    var els=document.querySelectorAll(ATTRS.map(function(a){return '['+a+']';}).join(','));
+    els.forEach(function(el){ if(el.closest('[data-no-i18n]')) return; doAttrs(el,loc); });
+    document.documentElement.lang=loc;
+  }
+  function setActive(loc){
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-loc')===loc);
+    });
+  }
+  function setLoc(loc){ try{localStorage.setItem('locale',loc);}catch(e){} setActive(loc); apply(loc); }
+  function init(){
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.addEventListener('click',function(){ setLoc(b.getAttribute('data-loc')); });
+    });
+    var saved='ko'; try{var v=localStorage.getItem('locale'); if(v&&['ko','en','zh','ja'].indexOf(v)>=0) saved=v;}catch(e){}
+    setLoc(saved);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>aidenlab Renewal — Deliverables Index</title>
+<style>
+:root{--bg:#05060d;--ink:#fff;--ink2:rgba(255,255,255,.7);--ink3:rgba(255,255,255,.45);--line:rgba(255,255,255,.12);--violet:#7C5CFF;--magenta:#FF4FB7;--cyan:#3DE3FF;--amber:#FFC857;--font:"Pretendard","Inter",system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;display:grid;place-items:center;padding:60px 24px}
+body::before,body::after{content:"";position:fixed;width:60vw;height:60vw;border-radius:50%;filter:blur(140px);opacity:.3;pointer-events:none;z-index:-1}
+body::before{top:-20vw;left:-15vw;background:radial-gradient(circle,var(--violet),transparent 60%)}
+body::after{bottom:-25vw;right:-20vw;background:radial-gradient(circle,var(--magenta),transparent 60%)}
+.wrap{max-width:840px;width:100%}
+.badge{display:inline-block;padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);background:rgba(61,227,255,.08)}
+h1{font-size:48px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:24px 0 14px}
+h1 span{background:linear-gradient(120deg,#7C5CFF,#FF4FB7 45%,#FFC857);-webkit-background-clip:text;color:transparent}
+.lead{color:var(--ink2);max-width:620px;font-size:17px;line-height:1.7;margin-bottom:50px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+a.card{display:block;padding:32px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));color:var(--ink);text-decoration:none;transition:transform .25s,border-color .25s,background .25s;position:relative;overflow:hidden}
+a.card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.05)}
+a.card .ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:24px;color:#0a0a14;font-weight:800;margin-bottom:18px;background:linear-gradient(135deg,#7C5CFF,#FF4FB7)}
+a.card.c2 .ico{background:linear-gradient(135deg,#3DE3FF,#7C5CFF 60%,#FF4FB7)}
+a.card h2{font-size:24px;margin:0 0 6px;letter-spacing:-.01em}
+a.card .meta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+a.card.c2 .meta{color:var(--magenta)}
+a.card p{margin:14px 0 0;color:var(--ink2);font-size:14px}
+a.card .arrow{position:absolute;top:32px;right:32px;color:var(--ink3);font-size:18px;transition:transform .2s,color .2s}
+a.card:hover .arrow{transform:translateX(4px);color:var(--ink)}
+.note{margin-top:40px;padding:24px;border-radius:16px;border:1px dashed var(--line);color:var(--ink2);font-size:13px}
+.note b{color:var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:36px;color:var(--ink2);font-size:13px}
+.brand .m{width:24px;height:24px;border-radius:6px;background:linear-gradient(120deg,#7C5CFF,#FF4FB7 45%,#FFC857);box-shadow:0 0 14px rgba(124,92,255,.5)}
+.foot{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--ink3);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot a{color:var(--ink2);text-decoration:none}
+@media (max-width:680px){.grid{grid-template-columns:1fr}h1{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="m"></span> aidenlab Renewal · Deliverables Bundle</div>
+  <span class="badge">v2.0 · 2026.05.17 · with real assets</span>
+  <h1>에이든랩 홈페이지 리뉴얼<br/><span>기획·디자인 산출물</span></h1>
+  <p class="lead">두 개의 인터랙티브 HTML 문서. 프로토타입은 <b>실제 aidenlab·わさび10 이미지를 적용한 v2.0</b>으로 업데이트되었습니다. 우측 RFP는 사업·기획·디자인 요구사항을 통합한 매뉴얼입니다.</p>
+
+  <div class="grid">
+    <a class="card" href="./prototype.html">
+      <div class="ico">📐</div>
+      <div class="meta">DELIVERABLE 01</div>
+      <h2>와이어프레임 프로토타입 v2</h2>
+      <p>9개 페이지 · 다크/그라데이션 톤 · 클릭 가능한 인터랙티브 화면. <b>실 PB 제품·캠페인 이미지 60+ 적용.</b></p>
+      <span class="arrow">→</span>
+    </a>
+    <a class="card c2" href="./rfp.html">
+      <div class="ico">📄</div>
+      <div class="meta">DELIVERABLE 02</div>
+      <h2>기획·디자인 요구정의서</h2>
+      <p>12개 챕터 · 페이지별 사양 · 이미지 컨셉 · 디자인 시스템 · 일정 · 검수 기준까지 포함한 통합 매뉴얼.</p>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div class="note">
+    <b>활용 방법.</b> 이해관계자 미팅 시 프로토타입을 우선 공유해 시각적 합의를 빠르게 만들고, 이후 RFP를 외주 디자인·개발사 또는 사내 팀에 전달해 실행 단계로 진입합니다. 두 문서는 같은 디자인 토큰(컬러·타이포·간격)을 공유합니다.
+  </div>
+
+  <div class="foot">
+    <div>(주)에이든랩 내부 검토용 · Senior Web Planner</div>
+    <div><a href="https://www.aidenlab.io" target="_blank">현재 사이트 →</a> · <a href="https://wasabi10.com" target="_blank">わさび10 →</a></div>
+  </div>
+</div>
+</body>
+</html>
