@@ -315,6 +315,12 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
 .field input,.field textarea,.field select{width:100%;padding:14px 16px;border:1px solid var(--line-2);background:rgba(0,0,0,.3);color:var(--ink-0);border-radius:12px;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent-violet)}
 .field textarea{min-height:120px;resize:vertical}
+.field input[type=file]{padding:10px 12px;cursor:pointer}
+.field input[type=file]::file-selector-button{margin-right:12px;padding:8px 14px;border:1px solid var(--line-2);border-radius:8px;background:rgba(255,255,255,.06);color:var(--ink-1);font-family:inherit;font-size:13px;cursor:pointer;transition:background .2s}
+.field input[type=file]::file-selector-button:hover{background:rgba(255,255,255,.12)}
+.form-status{margin-top:14px;font-size:14px;min-height:1em;line-height:1.5}
+.form-status[data-type="ok"]{color:#34d399}
+.form-status[data-type="err"]{color:#fb7185}
 .contact-info .row{display:flex;gap:18px;padding:24px 0;border-top:1px solid var(--line)}
 .contact-info .row:first-child{border-top:0}
 .contact-info .row .ico{width:40px;height:40px;border-radius:10px;background:rgba(124,92,255,.16);display:grid;place-items:center;color:var(--accent-violet);font-size:18px;font-weight:700;flex-shrink:0}
@@ -1347,9 +1353,9 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
   <section style="padding-top:0">
     <div class="wrap">
       <div class="contact-grid">
-        <form class="contact-form" onsubmit="event.preventDefault();alert('상담 신청이 접수되었습니다. 1영업일 내에 연락드리겠습니다.');">
+        <form class="contact-form" id="contactForm">
           <div class="field"><label>관심 서비스</label>
-            <select>
+            <select name="service">
               <option>일본 Qoo10 1위 만들기 (Japan Growth Plan)</option>
               <option>런칭 6개월 1억 만들기 (Launch Booster)</option>
               <option>글로벌 인플루언서 마케팅</option>
@@ -1360,26 +1366,33 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
               <option>기타 / 일반 문의</option>
             </select>
           </div>
-          <div class="field"><label>회사명 / 브랜드명</label><input placeholder="예: aidenlab" /></div>
+          <div class="field"><label>회사명 / 브랜드명</label><input name="company" placeholder="예: aidenlab" /></div>
           <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div><label>담당자명</label><input placeholder="홍길동" /></div>
-            <div><label>직책</label><input placeholder="마케팅 매니저" /></div>
+            <div><label>담당자명</label><input name="contact_name" placeholder="홍길동" /></div>
+            <div><label>직책</label><input name="position" placeholder="마케팅 매니저" /></div>
           </div>
           <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div><label>이메일</label><input type="email" placeholder="hello@brand.com" /></div>
-            <div><label>전화번호</label><input placeholder="010-0000-0000" /></div>
+            <div><label>이메일</label><input name="email" type="email" placeholder="hello@brand.com" /></div>
+            <div><label>전화번호</label><input name="phone" placeholder="010-0000-0000" /></div>
           </div>
           <div class="field"><label>월매출 / 카테고리</label>
-            <select>
+            <select name="revenue">
               <option>월 1천만 미만 / 런칭 준비중</option>
               <option>월 1천~5천만원</option>
               <option>월 5천만~3억원</option>
               <option>월 3억 이상</option>
             </select>
           </div>
-          <div class="field"><label>문의 내용</label><textarea placeholder="진행하고 싶은 시장, 일정, 예산 등을 자유롭게 적어주세요."></textarea></div>
+          <div class="field"><label>문의 내용</label><textarea name="message" placeholder="진행하고 싶은 시장, 일정, 예산 등을 자유롭게 적어주세요."></textarea></div>
+          <div class="field"><label>브랜드 정보 파일 (선택)</label>
+            <input name="brand_file" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.key,.xls,.xlsx,.csv,.zip,.png,.jpg,.jpeg" />
+            <div style="font-size:12px;color:var(--ink-3);margin-top:6px">회사소개서·브랜드 자료 등 — 최대 25MB (PDF·PPT·XLS·이미지·ZIP)</div>
+          </div>
+          <!-- 스팸봇 차단용 허니팟: 사람에게는 보이지 않음 -->
+          <div style="position:absolute;left:-9999px" aria-hidden="true"><label>이 칸은 비워두세요<input name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
           <div class="field" style="font-size:12px;color:var(--ink-3)">제출 시 개인정보 처리방침에 동의한 것으로 간주됩니다.</div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">무료 진단 신청 <span class="arr">→</span></button>
+          <button type="submit" id="contactSubmit" class="btn btn-primary" style="width:100%;justify-content:center">무료 진단 신청 <span class="arr">→</span></button>
+          <div id="contactStatus" class="form-status" role="status" aria-live="polite"></div>
         </form>
         <div class="contact-info">
           <div class="row"><div class="ico">📧</div><div><strong>일반 문의</strong><p class="muted" style="font-size:13px;margin:0">admin@aidenlab.io</p></div></div>
@@ -1430,6 +1443,43 @@ document.addEventListener('click',(e)=>{if(!btn.contains(e.target)&&!panel.conta
 document.querySelectorAll('.svc-tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.svc-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.svc-pane').forEach(p=>p.style.display='none');document.querySelector('.svc-pane[data-pane="'+t.dataset.tab+'"]').style.display='';})});
 document.querySelectorAll('.case-filter').forEach(group=>{group.querySelectorAll('.chip').forEach(c=>{c.addEventListener('click',()=>{group.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');const filter=c.textContent.trim();const wrap=group.closest('.wrap');wrap.querySelectorAll('.case-big, .news').forEach(card=>{if(filter==='전체'){card.style.display='';}else{if(card.textContent.includes(filter)){card.style.display='';}else{card.style.display='none';}}});})})});
 document.querySelectorAll('.openings .row:not(:first-child)').forEach(row => { row.style.cursor = 'pointer'; row.addEventListener('click', () => { alert('상세 요강은 준비 중입니다.'); }); });
+
+/* ===== 상담폼 → Cloudflare Worker(R2 저장 + Lark 알림) ===== */
+/* ↓↓↓ contact-worker 배포 후 출력된 Worker 주소로 교체하세요 ↓↓↓ */
+const CONTACT_ENDPOINT = "https://PASTE-YOUR-WORKER-URL-HERE.workers.dev";
+(function(){
+  const form = document.getElementById('contactForm');
+  if(!form) return;
+  const statusEl = document.getElementById('contactStatus');
+  const submitBtn = document.getElementById('contactSubmit');
+  const setStatus = (msg,type)=>{ statusEl.textContent = msg; statusEl.dataset.type = type||''; };
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fileInput = form.querySelector('input[type="file"]');
+    if(fileInput && fileInput.files[0] && fileInput.files[0].size > 25*1024*1024){
+      setStatus('첨부 파일이 25MB를 초과합니다. 더 작은 파일로 올려주세요.','err'); return;
+    }
+    if(!CONTACT_ENDPOINT || CONTACT_ENDPOINT.includes('PASTE-YOUR-WORKER-URL')){
+      setStatus('폼 전송 설정이 아직 완료되지 않았습니다. (관리자: Worker 주소 입력 필요)','err'); return;
+    }
+    const original = submitBtn.innerHTML;
+    submitBtn.disabled = true; submitBtn.innerHTML = '전송 중…'; setStatus('','');
+    try{
+      const res = await fetch(CONTACT_ENDPOINT, { method:'POST', body:new FormData(form) });
+      const data = await res.json().catch(()=>({}));
+      if(res.ok && data.ok){
+        form.reset();
+        setStatus('✅ 상담 신청이 접수되었습니다. 1영업일 내에 연락드리겠습니다.','ok');
+      }else{
+        setStatus('전송에 실패했습니다. 잠시 후 다시 시도하시거나 admin@aidenlab.io 로 연락 주세요.','err');
+      }
+    }catch{
+      setStatus('네트워크 오류로 전송하지 못했습니다. 잠시 후 다시 시도해 주세요.','err');
+    }finally{
+      submitBtn.disabled = false; submitBtn.innerHTML = original;
+    }
+  });
+})();
 </script>
 <script>/* i18n-injected */
 (function(){

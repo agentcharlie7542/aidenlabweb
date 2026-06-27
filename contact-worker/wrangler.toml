@@ -1,0 +1,16 @@
+name = "aidenlab-contact-relay"
+main = "worker.js"
+compatibility_date = "2026-06-01"
+
+# R2 버킷 바인딩 — 배포 전 `wrangler r2 bucket create aidenlab-brand-files` 로 생성
+[[r2_buckets]]
+binding = "BRAND_FILES"
+bucket_name = "aidenlab-brand-files"
+
+[vars]
+# 폼이 올라간 도메인(여러 개면 쉼표). 운영 도메인을 쓰면 외부 스팸 POST를 막아줍니다.
+ALLOWED_ORIGIN = "https://agentcharlie7542.github.io"
+
+# 아래 두 값은 코드에 두지 말고 시크릿으로 등록하세요(웹훅 주소엔 토큰이 들어 있음):
+#   wrangler secret put LARK_WEBHOOK_URL      ← Lark 그룹 커스텀봇 웹훅 주소
+#   wrangler secret put LARK_SIGN_SECRET      ← (봇에 "서명 검증"을 켰을 때만)
