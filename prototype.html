@@ -311,6 +311,13 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
 .team-filter .chip:hover{color:var(--ink-0);border-color:var(--ink-3)}
 .team-filter .chip.active{background:var(--grad-cool);color:#05060d;border-color:transparent;font-weight:600}
 .openings a.row{color:inherit;text-decoration:none}
+.office-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:36px}
+.office{padding:20px 18px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.02);transition:border-color .25s,transform .25s}
+.office:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.office .flag{font-size:22px;line-height:1}
+.office .ctry{font-weight:700;color:var(--ink-0);margin-top:10px;font-size:15px}
+.office .city{font-size:12px;color:var(--accent-cyan);letter-spacing:.04em;margin-top:2px}
+.office .addr{font-size:11.5px;color:var(--ink-3);margin-top:10px;line-height:1.55}
 .openings{margin-top:60px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
 .openings .row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 60px;padding:20px 28px;border-top:1px solid var(--line);align-items:center;transition:background .2s;cursor:pointer}
 .openings .row:first-child{border-top:0;background:rgba(255,255,255,.04);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
@@ -348,7 +355,7 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
 
 @media (max-width:900px){
   .hero-inner,.bridge,.svc-detail,.contact-grid{grid-template-columns:1fr}
-  .svc-grid,.case-grid,.proc,.team-grid,.case-list,.brand-grid,.career-grid,.news-grid,.campaign-grid,.career-stats{grid-template-columns:1fr 1fr}
+  .svc-grid,.case-grid,.proc,.team-grid,.case-list,.brand-grid,.career-grid,.news-grid,.campaign-grid,.career-stats,.office-grid{grid-template-columns:1fr 1fr}
   .sig-grid,.foot-grid{grid-template-columns:1fr}
   .wasabi-stats{grid-template-columns:1fr 1fr}
   .brand-card{grid-template-columns:1fr;min-height:auto}
@@ -410,15 +417,15 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
     <div class="wrap" style="position:relative;z-index:1">
       <div class="hero-inner">
         <div>
-          <div class="eyebrow"><span class="dot"></span>GLOBAL MARKETING × COMMERCE PARTNER</div>
+          <div class="eyebrow"><span class="dot"></span>K-BRAND, BREAKING BORDERS</div>
           <h1 style="margin-top:24px">
             <span class="l1">K-브랜드의</span>
             <span class="l1 grad-text">글로벌 매출을</span>
             <span class="l1">설계합니다.</span>
           </h1>
           <p class="muted" style="margin-top:24px;font-size:18px;max-width:540px">
-            일본 큐텐 카테고리 1위 17건, 런칭 6개월 만에 월매출 1억 돌파. <br/>
-            에이든랩은 데이터·AI·인플루언서 네트워크로 K-브랜드의 해외 매출을 만들어내는 단 하나의 파트너입니다.
+            일본 큐텐·라쿠텐 카테고리 1위 다수, 런칭 6개월 만에 월매출 1억 돌파. <br/>
+            한국·일본·중국·미국·싱가포르 <strong>5개국 거점</strong>에서 데이터·AI·인플루언서 네트워크로 K-브랜드의 글로벌 매출을 만들어내는 파트너입니다.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#contact" data-page="contact">무료 진단 받기 <span class="arr">→</span></a>
@@ -436,7 +443,7 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
         <div class="hero-art" aria-hidden="true">
           <div class="photo-wrap">
             <div class="img featured">
-              <img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/8694aec7b8058.png" alt="Qoo10 카테고리 1위 트로피" />
+              <img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/1dbf614fc7c33.png" alt="에이든랩 고객사 아이힐(iHEAL) 2025 Qoo10 Awards 수상" />
             </div>
             <div class="img">
               <img src="https://cdn.imweb.me/thumbnail/20260410/553afd2222022.png" alt="MEAL IT 제품 캠페인" />
@@ -700,7 +707,7 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
       <div class="foot-grid">
         <div>
           <div class="brand" data-no-i18n><img src="aidenlab%20logo%20.png" alt="Aiden Lab" class="brand-img brand-img-sm" /></div>
-          <p class="dim" style="font-size:13px;margin-top:14px;max-width:300px">K-브랜드의 글로벌 매출을 설계합니다. <br/>Seoul · Tokyo</p>
+          <p class="dim" style="font-size:13px;margin-top:14px;max-width:320px">K-Brand, Breaking Borders. <br/>Seoul · Tokyo · Shanghai · Irvine · Singapore</p>
           <p class="dim" style="font-size:12px;margin-top:24px">admin@aidenlab.io · 02-6737-1922</p>
         </div>
         <div><h4>Services</h4><ul><li><a href="#services" data-page="services">인플루언서 마케팅</a></li><li><a href="#services" data-page="services">퍼포먼스 마케팅</a></li><li><a href="#services" data-page="services">이커머스 운영대행</a></li><li><a href="#services" data-page="services">사입 &amp; 유통</a></li></ul></div>
@@ -708,8 +715,8 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
         <div><h4>Platforms</h4><ul><li><a href="#wasabi10" data-page="wasabi10">わさび10</a></li><li><a href="#news" data-page="news">Insights</a></li><li><a href="#contact" data-page="contact">Contact</a></li></ul></div>
       </div>
       <div class="foot-bottom">
-        <div>© 2026 (주)에이든랩. All rights reserved.</div>
-        <div>대표 강철용 · 사업자번호 464-87-01922 · 서울 마포구 마포대로 19, 14층</div>
+        <div>© 2026 (주)에이든랩. All rights reserved. · 서울 마포구 마포대로 19, 14층 (신화빌딩)</div>
+        <div>대표 강철용 · 사업자등록번호 464-87-01922 · 통신판매업신고 2024-서울마포-1234 · 호스팅 (주)아임웹</div>
       </div>
     </div>
   </footer>
@@ -721,7 +728,7 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
     <div class="wrap">
       <div class="eyebrow"><span class="dot"></span>About aidenlab</div>
       <h1 style="margin-top:24px">한국의 좋은 브랜드가<br/><span class="grad-text">세계의 좋은 브랜드</span>가 되도록.</h1>
-      <p class="muted" style="max-width:720px;margin:24px auto 0;font-size:18px">에이든랩은 K-브랜드와 글로벌 소비자 사이의 거리를 줄이는 일을 합니다. 데이터·AI·현지 네트워크로 매출이라는 결과를 만들어냅니다.</p>
+      <p class="muted" style="max-width:740px;margin:24px auto 0;font-size:18px">에이든랩은 여러 국가에 해외 법인을 두고 각 지역 특성에 맞춘 전략으로 K-브랜드의 가치를 세계에 연결하는 <strong>Global Partner</strong>입니다. 브랜드 전략부터 마케팅·유통까지 통합 글로벌 서비스를 제공합니다.</p>
       <div class="about-hero-img"><img src="https://cdn.imweb.me/thumbnail/20260409/10284acd42181.png" alt="aidenlab 글로벌 비즈니스" /></div>
     </div>
   </section>
@@ -733,6 +740,21 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
         <div class="val"><div class="num">01 / VALUE</div><h3>숫자로 증명한다</h3><p class="muted">정성적 보고서가 아닌 매출·랭킹·ROAS로 말합니다. 모든 캠페인은 측정 가능한 KPI를 선언하고 시작합니다.</p></div>
         <div class="val"><div class="num">02 / VALUE</div><h3>현지에서 만든다</h3><p class="muted">도쿄·시부야 거점 + 4,000명 일본 현지 크리에이터 + 일본인 MD·CS 인력. 번역이 아닌 현지 기획.</p></div>
         <div class="val"><div class="num">03 / VALUE</div><h3>AI로 가속한다</h3><p class="muted">인플루언서 매칭, 콘텐츠 생성, 광고 입찰, 리포팅까지 자체 AI 스택으로 30배 빠르게 운영합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>Global Network</div>
+      <h2 style="margin-top:18px">5개국 거점, 하나의 팀</h2>
+      <p class="muted" style="max-width:680px">한국 본사를 중심으로 일본·중국·미국·싱가포르에 해외 법인을 두고, 각 지역 특성에 맞춘 전략적 비즈니스를 전개합니다.</p>
+      <div class="office-grid">
+        <div class="office"><div class="flag">🇰🇷</div><div class="ctry">한국 본사</div><div class="city">SEOUL</div><div class="addr">서울 마포구 마포대로 19, 14층 (신화빌딩)</div></div>
+        <div class="office"><div class="flag">🇯🇵</div><div class="ctry">일본</div><div class="city">TOKYO</div><div class="addr">Miyata Bldg. 1-12-14 Jinnan, Shibuya, Tokyo</div></div>
+        <div class="office"><div class="flag">🇨🇳</div><div class="ctry">중국</div><div class="city">SHANGHAI</div><div class="addr">Shanghai Mart, 2299 Yan'an West Rd, Changning</div></div>
+        <div class="office"><div class="flag">🇺🇸</div><div class="ctry">미국</div><div class="city">IRVINE, CA</div><div class="addr">780 Roosevelt Ste 210, Irvine, CA</div></div>
+        <div class="office"><div class="flag">🇸🇬</div><div class="ctry">싱가포르</div><div class="city">SINGAPORE</div><div class="addr">111 Somerset Road #06-01A, Singapore 238164</div></div>
       </div>
     </div>
   </section>
@@ -1100,7 +1122,7 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
     <div class="wrap">
       <div class="eyebrow">Partner Brands · Distribution</div>
       <h2 style="margin-top:18px">유통/총판 브랜드</h2>
-      <p class="muted">에이든랩이 국내·일본 유통을 담당하는 K-뷰티 파트너 브랜드.</p>
+      <p class="muted">에이든랩이 국내·일본 유통을 담당하는 K-뷰티 파트너 브랜드. <strong>Serumkind · Surebase · @trendseoul</strong>를 비롯한 브랜드의 사입·총판·해외 입점을 운영합니다.</p>
       <div class="brand-grid">
         <div class="brand-card">
           <div class="brand-vis"><img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="Surebase" /></div>
@@ -1171,6 +1193,9 @@ footer{border-top:1px solid var(--line);padding:80px 0 40px;margin-top:80px;back
         <div class="stat"><div class="num">10M+</div><div class="lbl">누적 팔로워</div></div>
         <div class="stat"><div class="num">200+</div><div class="lbl">진행 캠페인</div></div>
         <div class="stat"><div class="num">3개월</div><div class="lbl">신규 브랜드 무료</div></div>
+      </div>
+      <div style="max-width:430px;margin:48px auto 0;border-radius:20px;overflow:hidden;border:1px solid rgba(255,79,183,.35);box-shadow:0 30px 80px -30px rgba(255,79,183,.45)">
+        <img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/360e9e188c325.png" alt="wasabi10 공식 출시 — AI 기반 일본 인플루언서 마케팅 플랫폼: AI 성과 리포트 제공, 1,000만 팔로워 인플루언서 즉시 연결, 캠페인 생성 즉시 노출" style="width:100%;display:block" loading="lazy" />
       </div>
     </div>
   </section>
