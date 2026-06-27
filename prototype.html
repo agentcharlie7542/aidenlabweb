@@ -1446,7 +1446,7 @@ document.querySelectorAll('.openings .row:not(:first-child)').forEach(row => { r
 
 /* ===== 상담폼 → Cloudflare Worker(R2 저장 + Lark 알림) ===== */
 /* ↓↓↓ contact-worker 배포 후 출력된 Worker 주소로 교체하세요 ↓↓↓ */
-const CONTACT_ENDPOINT = "https://PASTE-YOUR-WORKER-URL-HERE.workers.dev";
+const CONTACT_ENDPOINT = "https://aidenlab-contact-relay.agentkang0331.workers.dev";
 (function(){
   const form = document.getElementById('contactForm');
   if(!form) return;
