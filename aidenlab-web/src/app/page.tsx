@@ -133,15 +133,15 @@ export default async function HomePage() {
         <div className="hero-art" aria-hidden="true">
           <div className="photo-wrap">
             <div className="img featured">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="Glow u 헤어 스타일링 툴" />
             </div>
             <div className="img">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="Meal it 단백질 셰이크" />
             </div>
             <div className="img">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/25/thumbnails/92867572135641955824.jpg" alt="Surebase 쿠션 파운데이션" />
             </div>
           </div>
@@ -152,7 +152,6 @@ export default async function HomePage() {
         </div>
       </div>
     </div>
-    <div className="note wrap" style={{marginTop: '60px'}}>P1-S01 — 히어로 비주얼은 실제 PB 브랜드 제품 콜라주(Glow u 헤어툴 + Meal it 셰이크 + Surebase 쿠션). 중앙 플로팅 배지로 "Qoo10 카테고리 1위" 즉시 인식.</div>
   </section>
 
   {/*  LOGO MARQUEE  */}
@@ -210,6 +209,7 @@ export default async function HomePage() {
           title="글로벌 인플루언서 마케팅"
           description="일본 2만+ 인플루언서 네트워크와 AI 매칭으로 ROI 입증된 시딩·콘텐츠 캠페인."
           linkText="Marketing →"
+          href="/services#influencer"
         />
         <ServiceCard
           isCool
@@ -217,12 +217,14 @@ export default async function HomePage() {
           title="글로벌 이커머스 운영대행"
           description="Qoo10·Rakuten·Amazon JP·Yahoo쇼핑 입점·MD협업·CS·반품까지 풀스택."
           linkText="E-Commerce →"
+          href="/services#ecommerce"
         />
         <ServiceCard
           iconSrc="https://cdn.imweb.me/upload/S20230516de7df0b488e73/5d42d6545c567.png"
           title="PB 브랜드 개발 &amp; 유통"
           description="Meal it·Glow u·Pimple Lab·Maldda — 직접 만들고 키운 브랜드 4종."
           linkText="Brands →"
+          href="/brands"
         />
         <ServiceCard
           isCool
@@ -230,6 +232,7 @@ export default async function HomePage() {
           title="상품 사입 &amp; 총판"
           description="국내 올리브영 1,300+ 매장 / 일본 드럭스토어 입점 유통망 보유."
           linkText="Distribution →"
+          href="/services#distribution"
         />
       </div>
     </div>
@@ -261,20 +264,20 @@ export default async function HomePage() {
                 <div className="menu">≡</div>
               </div>
               <div className="product-card" style={{aspectRatio: '1.1/1'}}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                { }
                 <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/28/thumbnails/07962524302750844486.png" alt="Pureka" />
                 <div className="price">3,000 ¥P</div>
                 <div className="title">飲むサラダ Pureka ウォーターミックス4種</div>
               </div>
               <div className="grid2">
                 <div className="product-card">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  { }
                   <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="Glow u" />
                   <div className="price">8,900 ¥P</div>
                   <div className="title">Glow u 韓国ヘアアイロン</div>
                 </div>
                 <div className="product-card">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  { }
                   <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="MEAL IT" />
                   <div className="price">3,900 ¥P</div>
                   <div className="title">MEAL IT 置き換えプロテイン</div>
@@ -348,6 +351,7 @@ export default async function HomePage() {
             title={insight.title}
             description={insight.description}
             dateStr={(insight as Insight & { dateStr?: string }).dateStr || insight.publishedAt}
+            href={(insight as Insight).pdfUrl || '/news'}
           />
         ))}
       </div>

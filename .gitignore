@@ -23,3 +23,9 @@ Thumbs.db
 
 # Sanity
 **/.sanity/
+
+# Cloudflare Wrangler cache/build
+**/.wrangler/
+
+# Local assets (spreadsheets, etc.)
+assets/*.xlsx

@@ -31,7 +31,7 @@ export default function BrandCard({
   return (
     <div className={`brand-card ${variantClass}`.trim()}>
       <div className="brand-vis">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src={imageSrc} alt="Brand Visual" />
       </div>
       <div className="brand-body">

@@ -1,6 +1,4 @@
 
-import Link from 'next/link';
-
 export default function Wasabi10Page() {
   return (
     <main className="page active">

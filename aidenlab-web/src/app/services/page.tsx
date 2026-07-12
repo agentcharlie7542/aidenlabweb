@@ -1,14 +1,29 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Button from '@/components/ui/Button';
 import SignatureCard from '@/components/cards/SignatureCard';
 
+const SERVICE_TABS = [
+  { id: 'influencer', label: '글로벌 인플루언서' },
+  { id: 'performance', label: '퍼포먼스 마케팅' },
+  { id: 'ecommerce', label: '이커머스 운영대행' },
+  { id: 'distribution', label: '사입 & 유통' },
+  { id: 'signature', label: '시그니처 프로그램' },
+];
+
 export default function ServicesPage() {
-  const handleTermsClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    alert('환급 보장 조건 상세 페이지는 준비 중입니다.');
+  const [activeTab, setActiveTab] = useState('influencer');
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (SERVICE_TABS.some((tab) => tab.id === hash)) setActiveTab(hash);
+  }, []);
+
+  const selectTab = (id: string) => {
+    setActiveTab(id);
+    window.history.replaceState(null, '', `#${id}`);
   };
 
   return (
@@ -19,18 +34,27 @@ export default function ServicesPage() {
       <Eyebrow>Services</Eyebrow>
       <h1 style={{marginTop: '24px'}}>하나의 파트너,<br/><span className="cool-text">통합 글로벌 솔루션</span></h1>
       <p className="muted" style={{maxWidth: '680px', marginTop: '24px', fontSize: '18px'}}>전략 · 마케팅 · 운영 · 유통까지. 에이전시 4곳에 흩어진 일을 한 팀이 합니다.</p>
-      <div className="svc-tab-wrap">
-        <button className="svc-tab active" data-tab="influencer">글로벌 인플루언서</button>
-        <button className="svc-tab" data-tab="performance">퍼포먼스 마케팅</button>
-        <button className="svc-tab" data-tab="ecommerce">이커머스 운영대행</button>
-        <button className="svc-tab" data-tab="distribution">사입 &amp; 유통</button>
-        <button className="svc-tab" data-tab="signature">시그니처 프로그램</button>
+      <div className="svc-tab-wrap" role="tablist" aria-label="서비스 선택">
+        {SERVICE_TABS.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            className={`svc-tab ${activeTab === tab.id ? 'active' : ''}`}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            aria-controls={`panel-${tab.id}`}
+            id={`tab-${tab.id}`}
+            onClick={() => selectTab(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
     </div>
   </section>
 
   <div className="wrap">
-    <div className="svc-detail svc-pane" data-pane="influencer">
+    <div id="panel-influencer" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-influencer" hidden={activeTab !== 'influencer'}>
       <div>
         <div className="eyebrow">01 · INFLUENCER MARKETING</div>
         <h2 style={{marginTop: '18px'}}>일본 2만+ 인플루언서, <br/>AI로 매칭합니다.</h2>
@@ -44,12 +68,12 @@ export default function ServicesPage() {
         <Button variant="primary" href="/contact" hasArrow style={{marginTop: '30px'}}>상담 신청</Button>
       </div>
       <div className="vis">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/81c6524a4c1c2.png" alt="" />
       </div>
     </div>
 
-    <div className="svc-detail svc-pane" data-pane="performance" style={{display: 'none'}}>
+    <div id="panel-performance" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-performance" hidden={activeTab !== 'performance'}>
       <div>
         <div className="eyebrow">02 · PERFORMANCE MARKETING</div>
         <h2 style={{marginTop: '18px'}}>일본 광고 효율,<br/>국내 최고 수준.</h2>
@@ -63,12 +87,12 @@ export default function ServicesPage() {
         <Button variant="primary" href="/contact" hasArrow style={{marginTop: '30px'}}>상담 신청</Button>
       </div>
       <div className="vis">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src="https://cdn.imweb.me/thumbnail/20260409/b4d1a0dca336b.png" alt="" />
       </div>
     </div>
 
-    <div className="svc-detail svc-pane" data-pane="ecommerce" style={{display: 'none'}}>
+    <div id="panel-ecommerce" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-ecommerce" hidden={activeTab !== 'ecommerce'}>
       <div>
         <div className="eyebrow">03 · GLOBAL E-COMMERCE</div>
         <h2 style={{marginTop: '18px'}}>Qoo10 · Rakuten · Amazon JP<br/>풀스택 운영대행.</h2>
@@ -82,12 +106,12 @@ export default function ServicesPage() {
         <Button variant="primary" href="/contact" hasArrow style={{marginTop: '30px'}}>상담 신청</Button>
       </div>
       <div className="vis">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src="https://cdn.imweb.me/thumbnail/20260410/ca0e612af256b.png" alt="" />
       </div>
     </div>
 
-    <div className="svc-detail svc-pane" data-pane="distribution" style={{display: 'none'}}>
+    <div id="panel-distribution" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-distribution" hidden={activeTab !== 'distribution'}>
       <div>
         <div className="eyebrow">04 · DISTRIBUTION</div>
         <h2 style={{marginTop: '18px'}}>국내 1,300+ 매장,<br/>일본 드럭스토어까지.</h2>
@@ -101,12 +125,12 @@ export default function ServicesPage() {
         <Button variant="primary" href="/contact" hasArrow style={{marginTop: '30px'}}>상담 신청</Button>
       </div>
       <div className="vis">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src="https://cdn.imweb.me/thumbnail/20260409/cb541ecc20362.jpeg" alt="" />
       </div>
     </div>
 
-    <div className="svc-pane" data-pane="signature" style={{display: 'none'}}>
+    <div id="panel-signature" className="svc-pane" role="tabpanel" aria-labelledby="tab-signature" hidden={activeTab !== 'signature'}>
       <div className="eyebrow">SIGNATURE PROGRAM</div>
       <h2 style={{marginTop: '18px'}}>간판 프로그램 두 가지</h2>
       <div className="sig-grid" style={{marginTop: '36px'}}>
@@ -121,7 +145,7 @@ export default function ServicesPage() {
               <div className="dim" style={{fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase'}}>3개월 패키지 / 견적 별도</div>
               <strong style={{display: 'block', color: 'var(--ink-0)', marginTop: '6px'}}>
                 미달성시 운영 수수료 환급 
-                <a href="#terms" onClick={handleTermsClick} style={{fontSize: '12px', color: 'var(--ink-3)', textDecoration: 'underline', marginLeft: '6px', fontWeight: 'normal'}}>(조건 확인)</a>
+                <a href="#guarantee-terms" style={{fontSize: '12px', color: 'var(--ink-3)', textDecoration: 'underline', marginLeft: '6px', fontWeight: 'normal'}}>(조건 확인)</a>
               </strong>
             </div>
           }
@@ -138,11 +162,15 @@ export default function ServicesPage() {
               <div className="dim" style={{fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase'}}>6개월 풀패키지 / 견적 별도</div>
               <strong style={{display: 'block', color: 'var(--ink-0)', marginTop: '6px'}}>
                 매출 미달 시 컨설팅 비용 환급 
-                <a href="#terms" onClick={handleTermsClick} style={{fontSize: '12px', color: 'var(--ink-3)', textDecoration: 'underline', marginLeft: '6px', fontWeight: 'normal'}}>(조건 확인)</a>
+                <a href="#guarantee-terms" style={{fontSize: '12px', color: 'var(--ink-3)', textDecoration: 'underline', marginLeft: '6px', fontWeight: 'normal'}}>(조건 확인)</a>
               </strong>
             </div>
           }
         />
+      </div>
+      <div id="guarantee-terms" className="guarantee-terms">
+        <strong>성과 보장 조건 안내</strong>
+        <p>세부 KPI, 필수 광고비, 상품 재고, 채널 승인 일정 및 환급 범위는 브랜드 진단 후 계약서에 명시됩니다. 상담 단계에서 적용 가능 여부와 조건을 먼저 안내드립니다.</p>
       </div>
     </div>
   </div>

@@ -1,6 +1,4 @@
 
-import Link from 'next/link';
-
 export default function CareersPage() {
   return (
     <main className="page active">

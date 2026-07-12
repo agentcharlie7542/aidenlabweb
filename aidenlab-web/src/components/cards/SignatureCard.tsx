@@ -27,7 +27,7 @@ export default function SignatureCard({
   return (
     <div className={`sig-card ${isCool ? 'cool' : ''}`}>
       <div className="sig-bgimg">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src={bgImageSrc} alt="" />
       </div>
       <div>

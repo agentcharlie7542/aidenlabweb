@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export interface NewsCardProps {
   imageSrc: string;
@@ -7,6 +8,7 @@ export interface NewsCardProps {
   description?: string;
   dateStr: string;
   isFeatured?: boolean;
+  href?: string;
 }
 
 export default function NewsCard({
@@ -16,13 +18,14 @@ export default function NewsCard({
   description,
   dateStr,
   isFeatured = false,
+  href = '/news',
 }: NewsCardProps) {
   const containerStyle = isFeatured ? { borderColor: 'var(--line-2)' } : {};
 
   return (
-    <div className="news" style={containerStyle}>
+    <Link href={href} className="news" style={containerStyle} aria-label={`${title} 읽기`}>
       <div className="news-img">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src={imageSrc} alt="" />
       </div>
       <div className="news-body">
@@ -35,6 +38,6 @@ export default function NewsCard({
         )}
         <div className="date">{dateStr}</div>
       </div>
-    </div>
+    </Link>
   );
 }

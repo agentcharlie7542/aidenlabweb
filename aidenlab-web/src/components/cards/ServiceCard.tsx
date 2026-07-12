@@ -1,10 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 
 export interface ServiceCardProps {
   iconSrc: string;
   title: string;
   description: string;
   linkText?: string;
+  href?: string;
   isCool?: boolean;
 }
 
@@ -13,17 +15,18 @@ export default function ServiceCard({
   title,
   description,
   linkText,
+  href = '/services',
   isCool = false,
 }: ServiceCardProps) {
   return (
-    <div className={`svc ${isCool ? 'cool' : ''}`}>
+    <Link href={href} className={`svc ${isCool ? 'cool' : ''}`} aria-label={`${title} 자세히 보기`}>
       <div className="svc-iconbox">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src={iconSrc} alt="" />
       </div>
       <h3>{title}</h3>
       <p>{description}</p>
       {linkText && <div className="more">{linkText}</div>}
-    </div>
+    </Link>
   );
 }

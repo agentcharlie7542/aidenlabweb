@@ -74,7 +74,7 @@ export default async function NewsPage() {
         <div className="case-big" style={{minHeight: 'auto'}}>
           <div className="case-cover" style={{aspectRatio: '16/8'}}>
             <span className="corner-tag">{mainFeatured.category}</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             <img src={mainFeatured.imageUrl} alt={mainFeatured.title} />
           </div>
           <div className="case-content">

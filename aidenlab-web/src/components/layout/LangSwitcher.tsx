@@ -2,11 +2,11 @@
 
 import { useLanguage, type Locale } from '@/i18n/LanguageProvider';
 
-const OPTIONS: { code: Locale; flag: string; label: string }[] = [
-  { code: 'ko', flag: '🇰🇷', label: 'KO' },
-  { code: 'en', flag: '🇺🇸', label: 'EN' },
-  { code: 'zh', flag: '🇨🇳', label: 'ZH' },
-  { code: 'ja', flag: '🇯🇵', label: 'JA' },
+const OPTIONS: { code: Locale; flag: string; label: string; name: string }[] = [
+  { code: 'ko', flag: '🇰🇷', label: 'KO', name: '한국어' },
+  { code: 'en', flag: '🇺🇸', label: 'EN', name: 'English' },
+  { code: 'zh', flag: '🇨🇳', label: 'ZH', name: '中文' },
+  { code: 'ja', flag: '🇯🇵', label: 'JA', name: '日本語' },
 ];
 
 export default function LangSwitcher() {
@@ -20,6 +20,7 @@ export default function LangSwitcher() {
           onClick={() => setLocale(o.code)}
           className={'lang-btn' + (locale === o.code ? ' active' : '')}
           aria-pressed={locale === o.code}
+          aria-label={`${o.name}로 변경`}
           title={o.label}
         >
           <span className="lang-flag">{o.flag}</span>

@@ -31,7 +31,7 @@ export default function CaseCard({
       <div className="case-big">
         <div className="case-cover">
           {cornerTag && <span className="corner-tag">{cornerTag}</span>}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          { }
           <img src={imageSrc} alt={imageAlt} />
         </div>
         <div className="case-content">
@@ -55,7 +55,7 @@ export default function CaseCard({
   return (
     <div className="case">
       <div className="case-img">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img src={imageSrc} alt={imageAlt} />
       </div>
       <div className="case-body">
