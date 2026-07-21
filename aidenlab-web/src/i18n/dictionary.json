@@ -1662,13 +1662,13 @@
 "ja": "Qoo10カテゴリー1位トロフィー"
 },
 "MEAL IT 제품 캠페인": {
-"en": "MEAL IT Product Campaign",
-"zh": "MEAL IT产品营销",
-"ja": "MEAL IT 製品キャンペーン"
+"en": "MEAL IT product campaign",
+"zh": "MEAL IT 产品营销活动",
+"ja": "MEAL IT 商品キャンペーン"
 },
 "わさび10 일본 인플루언서 네트워크": {
-"en": "Wasabi10 Japan Influencer Network",
-"zh": "Wasabi10日本网红网络",
+"en": "わさび10 Japanese influencer network",
+"zh": "わさび10 日本网红网络",
 "ja": "わさび10 日本インフルエンサーネットワーク"
 },
 "Glow u 사례": {
@@ -1872,9 +1872,9 @@
 "ja": "日本の体験マーケティングの標準 **わさび10 (Wasabi10)**"
 },
 "Qoo10 카테고리 **1위** 17건": {
-"en": "**17** Qoo10 category #1s",
-"zh": "Qoo10 品类 **第1名** 17项",
-"ja": "Qoo10カテゴリー **1位** 17件"
+"en": "**17** Qoo10 category #1 rankings",
+"zh": "Qoo10 品类第1名 **17** 项",
+"ja": "Qoo10カテゴリー1位 **17**件"
 },
 "카테고리 1위 달성": {
 "en": "Category #1 achieved",
@@ -1990,6 +1990,11 @@
 "en": "Glow u · Head of Brand",
 "zh": "Glow u · 品牌负责人",
 "ja": "Glow u · ブランド統括"
+},
+"에이든랩 고객사 아이힐(iHEAL) 2025 Qoo10 Awards 수상": {
+"en": "aidenlab client iHEAL winning a 2025 Qoo10 Award",
+"zh": "aidenlab 客户 iHEAL 荣获 2025 Qoo10 Awards",
+"ja": "aidenlabのクライアントiHEALが2025 Qoo10 Awardsを受賞"
 }
 }
 }

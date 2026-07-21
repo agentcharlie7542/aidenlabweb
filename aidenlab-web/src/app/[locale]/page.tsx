@@ -9,6 +9,7 @@ import CaseCard from '@/components/cards/CaseCard';
 import ServiceCard from '@/components/cards/ServiceCard';
 import SignatureCard from '@/components/cards/SignatureCard';
 import NewsCard from '@/components/cards/NewsCard';
+import Icon from '@/components/ui/Icon';
 import { sanityFetch } from '@/sanity/lib/client';
 import { getFeaturedCasesQuery, getFeaturedInsightsQuery } from '@/sanity/lib/queries';
 
@@ -129,34 +130,27 @@ export default async function HomePage({ params }: PageProps) {
           </div>
         </div>
 
-        {/*  HERO ART: the proof, as text rather than baked into a photo — so it
-             reads in every language and stays legible at any size.  */}
-        <div className="rank-board">
-          <div className="rank-head">
-            <span className="rank-chip">Qoo10 JAPAN</span>
-            <span className="rank-title">카테고리 1위 달성</span>
+        {/*  HERO ART: 실적(수상) · 제품 · 자체 플랫폼을 한 화면에.
+             배지는 이미지가 아니라 DOM 텍스트라 4개 언어로 번역된다.  */}
+        <div className="hero-art">
+          <div className="photo-wrap">
+            <div className="img featured">
+              { }
+              <img src="https://cdn.imweb.me/upload/S20230516de7df0b488e73/1dbf614fc7c33.png" alt="에이든랩 고객사 아이힐(iHEAL) 2025 Qoo10 Awards 수상" />
+            </div>
+            <div className="img">
+              { }
+              <img src="https://cdn.imweb.me/thumbnail/20260410/553afd2222022.png" alt="MEAL IT 제품 캠페인" />
+            </div>
+            <div className="img wide">
+              { }
+              <img src="https://cdn.imweb.me/thumbnail/20260413/a7e5737139c7f.png" alt="わさび10 일본 인플루언서 네트워크" />
+            </div>
           </div>
-          <ol className="rank-list">
-            <li className="rank-row">
-              { }
-              <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/23/thumbnails/02666119874050051589.jpg" alt="" />
-              <span className="rank-brand">Glow u<em>헤어케어</em></span>
-              <span className="rank-badge">1위</span>
-            </li>
-            <li className="rank-row">
-              { }
-              <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/22/thumbnails/04173423333246427204.jpg" alt="" />
-              <span className="rank-brand">MEAL IT<em>다이어트</em></span>
-              <span className="rank-badge">1위</span>
-            </li>
-            <li className="rank-row">
-              { }
-              <img src="https://d6h4b98pf88d8.cloudfront.net/trial-marketings/26/thumbnails/71798732318587195651.png" alt="" />
-              <span className="rank-brand">Pimple Lab<em>트러블케어</em></span>
-              <span className="rank-badge">1위</span>
-            </li>
-          </ol>
-          <p className="rank-foot">평균 8주 내 카테고리 톱10 진입 · 누적 1위 17건</p>
+          <p className="badge-float">
+            <Icon name="award" size={18} />
+            Qoo10 카테고리 **1위** 17건
+          </p>
         </div>
       </div>
     </div>

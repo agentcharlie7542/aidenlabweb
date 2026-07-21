@@ -18,7 +18,8 @@ export type IconName =
   | 'bolt'
   | 'chart'
   | 'globe'
-  | 'cpu';
+  | 'cpu'
+  | 'award';
 
 const PATHS: Record<IconName, React.ReactNode> = {
   megaphone: (
@@ -102,6 +103,12 @@ const PATHS: Record<IconName, React.ReactNode> = {
     <>
       <rect x="7" y="7" width="10" height="10" rx="1.5" />
       <path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" />
+    </>
+  ),
+  award: (
+    <>
+      <circle cx="12" cy="9" r="5.5" />
+      <path d="m8.5 13.6-1.3 7.2 4.8-2.6 4.8 2.6-1.3-7.2" />
     </>
   ),
 };

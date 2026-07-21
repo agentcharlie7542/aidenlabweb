@@ -117,19 +117,19 @@ html[data-locale="zh"] .hero h1,html[data-locale="ja"] .hero h1{max-width:13em}
 .hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
 .hero-note{margin:12px 0 0;font-size:13px}
 
-/* Hero proof board — the claim rendered as text, not baked into a photo, so it
-   translates and stays legible. */
-.rank-board{border:1px solid var(--line-2);border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015));padding:26px;box-shadow:var(--shadow-1);backdrop-filter:blur(6px)}
-.rank-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line)}
-.rank-chip{font-size:11px;font-weight:700;letter-spacing:.14em;padding:5px 10px;border-radius:6px;background:rgba(79,216,255,.12);color:var(--accent-cyan);border:1px solid rgba(79,216,255,.32)}
-.rank-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--ink-0)}
-.rank-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-.rank-row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
-.rank-row img{width:44px;height:44px;border-radius:10px;object-fit:cover;border:1px solid var(--line-2)}
-.rank-brand{display:flex;flex-direction:column;gap:2px;font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--ink-0);min-width:0}
-.rank-brand em{font-style:normal;font-family:var(--font-sans);font-size:13px;font-weight:400;color:var(--ink-3)}
-.rank-badge{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--accent-cyan);padding:6px 12px;border-radius:999px;background:rgba(79,216,255,.10);border:1px solid rgba(79,216,255,.28);white-space:nowrap}
-.rank-foot{margin:16px 0 0;font-size:13px;line-height:1.5;color:var(--ink-3)}
+/* Hero collage — award proof, product, own platform in one frame.
+   Toned to the two-accent palette; the badge stays DOM text so it translates. */
+.hero-art{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(circle at 30% 20%,rgba(139,114,255,.28),transparent 55%),radial-gradient(circle at 80% 80%,rgba(79,216,255,.18),transparent 55%),linear-gradient(180deg,#11142a,#05060d);border:1px solid var(--line-2);display:grid;place-items:center}
+.hero-art .photo-wrap{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:14px}
+.hero-art .photo-wrap .img{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0a0c18}
+.hero-art .photo-wrap img{width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.03) brightness(.88)}
+.hero-art .photo-wrap .img::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,114,255,.14),transparent 55%,rgba(79,216,255,.10));mix-blend-mode:overlay;pointer-events:none}
+.hero-art .photo-wrap .img.featured{grid-column:1;grid-row:1 / span 2;animation:lev 6s ease-in-out infinite}
+.hero-art .photo-wrap .img.featured img{object-position:center top}
+.hero-art .photo-wrap .img.wide{grid-column:2;grid-row:2}
+.hero-art .photo-wrap .img.wide img{object-position:center;transform:scale(1.12)}
+.hero-art .badge-float{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;padding:13px 20px;border-radius:999px;background:rgba(5,6,13,.82);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;color:#fff;z-index:3;box-shadow:0 14px 40px rgba(0,0,0,.45);white-space:nowrap}
+.hero-art .badge-float svg{color:var(--accent-cyan);flex:0 0 auto}
 @keyframes lev{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 /* Logo marquee with images */
