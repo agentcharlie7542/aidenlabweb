@@ -1,12 +1,20 @@
+import { tx } from '@/i18n/translate';
+import type { Locale } from '@/i18n/config';
 
-export default function CareersPage() {
-  return (
-    <main className="page active">
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+import Icon from '@/components/ui/Icon';
+
+
+export default async function CareersPage({ params }: PageProps) {
+  const { locale } = await params;
+  return tx(
+    <main className="page">
 
   <section className="career-hero">
     <div className="wrap">
       <div className="eyebrow"><span className="dot"></span>We're hiring</div>
-      <h1 style={{marginTop: '24px'}}><span className="grad-text">경계를 허무는 사람들</span>과<br/>함께 합니다.</h1>
+      <h1 style={{marginTop: '24px'}}>**경계를 허무는 사람들**과 함께 합니다.</h1>
       <p className="muted" style={{maxWidth: '680px', margin: '24px auto 0', fontSize: '18px'}}>한국·일본 양국 마켓에서 K-브랜드의 글로벌화를 만드는 일. 합리적인 동료와 빠른 의사결정 속에서 일합니다.</p>
     </div>
   </section>
@@ -15,10 +23,10 @@ export default function CareersPage() {
     <div className="wrap">
       <h2>에이든랩이 일하는 방식</h2>
       <div className="career-grid">
-        <div className="culture"><div className="emoji">⚡</div><div><h3>속도가 곧 경쟁력</h3><p className="muted">월 단위가 아닌 주 단위 의사결정. 모든 미팅은 결론과 다음 액션으로 끝납니다.</p></div></div>
-        <div className="culture"><div className="emoji">📊</div><div><h3>모든 일은 숫자로</h3><p className="muted">의견 대립은 데이터로 해결. KPI 없는 캠페인은 시작하지 않습니다.</p></div></div>
-        <div className="culture"><div className="emoji">🌏</div><div><h3>한국 + 일본 듀얼</h3><p className="muted">한국 본사·도쿄 지사가 같은 슬랙·노션에서 일합니다. 일본 출장 기회 많음.</p></div></div>
-        <div className="culture"><div className="emoji">🤖</div><div><h3>AI는 동료다</h3><p className="muted">모든 직군이 AI 툴을 일상적으로 사용. 사내 AI 스택 활용 교육 매주 진행.</p></div></div>
+        <div className="culture"><div className="emoji"><Icon name="bolt" size={26} /></div><div><h3>속도가 곧 경쟁력</h3><p className="muted">월 단위가 아닌 주 단위 의사결정. 모든 미팅은 결론과 다음 액션으로 끝납니다.</p></div></div>
+        <div className="culture"><div className="emoji"><Icon name="chart" size={26} /></div><div><h3>모든 일은 숫자로</h3><p className="muted">의견 대립은 데이터로 해결. KPI 없는 캠페인은 시작하지 않습니다.</p></div></div>
+        <div className="culture"><div className="emoji"><Icon name="globe" size={26} /></div><div><h3>한국 + 일본 듀얼</h3><p className="muted">한국 본사·도쿄 지사가 같은 슬랙·노션에서 일합니다. 일본 출장 기회 많음.</p></div></div>
+        <div className="culture"><div className="emoji"><Icon name="cpu" size={26} /></div><div><h3>AI는 동료다</h3><p className="muted">모든 직군이 AI 툴을 일상적으로 사용. 사내 AI 스택 활용 교육 매주 진행.</p></div></div>
       </div>
     </div>
   </section>
@@ -53,5 +61,6 @@ export default function CareersPage() {
   </section>
 
     </main>
+    , locale
   );
 }

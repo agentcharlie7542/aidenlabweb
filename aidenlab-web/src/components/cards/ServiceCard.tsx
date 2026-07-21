@@ -1,8 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/i18n/Link';
+import Icon, { type IconName } from '@/components/ui/Icon';
 
 export interface ServiceCardProps {
-  iconSrc: string;
+  icon: IconName;
   title: string;
   description: string;
   linkText?: string;
@@ -11,7 +12,7 @@ export interface ServiceCardProps {
 }
 
 export default function ServiceCard({
-  iconSrc,
+  icon,
   title,
   description,
   linkText,
@@ -19,14 +20,13 @@ export default function ServiceCard({
   isCool = false,
 }: ServiceCardProps) {
   return (
-    <Link href={href} className={`svc ${isCool ? 'cool' : ''}`} aria-label={`${title} 자세히 보기`}>
-      <div className="svc-iconbox">
-        { }
-        <img src={iconSrc} alt="" />
-      </div>
+    <Link href={href} className={`svc ${isCool ? 'cool' : ''}`}>
+      <span className="svc-iconbox">
+        <Icon name={icon} size={26} />
+      </span>
       <h3>{title}</h3>
       <p>{description}</p>
-      {linkText && <div className="more">{linkText}</div>}
+      {linkText && <span className="more">{linkText}</span>}
     </Link>
   );
 }

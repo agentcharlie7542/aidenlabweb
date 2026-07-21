@@ -1,16 +1,24 @@
+import { tx } from '@/i18n/translate';
+import type { Locale } from '@/i18n/config';
 
-export default function Wasabi10Page() {
-  return (
-    <main className="page active">
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+import Link from '@/i18n/Link';
+
+
+export default async function Wasabi10Page({ params }: PageProps) {
+  const { locale } = await params;
+  return tx(
+    <main className="page">
 
   <section className="wasabi-hero">
     <div className="wrap">
       <div className="eyebrow" style={{background: 'rgba(255,79,183,.1)', borderColor: 'rgba(255,79,183,.4)'}}><span className="dot" style={{background: 'var(--accent-magenta)', boxShadow: '0 0 8px var(--accent-magenta)'}}></span>Owned Platform · Operated by aidenlab</div>
-      <h1 style={{marginTop: '24px'}}><span className="jp">わさび10</span><br/>일본 체험단 마케팅의 표준.</h1>
+      <h1 style={{marginTop: '24px'}}>{'**わさび10**\n일본 체험단 마케팅의 표준.'}</h1>
       <p className="muted" style={{maxWidth: '720px', margin: '24px auto 0', fontSize: '18px'}}>4,000+ 일본 현지 인플루언서가 직접 활동하는 자체 플랫폼. 브랜드 등록 후 3개월 무료, 캠페인은 단 3일 만에 오픈됩니다.</p>
       <div style={{marginTop: '36px', display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap'}}>
-        <a className="btn btn-primary" href="https://wasabi10.com" target="_blank">わさび10 바로가기 <span className="arr">→</span></a>
-        <a className="btn btn-ghost" href="/contact" data-page="contact">B2B 상담</a>
+        <a className="btn btn-primary" href="https://wasabi10.com" target="_blank" rel="noreferrer">わさび10 바로가기 <span className="arr" aria-hidden="true">→</span></a>
+        <Link className="btn btn-ghost" href="/contact">B2B 상담</Link>
       </div>
       <div className="wasabi-stats">
         <div className="stat"><div className="num">4,000+</div><div className="lbl">일본 현지 인플루언서</div></div>
@@ -87,7 +95,7 @@ export default function Wasabi10Page() {
   <section>
     <div className="wrap">
       <div style={{textAlign: 'center', padding: '80px 40px', borderRadius: 'var(--radius-lg)', background: 'linear-gradient(135deg,rgba(255,79,183,.2),rgba(255,200,87,.1))', border: '1px solid var(--line-2)'}}>
-        <h2>지금 등록하면 <span className="grad-text">3개월 무료.</span></h2>
+        <h2>지금 등록하면 **3개월 무료.**</h2>
         <p className="muted" style={{maxWidth: '600px', margin: '18px auto 30px'}}>わさび10는 에이든랩이 운영하는 자체 플랫폼입니다. 별도 계약 없이 즉시 캠페인을 시작할 수 있습니다.</p>
         <a className="btn btn-primary" href="https://wasabi10.com" target="_blank">わさび10 무료 등록 <span className="arr">→</span></a>
       </div>
@@ -95,5 +103,6 @@ export default function Wasabi10Page() {
   </section>
 
     </main>
+    , locale
   );
 }

@@ -1,12 +1,18 @@
+import { tx } from '@/i18n/translate';
+import type { Locale } from '@/i18n/config';
 
-export default function AboutPage() {
-  return (
-    <main className="page active">
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+
+export default async function AboutPage({ params }: PageProps) {
+  const { locale } = await params;
+  return tx(
+    <main className="page">
 
   <section className="about-hero">
     <div className="wrap">
       <div className="eyebrow"><span className="dot"></span>About aidenlab</div>
-      <h1 style={{marginTop: '24px'}}>한국의 좋은 브랜드가<br/><span className="grad-text">세계의 좋은 브랜드</span>가 되도록.</h1>
+      <h1 style={{marginTop: '24px'}}>{'한국의 좋은 브랜드가\n**세계의 좋은 브랜드**가 되도록.'}</h1>
       <p className="muted" style={{maxWidth: '720px', margin: '24px auto 0', fontSize: '18px'}}>에이든랩은 K-브랜드와 글로벌 소비자 사이의 거리를 줄이는 일을 합니다. 데이터·AI·현지 네트워크로 매출이라는 결과를 만들어냅니다.</p>
       <div className="about-hero-img"><img src="https://cdn.imweb.me/thumbnail/20260409/10284acd42181.png" alt="aidenlab 글로벌 비즈니스" /></div>
     </div>
@@ -81,5 +87,6 @@ export default function AboutPage() {
   </section>
 
     </main>
+    , locale
   );
 }

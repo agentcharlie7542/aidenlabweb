@@ -1,3 +1,8 @@
+import { tx } from '@/i18n/translate';
+import type { Locale } from '@/i18n/config';
+
+type PageProps = { params: Promise<{ locale: Locale }> };
+
 import Eyebrow from '@/components/ui/Eyebrow';
 import CaseCard from '@/components/cards/CaseCard';
 import { sanityFetch } from '@/sanity/lib/client';
@@ -18,7 +23,8 @@ interface CaseStudy {
   kpis: { value: string; label: string }[];
 }
 
-export default async function CasesPage() {
+export default async function CasesPage({ params }: PageProps) {
+  const { locale } = await params;
   const cases = await sanityFetch<CaseStudy[]>({ query: getAllCasesQuery });
 
   // Fallback data if CMS is empty
@@ -73,13 +79,13 @@ export default async function CasesPage() {
     }
   ];
 
-  return (
-    <main className="page active">
+  return tx(
+    <main className="page">
 
   <section className="svc-hero">
     <div className="wrap">
       <Eyebrow>Case studies</Eyebrow>
-      <h1 style={{marginTop: '24px'}}><span className="grad-text">100+ K-브랜드</span>의<br/>글로벌 성장 기록.</h1>
+      <h1 style={{marginTop: '24px'}}>{'**100+ K-브랜드**의\n글로벌 성장 기록.'}</h1>
       <p className="muted" style={{maxWidth: '680px', marginTop: '24px', fontSize: '18px'}}>에이든랩과 함께한 브랜드의 실적과 비하인드를 카테고리·플랫폼별로 모아 보세요.</p>
       <div className="case-filter">
         <button className="chip active">전체</button>
@@ -126,5 +132,6 @@ export default async function CasesPage() {
   </section>
 
     </main>
+    , locale
   );
 }

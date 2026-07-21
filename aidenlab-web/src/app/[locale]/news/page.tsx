@@ -1,3 +1,8 @@
+import { tx } from '@/i18n/translate';
+import type { Locale } from '@/i18n/config';
+
+type PageProps = { params: Promise<{ locale: Locale }> };
+
 import Eyebrow from '@/components/ui/Eyebrow';
 import Button from '@/components/ui/Button';
 import NewsCard from '@/components/cards/NewsCard';
@@ -17,7 +22,8 @@ interface Insight {
   pdfUrl?: string;
 }
 
-export default async function NewsPage() {
+export default async function NewsPage({ params }: PageProps) {
+  const { locale } = await params;
   const [insights, featuredInsights] = await Promise.all([
     sanityFetch<Insight[]>({ query: getAllInsightsQuery }),
     sanityFetch<Insight[]>({ query: getFeaturedInsightsQuery }),
@@ -47,13 +53,13 @@ export default async function NewsPage() {
   const sideNews = displayInsights.slice(0, 2);
   const gridNews = displayInsights.slice(2);
 
-  return (
-    <main className="page active">
+  return tx(
+    <main className="page">
 
   <section className="svc-hero">
     <div className="wrap">
       <Eyebrow>Aidenlab Insights</Eyebrow>
-      <h1 style={{marginTop: '24px'}}>일본 시장은 매주 바뀝니다.<br/><span className="cool-text">우리는 그 변화를 가장 먼저 봅니다.</span></h1>
+      <h1 style={{marginTop: '24px'}}>{'일본 시장은 매주 바뀝니다.\n**우리는 그 변화를 가장 먼저 봅니다.**'}</h1>
       <p className="muted" style={{maxWidth: '680px', marginTop: '24px', fontSize: '18px'}}>200+ 캠페인 데이터, 4,000+ 인플루언서 활동, 일본 현지 MD의 인사이트가 모이는 곳.</p>
     </div>
   </section>
@@ -118,5 +124,6 @@ export default async function NewsPage() {
   </section>
 
     </main>
+    , locale
   );
 }

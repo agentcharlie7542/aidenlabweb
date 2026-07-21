@@ -1700,6 +1700,296 @@
 "en": "Pimple Lab Trouble-Care Gel",
 "zh": "Pimple Lab 祛痘护理凝胶",
 "ja": "Pimple Lab トラブルケアジェル"
+},
+"본문으로 바로가기": {
+"en": "Skip to main content",
+"zh": "跳到正文",
+"ja": "本文へスキップ"
+},
+"회사소개": {
+"en": "About",
+"zh": "关于我们",
+"ja": "会社概要"
+},
+"서비스": {
+"en": "Services",
+"zh": "服务",
+"ja": "サービス"
+},
+"성공사례": {
+"en": "Cases",
+"zh": "成功案例",
+"ja": "実績"
+},
+"브랜드": {
+"en": "Brands",
+"zh": "品牌",
+"ja": "ブランド"
+},
+"인사이트": {
+"en": "Insights",
+"zh": "洞察",
+"ja": "インサイト"
+},
+"채용": {
+"en": "Careers",
+"zh": "招聘",
+"ja": "採用"
+},
+"문의하기": {
+"en": "Contact",
+"zh": "联系我们",
+"ja": "お問い合わせ"
+},
+"30분 무료 진단 신청": {
+"en": "Book a free 30-min diagnosis",
+"zh": "预约30分钟免费诊断",
+"ja": "30分の無料診断を予約"
+},
+"회사": {
+"en": "Company",
+"zh": "公司",
+"ja": "会社"
+},
+"플랫폼": {
+"en": "Platforms",
+"zh": "平台",
+"ja": "プラットフォーム"
+},
+"성과 보장 조건 안내": {
+"en": "About the performance guarantee",
+"zh": "成效保障条件说明",
+"ja": "成果保証の条件について"
+},
+"세부 KPI, 필수 광고비, 상품 재고, 채널 승인 일정 및 환급 범위는 브랜드 진단 후 계약서에 명시됩니다. 상담 단계에서 적용 가능 여부와 조건을 먼저 안내드립니다.": {
+"en": "Detailed KPIs, required ad spend, stock levels, channel approval timelines and the scope of any refund are set out in the contract after the brand diagnosis. We confirm eligibility and terms with you during the consultation first.",
+"zh": "具体KPI、必要广告预算、商品库存、渠道审核时间及退款范围，将在品牌诊断后于合同中明确约定。我们会在咨询阶段先行说明适用条件。",
+"ja": "詳細なKPI、必要な広告費、商品在庫、チャネル審査スケジュール、返金範囲は、ブランド診断後に契約書へ明記します。ご相談の段階で適用可否と条件を先にご案内します。"
+},
+"서비스를 선택해주세요": {
+"en": "Select a service",
+"zh": "请选择服务",
+"ja": "サービスを選択してください"
+},
+"현재 단계를 선택해주세요": {
+"en": "Select your current stage",
+"zh": "请选择当前阶段",
+"ja": "現在のステージを選択してください"
+},
+"브랜드 자료 (선택)": {
+"en": "Brand materials (optional)",
+"zh": "品牌资料（选填）",
+"ja": "ブランド資料（任意）"
+},
+"회사소개서·브랜드 자료 등, 최대 25MB": {
+"en": "Company or brand deck — up to 25MB",
+"zh": "公司介绍、品牌资料等，最大25MB",
+"ja": "会社紹介・ブランド資料など、最大25MB"
+},
+"이 칸은 비워두세요": {
+"en": "Leave this field empty",
+"zh": "请留空此栏",
+"ja": "この欄は空のままにしてください"
+},
+"상담 연락을 위한 개인정보 수집·이용에 동의합니다.": {
+"en": "I agree to the collection and use of my personal data so aidenlab can contact me about this enquiry.",
+"zh": "我同意为本次咨询联络收集并使用我的个人信息。",
+"ja": "ご相談のご連絡のため、個人情報の収集・利用に同意します。"
+},
+"전송 중…": {
+"en": "Sending…",
+"zh": "发送中…",
+"ja": "送信中…"
+},
+"신청이 완료됐습니다. 1영업일 이내에 담당자가 연락드리겠습니다.": {
+"en": "Request received. A consultant will contact you within one business day.",
+"zh": "已收到您的申请，我们将在1个工作日内与您联系。",
+"ja": "お申し込みを受け付けました。1営業日以内に担当者よりご連絡いたします。"
+},
+"전송에 실패했습니다. 잠시 후 다시 시도하거나 admin@aidenlab.io로 문의해주세요.": {
+"en": "Sending failed. Please try again shortly, or email admin@aidenlab.io.",
+"zh": "发送失败。请稍后重试，或发送邮件至 admin@aidenlab.io。",
+"ja": "送信に失敗しました。しばらくしてから再度お試しいただくか、admin@aidenlab.io までご連絡ください。"
+},
+"에이든랩 홈으로": {
+"en": "aidenlab home",
+"zh": "aidenlab 首页",
+"ja": "aidenlab ホームへ"
+},
+"주요 메뉴": {
+"en": "Main navigation",
+"zh": "主导航",
+"ja": "メインメニュー"
+},
+"모바일 메뉴": {
+"en": "Mobile navigation",
+"zh": "移动端导航",
+"ja": "モバイルメニュー"
+},
+"메뉴 열기": {
+"en": "Open menu",
+"zh": "打开菜单",
+"ja": "メニューを開く"
+},
+"메뉴 닫기": {
+"en": "Close menu",
+"zh": "关闭菜单",
+"ja": "メニューを閉じる"
+},
+"데이터·AI·현지 네트워크로 K-브랜드의 일본 마케팅, 이커머스, 유통 성장을 설계합니다.": {
+"en": "aidenlab engineers Japan marketing, e-commerce and distribution growth for K-brands with data, AI and on-the-ground networks.",
+"zh": "aidenlab 以数据、AI 与本地网络，为K品牌设计日本市场的营销、电商与分销增长。",
+"ja": "aidenlabはデータ・AI・現地ネットワークで、Kブランドの日本マーケティング、EC、流通の成長を設計します。"
+},
+"K-브랜드의 **글로벌 매출**을 설계합니다.": {
+"en": "We engineer **global revenue**\nfor Korean brands.",
+"zh": "为K品牌\n设计**全球销售增长**。",
+"ja": "Kブランドの\n**グローバル売上**を\n設計します。"
+},
+"에이든랩만의 **간판 서비스**": {
+"en": "Our **signature** programs",
+"zh": "Aidenlab的**招牌服务**",
+"ja": "エイデンラボの**看板サービス**"
+},
+"브랜드 전략부터 매출까지, **통합 글로벌 서비스**": {
+"en": "From brand strategy to revenue —\n**one integrated global service**",
+"zh": "从品牌战略到实际销售，**一体化全球服务**",
+"ja": "ブランド戦略から売上まで、**統合グローバルサービス**"
+},
+"숫자로 증명하는 **성장 파트너**": {
+"en": "A growth partner **proven in numbers**",
+"zh": "用数字证明的**增长伙伴**",
+"ja": "数字で証明する**成長パートナー**"
+},
+"한국에서 검증된 브랜드, **일본에서 한 번 더 폭발시킵니다.**": {
+"en": "Proven in Korea.\n**Scaled again in Japan.**",
+"zh": "在韩国验证过的品牌，**在日本再爆发一次。**",
+"ja": "韓国で実証されたブランドを、**日本でもう一度爆発させます。**"
+},
+"일본 체험단 마케팅의 표준 **わさび10 (Wasabi10)**": {
+"en": "The standard for Japanese sampling campaigns —\n**わさび10 (Wasabi10)**",
+"zh": "日本体验营销的标准 **わさび10 (Wasabi10)**",
+"ja": "日本の体験マーケティングの標準 **わさび10 (Wasabi10)**"
+},
+"Qoo10 카테고리 **1위** 17건": {
+"en": "**17** Qoo10 category #1s",
+"zh": "Qoo10 品类 **第1名** 17项",
+"ja": "Qoo10カテゴリー **1位** 17件"
+},
+"카테고리 1위 달성": {
+"en": "Category #1 achieved",
+"zh": "品类第1名达成",
+"ja": "カテゴリー1位を獲得"
+},
+"헤어케어": {
+"en": "Haircare",
+"zh": "护发",
+"ja": "ヘアケア"
+},
+"다이어트": {
+"en": "Diet",
+"zh": "减肥",
+"ja": "ダイエット"
+},
+"트러블케어": {
+"en": "Blemish care",
+"zh": "祛痘护理",
+"ja": "トラブルケア"
+},
+"평균 8주 내 카테고리 톱10 진입 · 누적 1위 17건": {
+"en": "Top 10 in the category within 8 weeks on average · 17 #1 rankings to date",
+"zh": "平均8周内进入品类前10 · 累计17次第1名",
+"ja": "平均8週間でカテゴリートップ10入り・累計1位17件"
+},
+"실적 먼저 보기": {
+"en": "See the results first",
+"zh": "先看成果",
+"ja": "まず実績を見る"
+},
+"상담료 없음 · 1영업일 내 회신": {
+"en": "No consulting fee · reply within one business day",
+"zh": "咨询免费 · 1个工作日内回复",
+"ja": "相談無料・1営業日以内にご返信"
+},
+"브랜드 정보를 더 주시면 진단이 정확해집니다 (선택)": {
+"en": "Add more about your brand for a sharper diagnosis (optional)",
+"zh": "补充品牌信息可让诊断更精准（选填）",
+"ja": "ブランド情報を追加いただくと診断がより正確になります（任意）"
+},
+"시작은 **30분 무료 진단**부터.": {
+"en": "It starts with a **free 30-minute diagnosis**.",
+"zh": "一切从**30分钟免费诊断**开始。",
+"ja": "すべては**30分の無料診断**から。"
+},
+"우리는 **브랜드를 만들고 키우는 회사**이기도 합니다.": {
+"en": "We also **build and grow brands** of our own.",
+"zh": "我们也是一家**打造并培育品牌的公司**。",
+"ja": "私たちは**ブランドを作り育てる会社**でもあります。"
+},
+"**わさび10** 일본 체험단 마케팅의 표준.": {
+"en": "**わさび10**\nThe standard for sampling campaigns in Japan.",
+"zh": "**わさび10**\n日本体验营销的标准。",
+"ja": "**わさび10**\n日本の体験マーケティングの標準。"
+},
+"지금 등록하면 **3개월 무료.**": {
+"en": "Register now for **3 months free.**",
+"zh": "现在注册即享**3个月免费**。",
+"ja": "今なら登録で**3ヵ月無料**。"
+},
+"**100+ K-브랜드**의 글로벌 성장 기록.": {
+"en": "The global growth record of\n**100+ K-brands**.",
+"zh": "**100+ 韩国品牌**的\n全球增长记录。",
+"ja": "**100+ Kブランド**の\nグローバル成長記録。"
+},
+"한국의 좋은 브랜드가 **세계의 좋은 브랜드**가 되도록.": {
+"en": "So that great Korean brands\nbecome **great global brands**.",
+"zh": "让韩国的好品牌\n成为**世界的好品牌**。",
+"ja": "韓国の良いブランドが\n**世界の良いブランド**になるように。"
+},
+"**경계를 허무는 사람들**과 함께 합니다.": {
+"en": "We work with **people who break boundaries**.",
+"zh": "我们与**打破边界的人**同行。",
+"ja": "**境界を壊す人たち**と共に働きます。"
+},
+"일본 시장은 매주 바뀝니다. **우리는 그 변화를 가장 먼저 봅니다.**": {
+"en": "Japan's market shifts every week.\n**We see it first.**",
+"zh": "日本市场每周都在变。\n**我们最先看见变化。**",
+"ja": "日本市場は毎週変わります。\n**その変化を、私たちが最初に見ています。**"
+},
+"하나의 파트너, **통합 글로벌 솔루션**": {
+"en": "One partner,\n**one integrated global solution**",
+"zh": "一个伙伴，\n**一体化全球解决方案**",
+"ja": "ひとつのパートナー、\n**統合グローバルソリューション**"
+},
+"일본 2만+ 인플루언서, AI로 매칭합니다.": {
+"en": "20,000+ Japanese influencers, matched by AI.",
+"zh": "2万+日本网红，由AI精准匹配。",
+"ja": "日本2万人以上のインフルエンサーを、AIでマッチング。"
+},
+"일본 광고 효율, 국내 최고 수준.": {
+"en": "Best-in-class ad efficiency in Japan.",
+"zh": "日本广告投放效率，业内领先。",
+"ja": "日本の広告効率、国内トップ水準。"
+},
+"Qoo10 · Rakuten · Amazon JP 풀스택 운영대행.": {
+"en": "Full-stack operations for Qoo10, Rakuten and Amazon JP.",
+"zh": "Qoo10 · Rakuten · Amazon JP 全栈运营代理。",
+"ja": "Qoo10・Rakuten・Amazon JP のフルスタック運用代行。"
+},
+"국내 1,300+ 매장, 일본 드럭스토어까지.": {
+"en": "1,300+ stores in Korea, all the way to Japanese drugstores.",
+"zh": "韩国1,300+门店，直达日本药妆店。",
+"ja": "国内1,300店舗以上、そして日本のドラッグストアまで。"
+},
+"“3개월 만에 일본 Qoo10 카테고리 1위. 대행사가 아니라 사업 파트너에 가깝습니다.”": {
+"en": "“Category #1 on Qoo10 Japan in three months. They feel less like an agency and more like a business partner.”",
+"zh": "“3个月登顶日本Qoo10品类第一。与其说是代理商，不如说是事业伙伴。”",
+"ja": "「3ヵ月で日本Qoo10カテゴリー1位。代理店というより事業パートナーです。」"
+},
+"Glow u · 브랜드 총괄": {
+"en": "Glow u · Head of Brand",
+"zh": "Glow u · 品牌负责人",
+"ja": "Glow u · ブランド統括"
 }
 }
 }

@@ -1,14 +1,20 @@
+import { tx } from '@/i18n/translate';
+import type { Locale } from '@/i18n/config';
+
+type PageProps = { params: Promise<{ locale: Locale }> };
+
 import Eyebrow from '@/components/ui/Eyebrow';
 import BrandCard from '@/components/cards/BrandCard';
 
-export default function BrandsPage() {
-  return (
-    <main className="page active">
+export default async function BrandsPage({ params }: PageProps) {
+  const { locale } = await params;
+  return tx(
+    <main className="page">
 
   <section className="svc-hero">
     <div className="wrap">
       <Eyebrow>Our Brands</Eyebrow>
-      <h1 style={{marginTop: '24px'}}>우리는 <span className="cool-text">브랜드를 만들고 키우는 회사</span>이기도 합니다.</h1>
+      <h1 style={{marginTop: '24px'}}>우리는 **브랜드를 만들고 키우는 회사**이기도 합니다.</h1>
       <p className="muted" style={{maxWidth: '680px', marginTop: '24px', fontSize: '18px'}}>에이든랩이 직접 기획·런칭한 PB 브랜드와, 유통 파트너십을 맺은 K-브랜드를 소개합니다.</p>
     </div>
   </section>
@@ -106,5 +112,6 @@ export default function BrandsPage() {
   </section>
 
     </main>
+    , locale
   );
 }

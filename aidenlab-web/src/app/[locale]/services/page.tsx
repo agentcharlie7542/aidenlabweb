@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Button from '@/components/ui/Button';
 import SignatureCard from '@/components/cards/SignatureCard';
+import { useT } from '@/i18n/LocaleProvider';
 
 const SERVICE_TABS = [
   { id: 'influencer', label: '글로벌 인플루언서' },
@@ -14,6 +15,7 @@ const SERVICE_TABS = [
 ];
 
 export default function ServicesPage() {
+  const { t, tx } = useT();
   const [activeTab, setActiveTab] = useState('influencer');
 
   useEffect(() => {
@@ -26,13 +28,13 @@ export default function ServicesPage() {
     window.history.replaceState(null, '', `#${id}`);
   };
 
-  return (
-    <main className="page active">
+  return tx(
+    <main className="page">
 
   <section className="svc-hero">
     <div className="wrap">
       <Eyebrow>Services</Eyebrow>
-      <h1 style={{marginTop: '24px'}}>하나의 파트너,<br/><span className="cool-text">통합 글로벌 솔루션</span></h1>
+      <h1 style={{marginTop: '24px'}}>{'하나의 파트너,\n**통합 글로벌 솔루션**'}</h1>
       <p className="muted" style={{maxWidth: '680px', marginTop: '24px', fontSize: '18px'}}>전략 · 마케팅 · 운영 · 유통까지. 에이전시 4곳에 흩어진 일을 한 팀이 합니다.</p>
       <div className="svc-tab-wrap" role="tablist" aria-label="서비스 선택">
         {SERVICE_TABS.map((tab) => (
@@ -46,7 +48,7 @@ export default function ServicesPage() {
             id={`tab-${tab.id}`}
             onClick={() => selectTab(tab.id)}
           >
-            {tab.label}
+            {t(tab.label)}
           </button>
         ))}
       </div>
@@ -57,7 +59,7 @@ export default function ServicesPage() {
     <div id="panel-influencer" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-influencer" hidden={activeTab !== 'influencer'}>
       <div>
         <div className="eyebrow">01 · INFLUENCER MARKETING</div>
-        <h2 style={{marginTop: '18px'}}>일본 2만+ 인플루언서, <br/>AI로 매칭합니다.</h2>
+        <h2 style={{marginTop: '18px'}}>일본 2만+ 인플루언서, AI로 매칭합니다.</h2>
         <p className="muted">わさび10 자체 플랫폼 + 외부 매크로/메가 인플루언서까지. 브랜드 톤·타겟·예산에 맞춰 AI가 후보군을 추천하고, 캠페인 운영부터 성과 분석까지 한 번에.</p>
         <div className="feat">
           <div><strong>나노 → 메가 풀스펙</strong>1만 팔로워부터 100만 팔로워까지 단계별 시딩 전략</div>
@@ -76,7 +78,7 @@ export default function ServicesPage() {
     <div id="panel-performance" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-performance" hidden={activeTab !== 'performance'}>
       <div>
         <div className="eyebrow">02 · PERFORMANCE MARKETING</div>
-        <h2 style={{marginTop: '18px'}}>일본 광고 효율,<br/>국내 최고 수준.</h2>
+        <h2 style={{marginTop: '18px'}}>일본 광고 효율, 국내 최고 수준.</h2>
         <p className="muted">Meta · TikTok · Google · LINE · X 광고를 일본 현지 계정·결제·세무로 운영. 평균 ROAS 4.2배.</p>
         <div className="feat">
           <div><strong>매체별 전문 인력</strong>Meta·Google·LINE·TikTok 각 매체 인증 운영자 보유</div>
@@ -95,7 +97,7 @@ export default function ServicesPage() {
     <div id="panel-ecommerce" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-ecommerce" hidden={activeTab !== 'ecommerce'}>
       <div>
         <div className="eyebrow">03 · GLOBAL E-COMMERCE</div>
-        <h2 style={{marginTop: '18px'}}>Qoo10 · Rakuten · Amazon JP<br/>풀스택 운영대행.</h2>
+        <h2 style={{marginTop: '18px'}}>Qoo10 · Rakuten · Amazon JP 풀스택 운영대행.</h2>
         <p className="muted">입점 신청부터 상세페이지 제작·MD 협업·CS·반품·세무까지. 자체 일본 법인을 통한 합법적 운영.</p>
         <div className="feat">
           <div><strong>입점 컨설팅</strong>Qoo10 메가포트 / 라쿠텐 / 아마존 등록 풀패키지</div>
@@ -114,7 +116,7 @@ export default function ServicesPage() {
     <div id="panel-distribution" className="svc-detail svc-pane" role="tabpanel" aria-labelledby="tab-distribution" hidden={activeTab !== 'distribution'}>
       <div>
         <div className="eyebrow">04 · DISTRIBUTION</div>
-        <h2 style={{marginTop: '18px'}}>국내 1,300+ 매장,<br/>일본 드럭스토어까지.</h2>
+        <h2 style={{marginTop: '18px'}}>국내 1,300+ 매장, 일본 드럭스토어까지.</h2>
         <p className="muted">올리브영·랄라블라·CU·H&amp;B 등 국내 메이저 채널, 일본 마츠모토키요시·웰시아 등 현지 드럭스토어 입점망 보유.</p>
         <div className="feat">
           <div><strong>국내 사입 &amp; 총판</strong>Serumkind, Surebase, @trendseoul 등 운영 사례</div>
