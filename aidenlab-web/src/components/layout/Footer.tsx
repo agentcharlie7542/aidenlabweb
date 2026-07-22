@@ -43,7 +43,7 @@ export default function Footer({ locale }: { locale: Locale }) {
           <div>
             <h4>플랫폼</h4>
             <ul>
-              <li><Link href="/wasabi10">わさび10</Link></li>
+              <li><Link href="/wasabi10">와사비텐</Link></li>
               <li><Link href="/news">인사이트</Link></li>
               <li><Link href="/contact">문의하기</Link></li>
             </ul>

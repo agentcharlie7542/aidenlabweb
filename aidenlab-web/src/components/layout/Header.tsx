@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { key: '서비스', href: '/services' },
   { key: '성공사례', href: '/cases' },
   { key: '브랜드', href: '/brands' },
-  { key: 'わさび10', href: '/wasabi10' },
+  { key: '와사비텐', href: '/wasabi10' },
   { key: '인사이트', href: '/news' },
   { key: '채용', href: '/careers' },
 ];
